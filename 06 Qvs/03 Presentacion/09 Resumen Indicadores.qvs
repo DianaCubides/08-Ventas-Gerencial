@@ -1,0 +1,17 @@
+﻿D_Indicadores:
+LOAD
+	*
+From $(vR_Qvd)D_08_Qvd_ResumenIndicadores_Tra.qvd (qvd)
+	Where Exists(%Pk_DashLink)
+;
+
+RENAME Fields
+[Cantidad Total Visitas Dispensacion Día] 	to [Cantidad Visitas Total Dispensacion Día],
+[Cantidad Total Visitas Dispensacion Mes]	to [Cantidad Visitas Total Dispensacion Mes],
+[Cantidad Total Visitas Retail Día] 		to [Cantidad Visitas Total Retail Día],
+[Cantidad Total Visitas Retail Mes] 		to [Cantidad Visitas Total Retail Mes],
+
+[Meta PAD Total Unid.] 	to [Cantidad Total Ppto Dinámicas UDM Media],
+[Meta PAD Total Cop$] 	to [Valor Total Ppto Dinámicas],
+[Cantidad Total Transacciones Venta] to [Cantidad Total Real Transacciones Venta Comercial]
+;

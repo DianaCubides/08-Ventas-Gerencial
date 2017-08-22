@@ -1,0 +1,20 @@
+﻿D_VentasConsolidado:
+LOAD
+	%Origen_UnionTablas,
+	[%Pk_VentasAgrupadasLink],
+	[Cantidad Productos UDM Maxima],
+	[Cantidad Productos UDM Media],
+	[Cantidad Productos UDM Minima],
+	[Filtro Ajuste Contable],
+//	[Nombre Actividad],
+	[Subcategoría Producto],
+	[Valor Real Venta Comercial],
+	[Valor Real Venta Público],
+	[Valor Real Costos Comercial],
+	[Valor Real Costos Público],
+	[Valor Real Contribución Comercial],
+	[Valor Real Contribución Público],
+	[Ciudad Cliente Entrega]
+From $(vR_Qvd)D_08_Qvd_VentasAgrupadas_Tra.qvd (qvd)
+	Where Exists(%Pk_VentasAgrupadasLink) and Floor(%Pk_Fecha)<floor(today()); 
+;

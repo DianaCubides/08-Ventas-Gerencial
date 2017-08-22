@@ -1,0 +1,68 @@
+﻿D_Cencosud_Tmp:
+	LOAD
+		 ApplyMap('Homologacion_Sucursales_CeCo_Map',ApplyMap('Equivalencia_Sucursal_Map',[Id Sucursal],[Id Sucursal]),'No Hay Dato') as [Id Centro Costo],
+		[Id Sucursal Cencosud],		 
+		ApplyMap('Subcanal_Map',ApplyMap('Equivalencia_Sucursal_Map',[Id Sucursal],[Id Sucursal]),Null()) as [Sub Canal Cencosud],
+		ApplyMap('M_NombreSucursal_Map',[Id Sucursal],'No Hay Dato') as NOMBRE_SUCURSAL,
+		 ApplyMap('Canales_Map','3','Error') as Canal,
+		 ApplyMap('Canales_Map','3','Error') as Canal_Tmp,
+		 ApplyMap('Linea_Negocio_Map','3','Error') as [Linea de Negocio],
+	     [Id Uen] as [ID. UEN], 
+	     [Id Sucursal] as [Id Sucursal Anterior], 
+	     ApplyMap('Equivalencia_Sucursal_Map',[Id Sucursal],[Id Sucursal]) as [Cod. Sucursal],
+	     floor(Fecha) as %Pk_Fecha, 
+	     [Valor Transacciones],
+	     [Total Transacciones]
+	FROM $(vR_QvdVentas)Ventas_Carrefour_Tra.qvd (qvd);
+
+STORE D_Cencosud_Tmp into $(vR_Qvd)D_08_Qvd_VentasCarrefour_Tra.qvd (qvd);
+DROP Table D_Cencosud_Tmp;
+
+D_Cencosud:
+LOAD
+		'Cencosud' as %Origen_UnionTablas,
+		'811' as TIPO_COMPROBANTE,
+		 '3' as [Id Canal Sin Convenio],
+		 'Venta' as TIPO_DOCUMENTO,
+	     '3' as [Id Canal],
+		 '0' as [CANTIDAD_UDM_MAXIMA],
+		 '0' as [CANTIDAD_UDM_MEDIA],
+		 '0' as [CANTIDAD_UDM_MINIMA],
+	     'Cencosud' as [Categoría Producto],
+	     'Cencosud' as [Subcategoría Producto],
+	     'Cencosud' as [Mundo Producto],
+	     'Cencosud' as [Grupo Producto],
+	     '0' as nit,
+	     '0' as [Costo Promedio Venta],
+	     '0' as [Valor Venta],
+	     '0' as [Cantidad Transacciones Venta],	     
+		[Id Sucursal Cencosud],	
+		[Id Centro Costo],	 
+		[Sub Canal Cencosud],
+		NOMBRE_SUCURSAL,
+		Canal,
+		Canal_Tmp,
+		[Linea de Negocio],
+	     [ID. UEN],
+	     [Id Sucursal Anterior], 
+	     [Cod. Sucursal],
+	     %Pk_Fecha, 
+	     sum([Valor Transacciones]) as [Valor Venta Público], 
+	     sum([Valor Transacciones])*0.8739 as [Costo Promedio Venta Público],
+	     sum([Total Transacciones]) as [Cantidad Transacciones Venta Público]
+From $(vR_Qvd)D_08_Qvd_VentasCarrefour_Tra.qvd (qvd)
+	Group By	[Id Sucursal Cencosud],		 
+		[Sub Canal Cencosud],
+		NOMBRE_SUCURSAL,
+		Canal,
+		Canal_Tmp,
+		[Linea de Negocio],
+		[Id Centro Costo],
+	     [ID. UEN],
+	     [Id Sucursal Anterior], 
+	     [Cod. Sucursal],
+	     %Pk_Fecha
+;
+
+STORE D_Cencosud into $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd);
+DROP Table D_Cencosud;

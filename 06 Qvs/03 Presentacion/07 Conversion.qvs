@@ -1,0 +1,12 @@
+﻿D_Conversion:
+LOAD
+	[%Pk_Link_Conversion],
+	[Cantidad Visitas Dispensacion Día],
+	[Cantidad Visitas Dispensacion Mes],
+	[Cantidad Visitas Retail Día],
+	[Cantidad Visitas Retail Mes],
+	[Valor Transacciones Venta Retail Mes],
+	[Valor Transacciones Venta Retail Día]
+From $(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd (qvd)
+	Where Exists(%Pk_Link_Conversion)
+;

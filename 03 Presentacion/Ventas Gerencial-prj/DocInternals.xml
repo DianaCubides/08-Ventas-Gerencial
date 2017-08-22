@@ -1,0 +1,1238 @@
+﻿<DocInternals>
+  <AlwaysLoose>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+    <bool>false</bool>
+  </AlwaysLoose>
+  <FieldSrcTables>
+    <String>6</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>D_Indicadores</String>
+    <String>7</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>M_Calendario</String>
+    <String>8</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>D_Conversion</String>
+    <String>9</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>10</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>D_Ppto</String>
+    <String>11</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>D_PptoDinámicas</String>
+    <String>12</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>D_VentasConsolidado</String>
+    <String>13</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>Tickets</String>
+    <String>14</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>15</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>16</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>17</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>18</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>19</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>20</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>21</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>22</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>23</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>24</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>25</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>26</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>27</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>28</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>29</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>30</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>31</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>32</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>Jerarquia</String>
+    <String>33</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>34</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>35</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>36</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>37</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>38</String>
+    <String>2</String>
+    <String>D_Link_Table</String>
+    <String>Descripcion_Nit_Cliente_Map</String>
+    <String>39</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>40</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>41</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>42</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>43</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>44</String>
+    <String>1</String>
+    <String>D_Link_Table</String>
+    <String>45</String>
+    <String>1</String>
+    <String>Descripcion_Nit_Cliente_Map</String>
+    <String>46</String>
+    <String>1</String>
+    <String>Descripcion_Nit_Cliente_Map</String>
+    <String>47</String>
+    <String>1</String>
+    <String>Tickets</String>
+    <String>48</String>
+    <String>1</String>
+    <String>Tickets</String>
+    <String>49</String>
+    <String>1</String>
+    <String>Tickets</String>
+    <String>50</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>51</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>52</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>53</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>54</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>55</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>56</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>57</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>58</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>59</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>60</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>61</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>62</String>
+    <String>1</String>
+    <String>D_VentasConsolidado</String>
+    <String>63</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>64</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>65</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>66</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>67</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>68</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>69</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>70</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>71</String>
+    <String>1</String>
+    <String>D_Ppto</String>
+    <String>72</String>
+    <String>1</String>
+    <String>D_PptoDinámicas</String>
+    <String>73</String>
+    <String>1</String>
+    <String>D_PptoDinámicas</String>
+    <String>74</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>75</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>76</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>77</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>78</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>79</String>
+    <String>1</String>
+    <String>D_Conversion</String>
+    <String>80</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>81</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>82</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>83</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>84</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>85</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>86</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>87</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>88</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>89</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>90</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>91</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>92</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>93</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>94</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>95</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>96</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>97</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>98</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>99</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>100</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>101</String>
+    <String>1</String>
+    <String>M_Calendario</String>
+    <String>102</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>103</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>104</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>105</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>106</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>107</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>108</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>109</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>110</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>111</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>112</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>113</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>114</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>115</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>116</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>117</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>118</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>119</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>120</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>121</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>122</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>123</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>124</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>125</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>126</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>127</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>128</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>129</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>130</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>131</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>132</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>133</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>134</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>135</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>136</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>137</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>138</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>139</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>140</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>141</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>142</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>143</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>144</String>
+    <String>1</String>
+    <String>D_Indicadores</String>
+    <String>145</String>
+    <String>1</String>
+    <String>Jerarquia</String>
+    <String>146</String>
+    <String>1</String>
+    <String>Jerarquia</String>
+    <String>147</String>
+    <String>1</String>
+    <String>Jerarquia</String>
+    <String>148</String>
+    <String>1</String>
+    <String>M_IslaTiempo</String>
+    <String>149</String>
+    <String>1</String>
+    <String>M_FactorConversionValor</String>
+    <String>150</String>
+    <String>1</String>
+    <String>M_FactorConversionValor</String>
+    <String>151</String>
+    <String>1</String>
+    <String>M_DashBoardMedidas</String>
+    <String>152</String>
+    <String>1</String>
+    <String>M_DashBoardMedidas</String>
+    <String>153</String>
+    <String>1</String>
+    <String>M_DashBoardMedidas</String>
+    <String>154</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension0</String>
+    <String>155</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension0</String>
+    <String>156</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension1</String>
+    <String>157</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension1</String>
+    <String>158</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension2</String>
+    <String>159</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension2</String>
+    <String>160</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension3</String>
+    <String>161</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension3</String>
+    <String>162</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension3-1</String>
+    <String>163</String>
+    <String>1</String>
+    <String>M_ReportePersonalizado_Dimension3-1</String>
+    <String>164</String>
+    <String>1</String>
+    <String>M_Filtros_Navegacion_Isla</String>
+  </FieldSrcTables>
+  <TableViewData>
+    <Pos></Pos>
+    <CtlInfo>
+      <InternalView>
+        <Tables>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>732</Left>
+              <Top>214</Top>
+              <Width>182</Width>
+              <Height>352</Height>
+            </Pos>
+            <Caption>D_Link_Table</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>253</Left>
+              <Top>310</Top>
+              <Width>306</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Consolidado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>447</Left>
+              <Top>264</Top>
+              <Width>211</Width>
+              <Height>27</Height>
+            </Pos>
+            <Caption>D_Ppto</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>202</Left>
+              <Top>27</Top>
+              <Width>264</Width>
+              <Height>82</Height>
+            </Pos>
+            <Caption>D_PptoPAD</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>978</Left>
+              <Top>309</Top>
+              <Width>248</Width>
+              <Height>154</Height>
+            </Pos>
+            <Caption>D_Conversion</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>995</Left>
+              <Top>115</Top>
+              <Width>242</Width>
+              <Height>98</Height>
+            </Pos>
+            <Caption>M_Calendario</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>443</Left>
+              <Top>308</Top>
+              <Width>213</Width>
+              <Height>150</Height>
+            </Pos>
+            <Caption>D_VentasConsolidado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>141</Left>
+              <Top>200</Top>
+              <Width>246</Width>
+              <Height>46</Height>
+            </Pos>
+            <Caption>M_IslaTiempo</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>996</Left>
+              <Top>234</Top>
+              <Width>238</Width>
+              <Height>56</Height>
+            </Pos>
+            <Caption>D_Indicadores</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>637</Left>
+              <Top>102</Top>
+              <Width>180</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_FactorConversion</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>137</Left>
+              <Top>253</Top>
+              <Width>251</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_FactorConversionValor</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>447</Left>
+              <Top>231</Top>
+              <Width>209</Width>
+              <Height>27</Height>
+            </Pos>
+            <Caption>D_PptoDinámicas</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>138</Left>
+              <Top>323</Top>
+              <Width>250</Width>
+              <Height>82</Height>
+            </Pos>
+            <Caption>M_DashBoardMedidas</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>247</Left>
+              <Top>526</Top>
+              <Width>100</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_ReportePersonalizado_Dimension0</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>128</Left>
+              <Top>527</Top>
+              <Width>100</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_ReportePersonalizado_Dimension1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>140</Left>
+              <Top>63</Top>
+              <Width>249</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_ReportePersonalizado_Dimension2</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>139</Left>
+              <Top>410</Top>
+              <Width>243</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_ReportePersonalizado_Dimension3</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>140</Left>
+              <Top>132</Top>
+              <Width>247</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>M_ReportePersonalizado_Dimension3-1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>136</Left>
+              <Top>479</Top>
+              <Width>210</Width>
+              <Height>46</Height>
+            </Pos>
+            <Caption>M_Filtros_Navegacion_Isla</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>421</Left>
+              <Top>122</Top>
+              <Width>292</Width>
+              <Height>100</Height>
+            </Pos>
+            <Caption>Tickets</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>804</Left>
+              <Top>38</Top>
+              <Width>100</Width>
+              <Height>100</Height>
+            </Pos>
+            <Caption>Jerarquia</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>426</Left>
+              <Top>38</Top>
+              <Width>219</Width>
+              <Height>82</Height>
+            </Pos>
+            <Caption>Descripcion_Nit_Cliente_Map</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>92</Left>
+              <Top>119</Top>
+              <Width>100</Width>
+              <Height>118</Height>
+            </Pos>
+            <Caption>$Syn 1 Table</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>40</Left>
+              <Top>249</Top>
+              <Width>158</Width>
+              <Height>118</Height>
+            </Pos>
+            <Caption>$Syn 2 Table</Caption>
+          </TableViewTableWinSaveInfo>
+        </Tables>
+        <BroomPoints></BroomPoints>
+        <ConnectionPoints></ConnectionPoints>
+        <ZoomFactor>3FF0000000000000</ZoomFactor>
+      </InternalView>
+      <SourceView></SourceView>
+    </CtlInfo>
+    <Mode>0</Mode>
+  </TableViewData>
+  <Bookmarks></Bookmarks>
+  <SavedByVersion>11.20.12742.0409</SavedByVersion>
+  <ForceBackEndMacroExecution>false</ForceBackEndMacroExecution>
+  <FieldTags>
+    <ScriptBased>
+      <FieldTagData>
+        <Tag>$key</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>%Pk_DashLink</String>
+          <String>%Pk_Fecha</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>%Pk_PptoLink</String>
+          <String>%Pk_PptoPADLink</String>
+          <String>%Pk_VentasAgrupadasLink</String>
+          <String>%Pk_LlaveTickets</String>
+          <String>Id Canal</String>
+          <String>nit</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$hidden</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$system</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$text</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Info</String>
+          <String>%Pk_DashLink</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>%Pk_Origen</String>
+          <String>%Pk_PptoLink</String>
+          <String>%Pk_PptoPADLink</String>
+          <String>%Pk_VentasAgrupadasLink</String>
+          <String>%Pk_LlaveTickets</String>
+          <String>Categoría Producto</String>
+          <String>Grupo Producto</String>
+          <String>Mundo Producto</String>
+          <String>Agrupacion Campaña</String>
+          <String>Nombre Actividad</String>
+          <String>Canal Gestion</String>
+          <String>Canal_Tmp</String>
+          <String>Centro de Costo</String>
+          <String>Ciudad</String>
+          <String>Cluster</String>
+          <String>Departamento</String>
+          <String>Desc. Cliente Convenio</String>
+          <String>Cliente Retail</String>
+          <String>Descuento Aplicado</String>
+          <String>Director</String>
+          <String>Regional</String>
+          <String>Subdirector</String>
+          <String>Tipo Dinámica</String>
+          <String>Desc. Cliente Factura</String>
+          <String>Cliente Factura</String>
+          <String>Clasificacion Conteo Tickets</String>
+          <String>%Origen_UnionTablas</String>
+          <String>Filtro Ajuste Contable</String>
+          <String>Subcategoría Producto</String>
+          <String>Ciudad Cliente Entrega</String>
+          <String>Origen_Ppto</String>
+          <String>Año_Quartil</String>
+          <String>Año_SemanaRetail</String>
+          <String>Año_Semestre</String>
+          <String>Quartil</String>
+          <String>Semestre</String>
+          <String>Tipo Calendario</String>
+          <String>Tipo Dia</String>
+          <String>Tipo Dia Festivo</String>
+          <String>Archivo</String>
+          <String>Cumplimiento Ppto PAD Unid.</String>
+          <String>Cantidad Total Productos PAD UDM Media</String>
+          <String>Cumplimiento Ppto PAD Cop$</String>
+          <String>Valor Total Venta PAD Comercial</String>
+          <String>Tasa de Éxito (PAD)</String>
+          <String>Cantidad Total Transacciones PAD Comercial</String>
+          <String>Ticket Promedio PAD</String>
+          <String>Canal</String>
+          <String>Grupo</String>
+          <String>Linea de Negocio</String>
+          <String>%Periodo_Tiempo</String>
+          <String>%UnidadesValor</String>
+          <String>Medidas</String>
+          <String>%Rep_Personalizado0</String>
+          <String>%Rep_Personalizado1</String>
+          <String>%Rep_Personalizado2</String>
+          <String>%Rep_Personalizado3</String>
+          <String>%Rep_Personalizado4</String>
+          <String>%Analisis_Cifras</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$numeric</Tag>
+        <FieldNames>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>%Pk_Fecha</String>
+          <String>Actividad</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Id Agrupacion Cliente</String>
+          <String>Id Canal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Id Centro Costo</String>
+          <String>Id Convenio</String>
+          <String>Id Sucursal</String>
+          <String>Id UEN</String>
+          <String>nit</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>Cantidad Real Transacciones Venta Comercial</String>
+          <String>Cantidad Productos UDM Maxima</String>
+          <String>Cantidad Productos UDM Media</String>
+          <String>Cantidad Productos UDM Minima</String>
+          <String>Valor Real Venta Comercial</String>
+          <String>Valor Real Venta Público</String>
+          <String>Valor Real Costos Comercial</String>
+          <String>Valor Real Costos Público</String>
+          <String>Valor Real Contribución Comercial</String>
+          <String>Valor Real Contribución Público</String>
+          <String>Valor Ppto Venta Comercial</String>
+          <String>Valor Ppto Venta Público</String>
+          <String>Valor Ppto Costos Comercial</String>
+          <String>Valor Ppto Costos Público</String>
+          <String>Valor Ppto Contribución Comercial</String>
+          <String>Valor Ppto Contribución Público</String>
+          <String>Valor Ppto Magen Comercial</String>
+          <String>Valor Ppto Magen Público</String>
+          <String>Valor Ppto Dinámicas</String>
+          <String>Cantidad Ppto Dinámicas UDM Media</String>
+          <String>Cantidad Visitas Dispensacion Día</String>
+          <String>Cantidad Visitas Dispensacion Mes</String>
+          <String>Cantidad Visitas Retail Día</String>
+          <String>Cantidad Visitas Retail Mes</String>
+          <String>Valor Transacciones Venta Retail Mes</String>
+          <String>Valor Transacciones Venta Retail Día</String>
+          <String>Año</String>
+          <String>Dia</String>
+          <String>Dia Semana</String>
+          <String>Fecha</String>
+          <String>Marcacion_FDS_Festivo</String>
+          <String>Mes</String>
+          <String>Mes_Num</String>
+          <String>Numero Dia Semana Retail</String>
+          <String>Periodo</String>
+          <String>Semana Año</String>
+          <String>Semana Mes</String>
+          <String>Semana Retail</String>
+          <String>Num_Periodo</String>
+          <String>Cumplimiento Ppto Ventas Público</String>
+          <String>Cumplimiento Ppto Ventas Comercial</String>
+          <String>Valor Total Ppto Venta Comercial</String>
+          <String>Valor Total Ppto Venta Público</String>
+          <String>Valor Total Real Venta Comercial</String>
+          <String>Valor Total Real Venta Público</String>
+          <String>Cumplimiento Ppto Costos Comercial</String>
+          <String>Cumplimiento Ppto Costos Público</String>
+          <String>Valor Total Ppto Costos Comercial</String>
+          <String>Valor Total Ppto Costos Público</String>
+          <String>Valor Total Real Costos Comercial</String>
+          <String>Valor Total Real Costos Público</String>
+          <String>Cumplimiento Ppto Contribución Comercial</String>
+          <String>Cumplimiento Ppto Contribución Público</String>
+          <String>Valor Total Ppto Contribución Comercial</String>
+          <String>Valor Total Ppto Contribución Público</String>
+          <String>Valor Total Real Contribución Comercial</String>
+          <String>Valor Total Real Contribución Público</String>
+          <String>Cumplimiento Ppto Margen Comercial</String>
+          <String>Valor Ppto Margen Comercial</String>
+          <String>Valor Total Margen Comercial</String>
+          <String>Cumplimiento Ppto Margen Público</String>
+          <String>Valor Ppto Margen Público</String>
+          <String>Valor Total Margen Público</String>
+          <String>%Conversion x Mes</String>
+          <String>Cantidad Visitas Total Retail Mes</String>
+          <String>Cantidad Visitas Total Dispensacion Mes</String>
+          <String>%Conversion x Día</String>
+          <String>Cantidad Visitas Total Dispensacion Día</String>
+          <String>Cantidad Visitas Total Retail Día</String>
+          <String>Cantidad Total Ppto Dinámicas UDM Media</String>
+          <String>Valor Total Ppto Dinámicas</String>
+          <String>Cantidad Total Real Transacciones Venta Comercial</String>
+          <String>Ticket Promedio Valor</String>
+          <String>Ticket Promedio Unidades</String>
+          <String>Cantidad Total Real Productos UDM Media</String>
+          <String>%M_FactorConversionValor</String>
+          <String>Medidas Id</String>
+          <String>Medidas Ord</String>
+          <String>%OrdenRepPersonalizado0</String>
+          <String>%OrdenRepPersonalizado1</String>
+          <String>%OrdenRepPersonalizado2</String>
+          <String>%OrdenRepPersonalizado3</String>
+          <String>%OrdenRepPersonalizado4</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$integer</Tag>
+        <FieldNames>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>%Pk_Fecha</String>
+          <String>Actividad</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Id Agrupacion Cliente</String>
+          <String>Id Canal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Id Centro Costo</String>
+          <String>Id Convenio</String>
+          <String>Id Sucursal</String>
+          <String>Id UEN</String>
+          <String>nit</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>Cantidad Real Transacciones Venta Comercial</String>
+          <String>Cantidad Visitas Dispensacion Día</String>
+          <String>Cantidad Visitas Dispensacion Mes</String>
+          <String>Cantidad Visitas Retail Día</String>
+          <String>Cantidad Visitas Retail Mes</String>
+          <String>Valor Transacciones Venta Retail Día</String>
+          <String>Año</String>
+          <String>Dia</String>
+          <String>Dia Semana</String>
+          <String>Fecha</String>
+          <String>Marcacion_FDS_Festivo</String>
+          <String>Mes</String>
+          <String>Mes_Num</String>
+          <String>Numero Dia Semana Retail</String>
+          <String>Periodo</String>
+          <String>Semana Año</String>
+          <String>Semana Mes</String>
+          <String>Semana Retail</String>
+          <String>Num_Periodo</String>
+          <String>Cantidad Visitas Total Retail Mes</String>
+          <String>Cantidad Visitas Total Dispensacion Mes</String>
+          <String>Cantidad Visitas Total Dispensacion Día</String>
+          <String>Cantidad Visitas Total Retail Día</String>
+          <String>Cantidad Total Real Transacciones Venta Comercial</String>
+          <String>%M_FactorConversionValor</String>
+          <String>Medidas Id</String>
+          <String>Medidas Ord</String>
+          <String>%OrdenRepPersonalizado0</String>
+          <String>%OrdenRepPersonalizado1</String>
+          <String>%OrdenRepPersonalizado2</String>
+          <String>%OrdenRepPersonalizado3</String>
+          <String>%OrdenRepPersonalizado4</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$ascii</Tag>
+        <FieldNames>
+          <String>$Info</String>
+          <String>%Pk_DashLink</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>%Pk_Origen</String>
+          <String>%Pk_PptoPADLink</String>
+          <String>Categoría Producto</String>
+          <String>Grupo Producto</String>
+          <String>Mundo Producto</String>
+          <String>Cliente Retail</String>
+          <String>Director</String>
+          <String>Regional</String>
+          <String>Tipo Dinámica</String>
+          <String>%Origen_UnionTablas</String>
+          <String>Filtro Ajuste Contable</String>
+          <String>Origen_Ppto</String>
+          <String>Año_Quartil</String>
+          <String>Año_SemanaRetail</String>
+          <String>Año_Semestre</String>
+          <String>Quartil</String>
+          <String>Semestre</String>
+          <String>Tipo Calendario</String>
+          <String>Tipo Dia Festivo</String>
+          <String>Archivo</String>
+          <String>Cumplimiento Ppto PAD Unid.</String>
+          <String>Cantidad Total Productos PAD UDM Media</String>
+          <String>Cumplimiento Ppto PAD Cop$</String>
+          <String>Valor Total Venta PAD Comercial</String>
+          <String>Tasa de Éxito (PAD)</String>
+          <String>Cantidad Total Transacciones PAD Comercial</String>
+          <String>Ticket Promedio PAD</String>
+          <String>Linea de Negocio</String>
+          <String>%Periodo_Tiempo</String>
+          <String>%UnidadesValor</String>
+          <String>Medidas</String>
+          <String>%Rep_Personalizado3</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$timestamp</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>Periodo</String>
+          <String>Num_Periodo</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$date</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>Periodo</String>
+          <String>Num_Periodo</String>
+        </FieldNames>
+      </FieldTagData>
+    </ScriptBased>
+    <Interactive>
+      <FieldTagData>
+        <Tag>$ascii</Tag>
+        <FieldNames>
+          <String>%Pk_Origen</String>
+          <String>%Pk_PptoPADLink</String>
+          <String>%Origen_UnionTablas</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Desc. Cliente Convenio</String>
+          <String>Categoría Producto</String>
+          <String>Cliente Retail</String>
+          <String>Grupo Producto</String>
+          <String>Mundo Producto</String>
+          <String>Tipo Dinámica</String>
+          <String>TIPO_DOCUMENTO</String>
+          <String>Origen_Ppto</String>
+          <String>Canal</String>
+          <String>Quartil</String>
+          <String>Tipo Dia Festivo</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$text</Tag>
+        <FieldNames>
+          <String>%Pk_Origen</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>%Pk_VentasAgrupadasLink</String>
+          <String>Canal</String>
+          <String>Canal_Tmp</String>
+          <String>Canal Gestion</String>
+          <String>Desc. Cliente Convenio</String>
+          <String>%Pk_PptoLink</String>
+          <String>%Pk_PptoPADLink</String>
+          <String>%Origen_UnionTablas</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Agrupacion Campaña</String>
+          <String>Categoría Producto</String>
+          <String>Cliente Retail</String>
+          <String>Descuento Aplicado</String>
+          <String>Grupo Producto</String>
+          <String>Linea de Negocio</String>
+          <String>Mundo Producto</String>
+          <String>Nombre Actividad</String>
+          <String>NOMBRE_SUCURSAL</String>
+          <String>Subcategoría Producto</String>
+          <String>Tipo Dinámica</String>
+          <String>TIPO_DOCUMENTO</String>
+          <String>CLIENTE</String>
+          <String>Origen_Ppto</String>
+          <String>Quartil</String>
+          <String>Tipo Dia Festivo</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$numeric</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Cod. Sucursal</String>
+          <String>Id Centro Costo</String>
+          <String>ID. UEN</String>
+          <String>Actividad</String>
+          <String>Id Canal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Id Convenio</String>
+          <String>nit</String>
+          <String>Cantidad Transacciones Venta</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>CANTIDAD_UDM_MAXIMA</String>
+          <String>CANTIDAD_UDM_MEDIA</String>
+          <String>CANTIDAD_UDM_MINIMA</String>
+          <String>Costo Promedio Venta</String>
+          <String>Costo Promedio Venta Público</String>
+          <String>Id Vendedor</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>Valor Venta</String>
+          <String>Valor Venta Público</String>
+          <String>Ppto Costos Venta Público</String>
+          <String>Ppto Costos Financiero</String>
+          <String>Ppto Contribución Venta Público</String>
+          <String>Ppto Contribución Financiero</String>
+          <String>ID CONVENIO</String>
+          <String>ID Centro de Costo</String>
+          <String>ID Sucursal</String>
+          <String>Fecha</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>Ppto Ingresos Venta Público</String>
+          <String>Ppto Ingresos Financiero</String>
+          <String>Meta PAD Diaria Cop$</String>
+          <String>Meta PAD Diaria Unid.</String>
+          <String>Cantidad Visitas Retail Mes</String>
+          <String>Cantidad Visitas Dispensacion Mes</String>
+          <String>Cantidad Visitas Retail Día</String>
+          <String>Cantidad Visitas Dispensacion Día</String>
+          <String>Semana Retail</String>
+          <String>Numero Dia Semana Retail</String>
+          <String>Año</String>
+          <String>Mes</String>
+          <String>Dia</String>
+          <String>Dia Semana</String>
+          <String>Periodo</String>
+          <String>Semana Año</String>
+          <String>Semana Mes</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$integer</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Cod. Sucursal</String>
+          <String>Id Centro Costo</String>
+          <String>ID. UEN</String>
+          <String>Actividad</String>
+          <String>Id Canal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Id Convenio</String>
+          <String>nit</String>
+          <String>Cantidad Transacciones Venta</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>CANTIDAD_UDM_MINIMA</String>
+          <String>Id Vendedor</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>Ppto Costos Financiero</String>
+          <String>ID CONVENIO</String>
+          <String>ID Centro de Costo</String>
+          <String>ID Sucursal</String>
+          <String>Fecha</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>Cantidad Visitas Retail Mes</String>
+          <String>Cantidad Visitas Dispensacion Mes</String>
+          <String>Cantidad Visitas Retail Día</String>
+          <String>Cantidad Visitas Dispensacion Día</String>
+          <String>Semana Retail</String>
+          <String>Numero Dia Semana Retail</String>
+          <String>Año</String>
+          <String>Mes</String>
+          <String>Dia</String>
+          <String>Dia Semana</String>
+          <String>Periodo</String>
+          <String>Semana Año</String>
+          <String>Semana Mes</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$timestamp</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$date</Tag>
+        <FieldNames>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+        </FieldNames>
+      </FieldTagData>
+    </Interactive>
+  </FieldTags>
+  <FieldComments></FieldComments>
+  <TableComments></TableComments>
+  <CreatePrjFolder>false</CreatePrjFolder>
+  <LinkedTables></LinkedTables>
+</DocInternals>

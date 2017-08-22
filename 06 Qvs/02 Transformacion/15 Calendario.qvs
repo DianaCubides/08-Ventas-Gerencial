@@ -1,0 +1,261 @@
+﻿Trace ==============================================================================================================================
+12.1.
+	Fecha: 29/11/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen: $(vR_QvdMaestros)M_Calendario_mas_Festivos_Tra.QVD (qvd)
+	Fuente de datos: QVD
+	Nombre Tablas/Archivos Resultante: D_09_Qvd_Calendario_Tra.qvd 
+	Descripcion QVD Resultante:	Qvd que contiene la información del Calendario Maestro con la inclusion de las semanas Retail
+	Regla de negocio: Se arma el calendario teniendo en cuenta que la Semana Retail inicia los días Domingos y hace un conteo lineal de los días. 
+					  Se replica la informacion de días remitida por Manuel Jaimes.
+===================================================================================================================================;
+M_FdsFestivo_Map1:
+mapping LOAD
+		Floor(Fecha) as %Pk_Fecha_Llave,
+		'1' as Marcacion
+From $(vR_QvdMaestros)M_Calendario_mas_Festivos_Tra.QVD (qvd)
+	Where num([Dia Semana])='0' and [Tipo Dia Festivo] like '*Festivo*'
+;
+
+
+M_Calendario_Tmp0:
+LOAD
+	if(Flag='1', %Pk_Fecha -1,null()) as Dia_Anterior1,
+	if(Flag='1', %Pk_Fecha -2, null()) as Dia_Anterior2,
+	*
+	;
+LOAD
+	Floor(Fecha) as %Pk_Fecha,
+	ApplyMap('M_FdsFestivo_Map1',Floor(Fecha),'0') as Flag
+From $(vR_QvdMaestros)M_Calendario_mas_Festivos_Tra.QVD (qvd);
+
+M_FdsFestivo_Map2:
+Mapping LOAD
+	Dia_Anterior1,
+	'1' as Flag_Map2
+Resident M_Calendario_Tmp0
+	Where Flag='1'
+;
+
+M_FdsFestivo_Map3:
+Mapping LOAD
+	Dia_Anterior2,
+	'1' as Flag_Map3
+Resident M_Calendario_Tmp0
+	Where Flag='1'
+;
+
+DROP Table M_Calendario_Tmp0;
+
+
+Trace ==============================================================================================================================
+12.1.
+	Fecha: 29/11/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen: $(vR_QvdMaestros)M_Calendario_mas_Festivos_Tra.QVD (qvd)
+	Fuente de datos: QVD
+	Nombre Tablas/Archivos Resultante: M_09_Qvd_Calendario_Tra.qvd 
+	Descripcion QVD Resultante:	Qvd que contiene la información del Calendario Maestro con la inclusion de las semanas Retail
+	Regla de negocio: Se arma el calendario teniendo en cuenta que la Semana Retail inicia los días Domingos y hace un conteo lineal de los días. 
+					  Se replica la informacion de días remitida por Manuel Jaimes.
+===================================================================================================================================;
+M_Calendario:
+LOAD
+		 Año&'_'&Semestre as Año_Semestre,
+	 Año&'_'&Quartil as Año_Quartil,
+	 Año&'_'&[Semana Retail] as Año_SemanaRetail,
+	 *
+	 ;
+LOAD
+	if(Dia='1' and Año<>Peek(Año,-1),'1',
+		if([Numero Dia Semana Retail]='1', Peek([Semana Retail],-1)+1,Peek([Semana Retail],-1))) as [Semana Retail],
+
+	if(Marcacion_FDS_Festivo='1','Fin de Semana Festivo',
+    	if(num([Dia Semana])='5' or num([Dia Semana])='6', 'Fin de Semana',
+     		if([Tipo Dia Festivo] like '*Festivo*','Día Festivo (No Lunes)','Día Normal'))) as [Tipo Dia],
+		*
+		;
+LOAD 
+	'MTH' as [Tipo Calendario],
+	ApplyMap('M_FdsFestivo_Map1',Floor(Fecha),
+		ApplyMap('M_FdsFestivo_Map2',Floor(Fecha),
+			ApplyMap('M_FdsFestivo_Map3',Floor(Fecha),'0'))) as Marcacion_FDS_Festivo,	
+	if(num([Dia Semana])+2='8','1',num([Dia Semana])+2) as [Numero Dia Semana Retail],
+	Floor(Fecha) as %Pk_Fecha,
+	Fecha, 
+	date(monthstart(Fecha),'MMM-YYYY') as Periodo,
+     Año, 
+     Mes, 
+     num(Mes) as Mes_Num,
+     Dia, 
+     [Dia Semana], 
+     [Semana Año], 
+     if(num(Mes)<='6','S1','S2') as Semestre,     
+     [Semana Mes], 
+     Quartil, 
+     [Tipo Dia Festivo]
+FROM $(vR_QvdMaestros)M_Calendario_mas_Festivos_Tra.QVD (qvd)
+	Where Año>='2013' and Año<= Year(Today())+5
+;
+
+STORE M_Calendario into $(vR_Qvd)M_08_Qvd_CalendarioMATM00_Tra.qvd (qvd);
+DROP Table M_Calendario;
+
+
+
+
+/******************************************************************************
+	Se crea calendario a 12 Meses, teniendo el nivel de detalle de semana 
+*******************************************************************************/
+M_Calendario_Tmp:	
+	LOAD Distinct
+		'MATS12' as [Tipo Calendario],
+	 floor(WeekEnd(%Pk_Fecha)) as Fecha_Filtro,
+		floor(AddMonths(WeekEnd(%Pk_Fecha),-12))+1 as Fecha_Inicio, 
+		floor(WeekEnd(%Pk_Fecha)) as Fecha_Final
+	From $(vR_Qvd)M_08_Qvd_CalendarioMATM00_Tra.qvd (qvd);
+
+
+Left Join
+	M_Calendario_Tmp2:
+	LOAD Distinct
+		num(Num(Fecha_Inicio)+IterNo() - 1) as %Pk_Fecha,
+		Num(Fecha_Inicio) as Fecha_Inicio, 
+		Num(Fecha_Final) as Fecha_Final
+	Resident M_Calendario_Tmp
+			While Num(Fecha_Inicio)+IterNo() - 1 <= Num(Fecha_Final);
+
+
+Left Join
+
+	M_Calendarios:
+	LOAD
+		num(%Pk_Fecha) as Fecha_Filtro,
+		Año,
+		[Tipo Dia],
+		Fecha,
+		Marcacion_FDS_Festivo,	
+		Dia,
+		[Dia Semana],
+		Mes,
+		Periodo,
+		Quartil,
+		[Semana Año],
+		[Semana Mes],
+		Semestre,
+		[Tipo Dia Festivo],
+		[Semana Retail],
+		[Numero Dia Semana Retail],
+		Mes_Num,
+		Año_Semestre,
+	 	Año_Quartil,
+	 	Año_SemanaRetail
+	From $(vR_Qvd)M_08_Qvd_CalendarioMATM00_Tra.qvd (qvd);
+
+DROP Fields Fecha_Filtro, Fecha_Inicio, Fecha_Final From M_Calendario_Tmp;
+
+STORE M_Calendario_Tmp into $(vR_Qvd)M_08_Qvd_CalendarioMATS12_Tra.qvd (qvd);
+DROP Table M_Calendario_Tmp;
+
+
+/*********************************************************************************
+				Calendario A nivel de Mes
+*********************************************************************************/				
+
+let vS_Meses='12, 03';
+
+FOR Each vMes in $(vS_Meses)
+
+let vS_MesInicio= if('$(vMes)'=12,'11','$(vMes)');
+let vS_PeriodoTiempo= if('$(vMes)'=12,'0','-1');
+let vS_FechaNavegacion= if('$(vMes)'=12,'0','1');
+
+M_Calendario_Tmp:
+	LOAD Distinct
+		'MATM$(vMes)' as [Tipo Calendario],
+		floor(AddMonths(MonthStart(%Pk_Fecha),-$(vS_MesInicio))) as Fecha_Inicio, 
+		floor(MonthEnd(AddMonths(MonthEnd(%Pk_Fecha),$(vS_PeriodoTiempo)))) as Fecha_Final 
+	From $(vR_Qvd)M_08_Qvd_CalendarioMATM00_Tra.qvd (qvd);
+
+Left Join
+	Planta_Fechas:
+	LOAD Distinct
+		num(Num(Fecha_Inicio)+IterNo() - 1) as %Pk_Fecha,
+		Num(Fecha_Inicio) as Fecha_Inicio, 
+		Num(Fecha_Final) as Fecha_Final,
+		floor(MonthStart(addmonths(Fecha_Final,$(vS_FechaNavegacion)))) as Fecha_Final_Navegacion
+	Resident M_Calendario_Tmp
+			While Num(Fecha_Inicio)+IterNo() - 1 <= Num(Fecha_Final);
+
+Left Join
+
+	M_Calendarios:
+	LOAD
+		num(%Pk_Fecha) as Fecha_Final_Navegacion,
+		Año,
+		Dia,
+		[Tipo Dia],
+		[Dia Semana],
+		Marcacion_FDS_Festivo,	
+		Mes,
+		Fecha,
+		Periodo,
+		Quartil,
+		[Semana Año],
+		[Semana Mes],
+		[Tipo Dia Festivo],
+		[Semana Retail],
+		Semestre,
+		[Numero Dia Semana Retail],
+		Mes_Num,
+		Año_Semestre,
+	 	Año_Quartil,
+	 	Año_SemanaRetail		
+	From $(vR_Qvd)M_08_Qvd_CalendarioMATM00_Tra.qvd (qvd);
+
+DROP Fields Fecha_Final_Navegacion,  Fecha_Inicio, Fecha_Final From M_Calendario_Tmp;
+
+STORE M_Calendario_Tmp into $(vR_Qvd)M_08_Qvd_CalendarioMATM$(vMes)_Tra.qvd (qvd);
+DROP Table M_Calendario_Tmp;
+
+NEXT vMes 
+
+
+for Each vR_Calendario in ('$(vR_Qvd)M_08_Qvd_CalendarioMAT???_Tra.qvd')
+
+
+	M_Calendario:
+	LOAD
+		[%Pk_Fecha],
+		[Año],
+		[Año_Quartil],
+		[Año_SemanaRetail],
+		[Año_Semestre],
+		//[Archivo],
+		day(%Pk_Fecha) as [Dia],
+		[Dia Semana],
+		[Fecha],
+		[Marcacion_FDS_Festivo],
+		[Mes],
+		[Mes_Num],
+		[Numero Dia Semana Retail],
+		[Periodo],
+		[Quartil],
+		[Semana Año],
+		[Semana Mes],
+		[Semana Retail],
+		[Semestre],
+		[Tipo Calendario],
+		[Tipo Dia],
+		[Tipo Dia Festivo],
+		FileName() as Archivo
+		From $(vR_Qvd)$(vR_Calendario) (qvd);
+
+NEXT vR_Calendario
+
+STORE M_Calendario into $(vR_Qvd)M_08_Qvd_CalendarioMAT_Tra.qvd (qvd);
+DROP Table M_Calendario;

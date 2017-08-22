@@ -1,0 +1,25 @@
+﻿D_Ppto:
+LOAD
+ [%Pk_PptoLink],
+ [Origen_Ppto],
+ [Valor Ppto Venta Comercial],
+ [Valor Ppto Venta Público],
+ [Valor Ppto Costos Comercial],
+ [Valor Ppto Costos Público],
+ [Valor Ppto Contribución Comercial],
+ [Valor Ppto Contribución Público],
+ [Valor Ppto Magen Comercial], 
+ [Valor Ppto Magen Público]
+From $(vR_Qvd)D_08_Qvd_Presupuesto_Tra.qvd (qvd)
+	Where Exists(%Pk_PptoLink)
+;
+
+
+D_PptoDinámicas:
+LOAD
+	%Pk_PptoPADLink,
+	[Valor Ppto Dinámicas],
+	[Cantidad Ppto Dinámicas UDM Media]
+From $(vR_Qvd)D_08_Qvd_PresupuestoPAD_Tra.qvd (qvd)
+	Where Exists(%Pk_PptoPADLink)
+;

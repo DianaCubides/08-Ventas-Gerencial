@@ -1,0 +1,672 @@
+﻿<DocInternals>
+  <AlwaysLoose></AlwaysLoose>
+  <FieldSrcTables></FieldSrcTables>
+  <TableViewData>
+    <Pos></Pos>
+    <CtlInfo>
+      <InternalView>
+        <Tables>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>433</Left>
+              <Top>265</Top>
+              <Width>100</Width>
+              <Height>100</Height>
+            </Pos>
+            <Caption>Lista_Archivos_Tmp1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>351</Left>
+              <Top>225</Top>
+              <Width>139</Width>
+              <Height>100</Height>
+            </Pos>
+            <Caption>Canasta_Productos</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>556</Left>
+              <Top>265</Top>
+              <Width>255</Width>
+              <Height>100</Height>
+            </Pos>
+            <Caption>Canasta_Productos_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>265</Left>
+              <Top>128</Top>
+              <Width>311</Width>
+              <Height>293</Height>
+            </Pos>
+            <Caption>Temp_Variables</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Margen</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>370</Left>
+              <Top>171</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Arcon</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>370</Left>
+              <Top>171</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Uom_Conversions_Ext</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>221</Left>
+              <Top>28</Top>
+              <Width>100</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>Tiempo</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>366</Left>
+              <Top>457</Top>
+              <Width>100</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>Tiempo-1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Ventas_Geopos</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>219</Top>
+              <Width>100</Width>
+              <Height>190</Height>
+            </Pos>
+            <Caption>Reglas_Actividad_Comercial</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>564</Left>
+              <Top>210</Top>
+              <Width>236</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Carrefour</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>432</Left>
+              <Top>210</Top>
+              <Width>167</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>833</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>2</Caption>
+          </TableViewTableWinSaveInfo>
+        </Tables>
+        <BroomPoints></BroomPoints>
+        <ConnectionPoints></ConnectionPoints>
+        <ZoomFactor>3FF0000000000000</ZoomFactor>
+      </InternalView>
+      <SourceView></SourceView>
+    </CtlInfo>
+    <Mode>0</Mode>
+  </TableViewData>
+  <Bookmarks></Bookmarks>
+  <SavedByVersion>11.20.12742.0409</SavedByVersion>
+  <ForceBackEndMacroExecution>false</ForceBackEndMacroExecution>
+  <FieldTags>
+    <ScriptBased>
+      <FieldTagData>
+        <Tag>$hidden</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$system</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$ascii</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$text</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+    </ScriptBased>
+    <Interactive>
+      <FieldTagData>
+        <Tag>$numeric</Tag>
+        <FieldNames>
+          <String>CODIGO_OFICINA</String>
+          <String>FECHA_GRABACION</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>SECUENCIA_INTERNA</String>
+          <String>CANTIDAD</String>
+          <String>VALOR_TRANSACCION</String>
+          <String>VALOR_IVA</String>
+          <String>CODIGO_VENDEDOR</String>
+          <String>CODIGO_ACTIVIDAD</String>
+          <String>CAJA</String>
+          <String>CODIGO_CAJERO</String>
+          <String>CODIGO_INTERNO_VENDEDOR</String>
+          <String>NUMERO_LINEA</String>
+          <String>ARTICULO</String>
+          <String>UDM</String>
+          <String>PORCENTAJE_IVA</String>
+          <String>FECHA_GRABACION2</String>
+          <String>AÑO</String>
+          <String>MES</String>
+          <String>DIA</String>
+          <String>HORA</String>
+          <String>CONTEO</String>
+          <String>FECHA_SERVIDOR</String>
+          <String>FECHA_CONTABLE</String>
+          <String>WID_TIEMPO</String>
+          <String>W_INSERT_DT</String>
+          <String>W_UPDATE_DT</String>
+          <String>CREATED_BY_WID</String>
+          <String>CREATED_ON_DT</String>
+          <String>CHANGED_BY_WID</String>
+          <String>CHANGED_ON_DT</String>
+          <String>WID_TRX_AR</String>
+          <String>WID_TRANSACCIONES_AR</String>
+          <String>WID_TIPOS_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_AR</String>
+          <String>WID_TIEMPO_PEDIDO</String>
+          <String>WID_TIEMPO_CONTABLE</String>
+          <String>WID_SUCURSAL_FACTURACION</String>
+          <String>WID_SUBINVENTARIOS</String>
+          <String>WID_PROVEEDORES_PRIMARIO</String>
+          <String>WID_PROVEEDORES_PO_INST</String>
+          <String>WID_PROVEEDORES_PO_COMER</String>
+          <String>WID_PRODUCTOS</String>
+          <String>WID_PEDIDOS</String>
+          <String>WID_ORGANIZACIONES</String>
+          <String>WID_ORDENES_COMPRA</String>
+          <String>WID_ESTADOS_LINEA_OM</String>
+          <String>WID_COMBINACIONES_GL_INGRESO</String>
+          <String>WID_COMBINACIONES_GL_COSTO</String>
+          <String>WID_CLIENTES_ENTREGA</String>
+          <String>SRC_TRANSACTION_ID</String>
+          <String>SRC_OE_ORDEN_LINES_LINE_ID</String>
+          <String>SRC_CUSTOMER_TRX_LINE_ID</String>
+          <String>NUM_ACUERDO_COMPRA_INST</String>
+          <String>NUM_ACUERDO_COMPRA_COMER</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>VALOR_PRODUCTO_COMPRA_INST</String>
+          <String>VALOR_PRODUCTO_COMPRA_COMER</String>
+          <String>VALOR_DOCUMENTO_AR</String>
+          <String>PRECIO_VENTA_PRODUCTO_PEDIDO</String>
+          <String>PRECIO_TOTAL_PEDIDO</String>
+          <String>COSTO_TRANSACCION</String>
+          <String>COSTO_PROMEDIO_PRODUCTO_TRX</String>
+          <String>CANTIDAD_TRANSACCION</String>
+          <String>CANTIDAD_PEDIDA_PEDIDO</String>
+          <String>CANTIDAD_DOCUMENTO_AR</String>
+          <String>FACTOR_UOM_VENTA_PEDIDO</String>
+          <String>FACTOR_UOM_PO_ACU_COMER</String>
+          <String>FACTOR_UOM_PO_ACU_INST</String>
+          <String>FACTOR_UOM_PO_OC</String>
+          <String>FACTOR_UOM_AR</String>
+          <String>PORCENTAJE_AR</String>
+          <String>VALOR_INGRESO</String>
+          <String>VALOR_TOTAL_COMPRA_INST</String>
+          <String>VALOR_TOTAL_COMPRA_COMER</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Codigo Asignado</String>
+          <String>Cedula</String>
+          <String>Año</String>
+          <String>PERTENECE</String>
+          <String>COD SUCURSAL</String>
+          <String>% PART. DIA</String>
+          <String>PRESUPUESTO DIARIO META</String>
+          <String>TOTAL MES FINANCIERO</String>
+          <String>PRESUPUESTO DIARIO FINANCIERO</String>
+          <String>SOLO PPTO SIN REUBICACION FINANCIERO</String>
+          <String>PRESUPUESTO DIARIO VIABILIDAD</String>
+          <String>IMPACTO REUBICACION + ACT COMERCIAL VIABILIDAD</String>
+          <String>SOLO PPTO SIN REUBICACION  VIABILIDAD</String>
+          <String>Fecha</String>
+          <String>WID_ANIO</String>
+          <String>NOM_ANIO</String>
+          <String>WID_MES</String>
+          <String>WID_DIA</String>
+          <String>FECHA_CALENDARIO</String>
+          <String>SEMANA_MES</String>
+          <String>SEMANA_ANIO</String>
+          <String>DIA_DEL_MES</String>
+          <String>DIA_DE_SEMANA</String>
+          <String>DIA_DE_ANIO</String>
+          <String>TRIMESTRE</String>
+          <String>SEMESTRE</String>
+          <String>SEMANA_VENTA</String>
+          <String>DIAS_MES</String>
+          <String>SRC_ORG_ID</String>
+          <String>W_EFFECTIVE_FROM_DT</String>
+          <String>W_EFFECTIVE_TO_DT</String>
+          <String>Id Canal</String>
+          <String>UEN</String>
+          <String>ID CONVENIO</String>
+          <String>TOTAL MES META</String>
+          <String>N° CENTRO DE COSTO</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>IDENTIFICACION_CLIENTE</String>
+          <String>Cod Actividad</String>
+          <String>Nit</String>
+          <String>Prioridad</String>
+          <String>Fecha Vigencia Desde</String>
+          <String>Fecha Vigencia Hasta</String>
+          <String>Mes</String>
+          <String>CODIGO</String>
+          <String>BARRAS</String>
+          <String>PVP FULL CADENA</String>
+          <String>PVP FULL SAN ANDRES</String>
+          <String>IVA</String>
+          <String>DCTO</String>
+          <String>PVP DCTO CADENA</String>
+          <String>PVP DCTO GEOPOS</String>
+          <String>Px DCTO GEOPOS</String>
+          <String>PVP DCTO SAN ANDRES</String>
+          <String>DCTO1</String>
+          <String>PVP DCTO CADENA1</String>
+          <String>Px DCTO LISTA CADENA1</String>
+          <String>PVP DCTO GEOPOS1</String>
+          <String>Px DCTO GEOPOS1</String>
+          <String>PVP DCTO SAN ANDRES1</String>
+          <String>Valido Desde1</String>
+          <String>Valido Hasta1</String>
+          <String>PVP DCTO CADENA2</String>
+          <String>Px DCTO LISTA CADENA2</String>
+          <String>PVP DCTO GEOPOS2</String>
+          <String>Px DCTO GEOPOS2</String>
+          <String>PVP DCTO SAN ANDRES2</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>DCTO3</String>
+          <String>PVP DCTO CADENA3</String>
+          <String>Px DCTO LISTA CADENA3</String>
+          <String>PVP DCTO GEOPOS3</String>
+          <String>Px DCTO GEOPOS3</String>
+          <String>PVP DCTO SAN ANDRES3</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>DCTO4</String>
+          <String>PVP DCTO CADENA4</String>
+          <String>Px DCTO LISTA CADENA4</String>
+          <String>PVP DCTO GEOPOS4</String>
+          <String>Px DCTO GEOPOS4</String>
+          <String>PVP DCTO SAN ANDRES4</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>DCTO5</String>
+          <String>PVP DCTO CADENA5</String>
+          <String>Px DCTO LISTA CADENA5</String>
+          <String>PVP DCTO GEOPOS5</String>
+          <String>Px DCTO GEOPOS5</String>
+          <String>PVP DCTO SAN ANDRES5</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>PVP DCTO CADENA6</String>
+          <String>Px DCTO LISTA CADENA6</String>
+          <String>PVP DCTO GEOPOS6</String>
+          <String>Px DCTO GEOPOS6</String>
+          <String>PVP DCTO SAN ANDRES6</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>DCTO7</String>
+          <String>PVP DCTO CADENA7</String>
+          <String>Px DCTO LISTA CADENA7</String>
+          <String>PVP DCTO GEOPOS7</String>
+          <String>Px DCTO GEOPOS7</String>
+          <String>PVP DCTO SAN ANDRES7</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>DCTO8</String>
+          <String>PVP DCTO CADENA8</String>
+          <String>Px DCTO LISTA CADENA8</String>
+          <String>PVP DCTO GEOPOS8</String>
+          <String>Px DCTO GEOPOS8</String>
+          <String>PVP DCTO SAN ANDRES8</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>DCTO9</String>
+          <String>PVP DCTO CADENA9</String>
+          <String>Px DCTO LISTA CADENA9</String>
+          <String>PVP DCTO GEOPOS9</String>
+          <String>Px DCTO GEOPOS9</String>
+          <String>PVP DCTO SAN ANDRES9</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>DCTO10</String>
+          <String>PVP DCTO CADENA10</String>
+          <String>Px DCTO LISTA CADENA10</String>
+          <String>PVP DCTO GEOPOS10</String>
+          <String>Px DCTO GEOPOS10</String>
+          <String>PVP DCTO SAN ANDRES10</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>DCTO11</String>
+          <String>PVP DCTO CADENA11</String>
+          <String>Px DCTO LISTA CADENA11</String>
+          <String>PVP DCTO GEOPOS11</String>
+          <String>Px DCTO GEOPOS11</String>
+          <String>PVP DCTO SAN ANDRES11</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>BARRAS 2</String>
+          <String>Actividad</String>
+          <String>Puntos</String>
+          <String>Hora Desde</String>
+          <String>Hora Hasta</String>
+          <String>EMPRESA</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$integer</Tag>
+        <FieldNames>
+          <String>CODIGO_OFICINA</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>SECUENCIA_INTERNA</String>
+          <String>CANTIDAD</String>
+          <String>VALOR_TRANSACCION</String>
+          <String>VALOR_IVA</String>
+          <String>CODIGO_VENDEDOR</String>
+          <String>CODIGO_ACTIVIDAD</String>
+          <String>CAJA</String>
+          <String>CODIGO_CAJERO</String>
+          <String>CODIGO_INTERNO_VENDEDOR</String>
+          <String>NUMERO_LINEA</String>
+          <String>ARTICULO</String>
+          <String>UDM</String>
+          <String>FECHA_GRABACION2</String>
+          <String>AÑO</String>
+          <String>MES</String>
+          <String>DIA</String>
+          <String>HORA</String>
+          <String>CONTEO</String>
+          <String>WID_TIEMPO</String>
+          <String>CREATED_BY_WID</String>
+          <String>CHANGED_BY_WID</String>
+          <String>WID_TRX_AR</String>
+          <String>WID_TRANSACCIONES_AR</String>
+          <String>WID_TIPOS_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_AR</String>
+          <String>WID_TIEMPO_PEDIDO</String>
+          <String>WID_TIEMPO_CONTABLE</String>
+          <String>WID_SUCURSAL_FACTURACION</String>
+          <String>WID_SUBINVENTARIOS</String>
+          <String>WID_PROVEEDORES_PRIMARIO</String>
+          <String>WID_PROVEEDORES_PO_INST</String>
+          <String>WID_PROVEEDORES_PO_COMER</String>
+          <String>WID_PRODUCTOS</String>
+          <String>WID_PEDIDOS</String>
+          <String>WID_ORGANIZACIONES</String>
+          <String>WID_ORDENES_COMPRA</String>
+          <String>WID_ESTADOS_LINEA_OM</String>
+          <String>WID_COMBINACIONES_GL_INGRESO</String>
+          <String>WID_COMBINACIONES_GL_COSTO</String>
+          <String>WID_CLIENTES_ENTREGA</String>
+          <String>SRC_TRANSACTION_ID</String>
+          <String>SRC_OE_ORDEN_LINES_LINE_ID</String>
+          <String>SRC_CUSTOMER_TRX_LINE_ID</String>
+          <String>NUM_ACUERDO_COMPRA_INST</String>
+          <String>NUM_ACUERDO_COMPRA_COMER</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>COSTO_PROMEDIO_PRODUCTO_TRX</String>
+          <String>FACTOR_UOM_VENTA_PEDIDO</String>
+          <String>FACTOR_UOM_AR</String>
+          <String>PORCENTAJE_AR</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Codigo Asignado</String>
+          <String>Cedula</String>
+          <String>Año</String>
+          <String>PERTENECE</String>
+          <String>COD SUCURSAL</String>
+          <String>TOTAL MES FINANCIERO</String>
+          <String>Fecha</String>
+          <String>WID_ANIO</String>
+          <String>NOM_ANIO</String>
+          <String>WID_MES</String>
+          <String>WID_DIA</String>
+          <String>FECHA_CALENDARIO</String>
+          <String>SEMANA_MES</String>
+          <String>SEMANA_ANIO</String>
+          <String>DIA_DEL_MES</String>
+          <String>DIA_DE_SEMANA</String>
+          <String>DIA_DE_ANIO</String>
+          <String>TRIMESTRE</String>
+          <String>SEMESTRE</String>
+          <String>SEMANA_VENTA</String>
+          <String>DIAS_MES</String>
+          <String>SRC_ORG_ID</String>
+          <String>Id Canal</String>
+          <String>UEN</String>
+          <String>ID CONVENIO</String>
+          <String>N° CENTRO DE COSTO</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>IDENTIFICACION_CLIENTE</String>
+          <String>Cod Actividad</String>
+          <String>Nit</String>
+          <String>Prioridad</String>
+          <String>Fecha Vigencia Desde</String>
+          <String>Fecha Vigencia Hasta</String>
+          <String>Mes</String>
+          <String>CODIGO</String>
+          <String>BARRAS</String>
+          <String>PVP FULL SAN ANDRES</String>
+          <String>PVP DCTO CADENA</String>
+          <String>PVP DCTO GEOPOS</String>
+          <String>PVP DCTO SAN ANDRES</String>
+          <String>PVP DCTO CADENA1</String>
+          <String>PVP DCTO GEOPOS1</String>
+          <String>PVP DCTO SAN ANDRES1</String>
+          <String>Valido Desde1</String>
+          <String>Valido Hasta1</String>
+          <String>PVP DCTO CADENA2</String>
+          <String>PVP DCTO GEOPOS2</String>
+          <String>PVP DCTO SAN ANDRES2</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>PVP DCTO CADENA3</String>
+          <String>PVP DCTO GEOPOS3</String>
+          <String>PVP DCTO SAN ANDRES3</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>PVP DCTO SAN ANDRES4</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>PVP DCTO CADENA5</String>
+          <String>PVP DCTO GEOPOS5</String>
+          <String>PVP DCTO SAN ANDRES5</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>PVP DCTO CADENA6</String>
+          <String>PVP DCTO GEOPOS6</String>
+          <String>PVP DCTO SAN ANDRES6</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>PVP DCTO CADENA7</String>
+          <String>PVP DCTO GEOPOS7</String>
+          <String>PVP DCTO SAN ANDRES7</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>PVP DCTO CADENA8</String>
+          <String>PVP DCTO GEOPOS8</String>
+          <String>PVP DCTO SAN ANDRES8</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>PVP DCTO CADENA9</String>
+          <String>PVP DCTO GEOPOS9</String>
+          <String>PVP DCTO SAN ANDRES9</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>PVP DCTO CADENA10</String>
+          <String>PVP DCTO GEOPOS10</String>
+          <String>PVP DCTO SAN ANDRES10</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>PVP DCTO CADENA11</String>
+          <String>PVP DCTO GEOPOS11</String>
+          <String>PVP DCTO SAN ANDRES11</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>BARRAS 2</String>
+          <String>Actividad</String>
+          <String>Puntos</String>
+          <String>EMPRESA</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$timestamp</Tag>
+        <FieldNames>
+          <String>FECHA_GRABACION</String>
+          <String>W_INSERT_DT</String>
+          <String>W_UPDATE_DT</String>
+          <String>FECHA_GRABACION2</String>
+          <String>FECHA_SERVIDOR</String>
+          <String>FECHA_CONTABLE</String>
+          <String>CREATED_ON_DT</String>
+          <String>CHANGED_ON_DT</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Fecha</String>
+          <String>FECHA_CALENDARIO</String>
+          <String>W_EFFECTIVE_FROM_DT</String>
+          <String>W_EFFECTIVE_TO_DT</String>
+          <String>Fecha Vigencia Desde</String>
+          <String>Fecha Vigencia Hasta</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$date</Tag>
+        <FieldNames>
+          <String>FECHA_GRABACION2</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Fecha</String>
+          <String>FECHA_CALENDARIO</String>
+          <String>Fecha Vigencia Desde</String>
+          <String>Fecha Vigencia Hasta</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+        </FieldNames>
+      </FieldTagData>
+    </Interactive>
+  </FieldTags>
+  <FieldComments></FieldComments>
+  <TableComments></TableComments>
+  <CreatePrjFolder>false</CreatePrjFolder>
+  <LinkedTables></LinkedTables>
+</DocInternals>

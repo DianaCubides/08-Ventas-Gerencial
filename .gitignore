@@ -1,0 +1,32 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+*.qvw
+*.qvd
+
+# Fuentes Externas
+*.xls
+*.xlsx
+*.xlsx#
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.txt
+*.db
+*.accdb
+*.accdb.dsn
+
+# Archivos Temporales
+*.tmp
+*.Shared
+*.Meta
+
+# Comprimidos
+*.7Z
+*.RAR
+*.ZIP
+
+# Pruebas 
+*pruebas*
+*test*
+*log*
+*Log*

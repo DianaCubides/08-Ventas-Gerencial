@@ -1,0 +1,30 @@
+﻿Trace ==============================================================================================================================
+3.1.
+	Fecha: 05/12/2013
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen: actividades3
+	Fuente de datos: actividades3.xls
+	Nombre Archivos QVD Resultante: M_02_EXCEL_Actividades3_Ext.qvd
+	Descripcion QVD Resultante:	Se extrae Archivo de Excel llamado Actividades 3, el cual permite diferenciar el tipo de ingreso en la tabla de margen.
+	Regla de negocio: ninguna ne particular, se realiza extracción Full de la tabla.
+===================================================================================================================================;
+
+M_Dinamicas_Comerciales:
+LOAD 
+	 Mes, 
+     Articulo, 
+     Articulo_Descripcion, 
+     Actividad_Original, 
+     Tipo_Dinamica, 
+     Vigencia_Inicio, 
+     Vigencia_Fin,
+     FileName() as [Nombre Archivo]
+FROM $(vR_Fuentes_Externas)Dinamicas\Dinamicas_Comerciales_*.xlsx
+(ooxml, embedded labels, table is Dinamicas)
+	Where len(Articulo)>'0'
+;
+
+STORE M_Dinamicas_Comerciales into $(vR_Qvd)M_08_Excel_DinamicasComerciales_Ext.qvd (qvd);
+DROP Table M_Dinamicas_Comerciales;

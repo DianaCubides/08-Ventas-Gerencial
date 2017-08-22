@@ -1,0 +1,20 @@
+﻿let vFin= now();
+
+set vRutaX = 'F:\Produccion\Estadisticas de Uso\04_Qvd\Ori\';
+
+//text(Interval([Hora Fin]-[Hora Inicio],'hh:mm:ss')) as Duracion;
+Ventas_GerencialX:
+Load
+	'Ventas Gerencial' as [Nombre de Modelo],
+	'Extraccion' as Etapa,
+	Today() as [Fecha Revision],
+	Alt(
+	Date#('$(vInicio)','DD/MM/YYYY HH:mm:ss tt')) as [Hora Inicio],
+	Alt(
+	Date#('$(vFin)','DD/MM/YYYY HH:mm:ss tt')) as [Hora Fin],
+	text(Interval('$(vFin)'-'$(vInicio)','hh:mm:ss')) as Duracion
+	Autogenerate(1);
+
+Store Ventas_GerencialX into $(vRutaX)D_08_Ventas_Gerencial_Ext.qvd (qvd);	
+Drop Table Ventas_GerencialX;
+EXIT Script;

@@ -1,0 +1,183 @@
+﻿Trace =======================================================================================================================================================
+3.1.
+	Fecha: 01/01/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Gilberto Jimenez
+	Version: 1.0
+	Nombre Tablas/Archivos Origen:  
+	Fuente de datos: Qvd
+	Nombre Archivos QVD Resultante: 
+	Descripcion QVD Resultante:	Presupuesto de Margen calculado para cada línea.
+								
+	Regla de negocio: 	3.1.1. Se calculan los indicadores globales a nivel de día para el modelo de ventas Gerencial.
+=============================================================================================================================================================;
+
+D_Indicadores_DashBoard_Tmp:
+	//D_Ventas:
+	LOAD
+		floor(%Pk_Fecha) as %Pk_Fecha,
+		[Id Canal],
+		sum([Valor Real Venta Comercial]) as [Valor Total Real Venta Comercial],
+		sum([Valor Real Venta Público]) as [Valor Total Real Venta Público],
+		sum([Valor Real Costos Comercial]) as [Valor Total Real Costos Comercial],
+		sum([Valor Real Costos Público]) as [Valor Total Real Costos Público],
+		sum([Valor Real Contribución Comercial]) as [Valor Total Real Contribución Comercial],
+		sum([Valor Real Contribución Público]) as [Valor Total Real Contribución Público],
+		sum([Cantidad Productos UDM Media]) as [Cantidad Total Real Productos UDM Media] 
+	From $(vR_Qvd)D_08_Qvd_VentasAgrupadas_Tra.qvd (qvd)
+		Group By floor(%Pk_Fecha),
+				 [Id Canal]
+	;
+
+
+
+Join(D_Indicadores_DashBoard_Tmp)
+
+	//D_Ppto:
+	LOAD
+		Floor([Fecha]) as %Pk_Fecha,
+		[Id Canal],
+		sum([Valor Ppto Venta Comercial]) as [Valor Total Ppto Venta Comercial],
+		sum([Valor Ppto Venta Público]) as [Valor Total Ppto Venta Público],
+		sum([Valor Ppto Costos Comercial]) as [Valor Total Ppto Costos Comercial],
+		sum([Valor Ppto Costos Público]) as [Valor Total Ppto Costos Público],
+		sum([Valor Ppto Contribución Comercial]) as [Valor Ppto Contribución Comercial],
+		sum([Valor Ppto Contribución Público]) as [Valor Ppto Contribución Público]
+	From $(vR_Qvd)D_08_Qvd_Presupuesto_Tra.qvd (qvd)
+		Group By Floor([Fecha]),
+				 [Id Canal]
+	;
+Join (D_Indicadores_DashBoard_Tmp)
+	//Ppto_PAD:
+	LOAD
+		floor(%Pk_Fecha) as %Pk_Fecha,
+		sum([Valor Ppto Dinámicas]) as [Meta PAD Total Cop$],
+		sum([Cantidad Ppto Dinámicas UDM Media]) as [Meta PAD Total Unid.]
+	from $(vR_Qvd)D_08_Qvd_PresupuestoPAD_Tra.qvd (qvd)
+		Where Upper([Tipo Dinámica])='PAD'
+			Group By Floor(%Pk_Fecha)
+	; 	
+	 
+Join (D_Indicadores_DashBoard_Tmp)
+	//D_PAD:
+	LOAD
+		floor(%Pk_Fecha) as %Pk_Fecha,
+		[Id Canal],
+		sum([Cantidad Transacciones Venta Comercial]) as [Cantidad Total Transacciones PAD Comercial],
+		sum([Cantidad Transacciones Venta Público]) as [Cantidad Total Transacciones PAD Público],
+		sum([Valor Real Venta Comercial]) as [Valor Total Venta PAD Comercial],
+		sum([Valor Real Venta Público]) as [Valor Total Venta PAD Público],
+		sum([Cantidad Productos UDM Media]) as [Cantidad Total Productos PAD UDM Media]
+	From $(vR_Qvd)D_08_Qvd_VentasAgrupadas_Tra.qvd (qvd)
+	Where [Tipo Dinámica]='PAD' 
+		Group By floor(%Pk_Fecha),
+				 [Id Canal]
+	;	
+
+Join (D_Indicadores_DashBoard_Tmp)
+	D_Conversion:
+	LOAD
+		floor([FECHA_CALENDARIO_TRX]) as %Pk_Fecha,
+		sum([Cantidad Visitas Dispensacion Día]) as [Cantidad Total Visitas Dispensacion Día],
+		sum([Cantidad Visitas Dispensacion Mes]) as [Cantidad Total Visitas Dispensacion Mes],
+		sum([Cantidad Visitas Retail Día]) as [Cantidad Total Visitas Retail Día],
+		sum([Cantidad Visitas Retail Mes]) as [Cantidad Total Visitas Retail Mes]
+	From $(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd (qvd)
+			Group By Floor([FECHA_CALENDARIO_TRX])
+	;	
+
+Left Join (D_Indicadores_DashBoard_Tmp)
+	D_Tickets:
+	LOAD
+		Floor([FECHA_CALENDARIO_TRX]) as %Pk_Fecha,
+		[Id Canal],
+		sum([Cantidad Tickets]) as [Cantidad Total Transacciones Venta],
+		sum([Cantidad Tickets]) as [Cantidad Total Transacciones Venta Público]
+	From $(vR_Qvd)D_08_Qvd_VentasTickets_Tra.qvd (qvd)
+		Where [Clasificacion Conteo Tickets]= 'Total x Mes'
+		Group By Floor([FECHA_CALENDARIO_TRX]),
+				 [Id Canal]
+	;	
+
+
+
+
+NoConcatenate
+D_Indicadores_DashBoard:
+LOAD
+	[%Pk_Fecha]&'_'&[Id Canal] as %Pk_DashLink,
+	
+
+	
+	//1. y 2. Cump Ventas
+	[Valor Total Real Venta Público]/[Valor Total Ppto Venta Público] as [Cumplimiento Ppto Ventas Público],
+	[Valor Total Real Venta Comercial]/[Valor Total Ppto Venta Comercial] as [Cumplimiento Ppto Ventas Comercial], 
+	[Valor Total Ppto Venta Comercial],
+	[Valor Total Ppto Venta Público],	
+	[Valor Total Real Venta Comercial],
+	[Valor Total Real Venta Público],
+
+	//3. y 4. Cump Costos
+	[Valor Total Real Costos Comercial]/[Valor Total Ppto Costos Comercial] as [Cumplimiento Ppto Costos Comercial],
+	[Valor Total Real Costos Público]/[Valor Total Ppto Costos Público] as [Cumplimiento Ppto Costos Público],
+	[Valor Total Ppto Costos Comercial],
+	[Valor Total Ppto Costos Público],
+	[Valor Total Real Costos Comercial],
+	[Valor Total Real Costos Público],	
+
+	//5. y 6. Cump Contrib
+	[Valor Total Real Contribución Comercial]/[Valor Ppto Contribución Comercial] as [Cumplimiento Ppto Contribución Comercial],
+	[Valor Total Real Contribución Público]/[Valor Ppto Contribución Público] as [Cumplimiento Ppto Contribución Público],
+	[Valor Ppto Contribución Comercial] as [Valor Total Ppto Contribución Comercial],
+	[Valor Ppto Contribución Público] as [Valor Total Ppto Contribución Público],
+	[Valor Total Real Contribución Comercial],
+	[Valor Total Real Contribución Público],
+
+	//7. y 8. Cump Margen
+	([Valor Total Real Contribución Comercial]/[Valor Total Real Venta Comercial])/([Valor Ppto Contribución Comercial]/[Valor Total Ppto Venta Comercial]) as [Cumplimiento Ppto Margen Comercial],
+	[Valor Ppto Contribución Comercial]/[Valor Total Ppto Venta Comercial] as [Valor Ppto Margen Comercial],
+	[Valor Total Real Contribución Comercial]/[Valor Total Real Venta Comercial] as [Valor Total Margen Comercial],
+
+	([Valor Total Real Contribución Público]/[Valor Total Real Venta Público])/([Valor Ppto Contribución Público]/[Valor Total Ppto Venta Público]) as [Cumplimiento Ppto Margen Público],
+	[Valor Ppto Contribución Público]/[Valor Total Ppto Venta Público] as [Valor Ppto Margen Público],
+	[Valor Total Real Contribución Público]/[Valor Total Real Venta Público] as [Valor Total Margen Público],
+
+	
+	//9. %Conversion Mes	
+	[Cantidad Total Visitas Retail Mes]/[Cantidad Total Visitas Dispensacion Mes] as [%Conversion x Mes],
+	[Cantidad Total Visitas Retail Mes],
+	[Cantidad Total Visitas Dispensacion Mes],
+
+	//10. %Conversion Dia	
+	[Cantidad Total Visitas Retail Día]/[Cantidad Total Visitas Dispensacion Día] as [%Conversion x Día],
+	[Cantidad Total Visitas Dispensacion Día],
+	[Cantidad Total Visitas Retail Día],
+		
+	//11. Unidades PAD	
+	[Cantidad Total Productos PAD UDM Media]/[Meta PAD Total Unid.] as [Cumplimiento Ppto PAD Unid.],
+	[Meta PAD Total Unid.],	
+	[Cantidad Total Productos PAD UDM Media],
+
+	//12. Valor PAD
+	[Valor Total Venta PAD Comercial]/[Meta PAD Total Cop$] as [Cumplimiento Ppto PAD Cop$],
+	[Valor Total Venta PAD Comercial],
+	[Meta PAD Total Cop$],
+	
+	//13. Tasa Exito
+	[Cantidad Total Productos PAD UDM Media]/[Cantidad Total Transacciones PAD Comercial] as [Tasa de Éxito (PAD)],
+	[Cantidad Total Transacciones PAD Comercial],
+	[Cantidad Total Transacciones Venta],
+	
+	//14. y 15. Ticket Promedio Valor y Unidades
+	[Valor Total Real Venta Comercial]/[Cantidad Total Transacciones Venta] as [Ticket Promedio Valor],
+	[Cantidad Total Real Productos UDM Media]/[Cantidad Total Transacciones Venta] as [Ticket Promedio Unidades],
+	[Cantidad Total Real Productos UDM Media],
+	
+	//16. Ticket Promedio PAD
+	[Valor Total Venta PAD Comercial]/[Cantidad Total Productos PAD UDM Media] as [Ticket Promedio PAD]
+
+Resident D_Indicadores_DashBoard_Tmp;
+DROP Table D_Indicadores_DashBoard_Tmp;
+
+STORE D_Indicadores_DashBoard into $(vR_Qvd)D_08_Qvd_ResumenIndicadores_Tra.qvd (qvd);
+DROP Table D_Indicadores_DashBoard;

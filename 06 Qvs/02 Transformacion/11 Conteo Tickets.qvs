@@ -1,0 +1,841 @@
+﻿Trace =======================================================================================================================================================
+11.1.
+	Fecha: 05/12/2013
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen:  
+
+	Fuente de datos: Qvd
+	Nombre Archivos QVD Resultante: D_02_Presupuesto_Tra.qvd
+	Descripcion QVD Resultante:	Presupuesto Diario para cada uno de los canales existentes en la organización. 
+								
+	Regla de negocio: 	11.1. Se realiza el calculo de la cantidad de transacciones agrupadas por dia teniendo en cuenta cada una de las dinamicas comerciales.
+						11.2. Se realiza el calculo de la cantidad de transacciones agrupadas por Mes teniendo en cuenta cada una de las dinamicas comerciales.
+						11.3. Se realiza el calculo de la cantidad de transacciones agrupadas por dia teniendo en cuenta cada Categoría de producto.
+						11.4. Se realiza el calculo de la cantidad de transacciones agrupadas por dia teniendo en cuenta cada Categoría de producto.
+						11.5. Se realiza el calculo de la cantidad de transacciones agrupadas por dia.
+						11.6. Se realiza el calculo de la cantidad de transacciones agrupadas por Mes.
+=============================================================================================================================================================;
+
+let vR_VentasContado8= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDia_Tra.qvd'))='0','D_08_Qvd_VentasContadoDetalle_Tra.qvd','D_08_Qvd_VentasContadoDetalleDelta_Tra.qvd') ;
+let vR_VentasMargen7= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDia_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ; 
+let vR_VentasContado9= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMes_Tra.qvd'))='0','D_08_Qvd_VentasContadoDetalle_Tra.qvd','D_08_Qvd_VentasContadoDetalleDelta_Tra.qvd') ;
+let vR_VentasMargen8= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMes_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ; 
+
+/**********************************************************************************************************************
+	11.5 Se realiza el calculo de la cantidad de tickets agrupados por día.
+**********************************************************************************************************************/			
+D_Tickets_Ventas_Contado:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]) as [Id Canal Sin Convenio],
+	[Id Canal],
+	[Linea de Negocio],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+From $(vR_Qvd)$(vR_VentasContado8) (qvd)
+	Where [Numero Ticket Conteo]>'0' and TIPO_COMPROBANTE='811' and upper([Linea de Negocio]) like '*RETA*' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+	Group By 	[Canal],
+				[Canal_Tmp],
+				[Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX],
+				if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]),
+				[Id Canal],
+				[Id Centro Costo],
+				[Linea de Negocio],
+				[TIPO_COMPROBANTE],
+				[TIPO_DOCUMENTO]
+;
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDiaDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDia_Tra.qvd'))>'0') then
+
+	Concatenate(D_Tickets_Ventas_Contado)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDia_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDia_Tra.qvd (qvd);
+DROP Table D_Tickets_Ventas_Contado;
+
+
+/*********************************************************************
+							Conteo Tickets Margen
+*********************************************************************/							
+
+D_Margen_Tmp:
+LOAD
+	Canal,
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	[Numero Ticket Conteo]
+From $(vR_Qvd)$(vR_VentasMargen7) (qvd)
+	where TIPO_COMPROBANTE='811' and Flag_Costo_Promedio_Rev = '0' and [Id Canal]<>'3' and UPPER([UOM_Media])<>'INT' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+;
+
+NoConcatenate	
+D_Margen_Tmp2:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	Count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+Resident D_Margen_Tmp
+		Group By 	[Canal],
+					[Canal_Tmp],
+					[Cod. Sucursal],
+					[FECHA_CALENDARIO_TRX],
+					[Id Canal],
+					[Id Canal Sin Convenio],
+					[NOMBRE_SUCURSAL],
+					[TIPO_COMPROBANTE],
+					[TIPO_DOCUMENTO]
+;
+
+DROP Table D_Margen_Tmp;
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDiaDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDia_Tra.qvd'))>'0') then
+
+	Concatenate(D_Margen_Tmp2)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDia_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDia_Tra.qvd (qvd);
+DROP Table D_Margen_Tmp2;
+
+
+
+D_TicketsConteo:
+//Tickets_Contado:
+	LOAD
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[Canal],
+		[Canal_Tmp],
+		[Cantidad Transacciones] as [Cantidad Tickets],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO]
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxDia_Tra.qvd (qvd);
+
+Concatenate
+
+	LOAD
+		
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Canal],
+		[Canal_Tmp],
+		[Cod. Sucursal],
+		[Cantidad Transacciones] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxDia_Tra.qvd (qvd)
+		Where [Id Canal]<>'3'
+	;
+
+Concatenate
+ 
+	LOAD
+		'3'&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&floor(%Pk_Fecha) as %Pk_LlaveTickets,
+		floor(%Pk_Fecha) as [FECHA_CALENDARIO_TRX],
+		'3' as [Id Canal],
+		[Id Canal Sin Convenio],
+		'811' as TIPO_COMPROBANTE,
+		'Venta' as TIPO_DOCUMENTO,
+		Canal,
+		Canal_Tmp,
+		[Cod. Sucursal],	
+		[Cantidad Transacciones Venta Público] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd);
+	
+STORE D_TicketsConteo into $(vR_Qvd)D_08_Qvd_VentasTicketsxDia_Tra.qvd (qvd);
+DROP Table D_TicketsConteo;
+
+/**********************************************************************************************************************
+		11.6	Se realiza el calculo de la cantidad de tickets agrupados por Mes.
+**********************************************************************************************************************/			
+ 
+D_Tickets_Ventas_Contado:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	Floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+	if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]) as [Id Canal Sin Convenio],
+	[Id Canal],
+	[Linea de Negocio],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+From $(vR_Qvd)$(vR_VentasContado9) (qvd)
+	Where [Numero Ticket Conteo]>'0' and TIPO_COMPROBANTE='811' and upper([Linea de Negocio]) like '*RETA*' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+	Group By 	[Canal],
+				[Canal_Tmp],
+				[Cod. Sucursal],
+				Floor(MonthStart([FECHA_CALENDARIO_TRX])),
+				if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]),
+				[Id Canal],
+				[Id Centro Costo],
+				[Linea de Negocio],
+				[TIPO_COMPROBANTE],
+				[TIPO_DOCUMENTO]
+;
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMesDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMes_Tra.qvd'))>'0') then
+
+	Concatenate(D_Tickets_Ventas_Contado)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMes_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMes_Tra.qvd (qvd);
+DROP Table D_Tickets_Ventas_Contado;
+
+
+/*********************************************************************
+							Conteo Tickets Margen
+*********************************************************************/							
+
+
+ 
+D_Margen_Tmp:
+LOAD
+	Canal,
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	Floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	[Numero Ticket Conteo]
+
+From $(vR_Qvd)$(vR_VentasMargen8) (qvd)
+	where TIPO_COMPROBANTE='811' and Flag_Costo_Promedio_Rev = '0' and [Id Canal]<>'3' and UPPER([UOM_Media])<>'INT' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+;
+
+NoConcatenate	
+D_Margen_Tmp2:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	Count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+Resident D_Margen_Tmp
+		Group By 	[Canal],
+					[Canal_Tmp],
+					[Cod. Sucursal],
+					[FECHA_CALENDARIO_TRX],
+					[Id Canal],
+					[Id Canal Sin Convenio],
+					[NOMBRE_SUCURSAL],
+					[TIPO_COMPROBANTE],
+					[TIPO_DOCUMENTO]
+;
+
+DROP Table D_Margen_Tmp;
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMesDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMes_Tra.qvd'))>'0') then
+
+	Concatenate(D_Margen_Tmp2)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMes_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMes_Tra.qvd (qvd);
+DROP Table D_Margen_Tmp2;
+
+
+
+D_TicketsConteo:
+//Tickets_Contado:
+	LOAD
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[Canal],
+		[Canal_Tmp],
+		[Cantidad Transacciones] as [Cantidad Tickets],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO]
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContadoxMes_Tra.qvd (qvd);
+
+Concatenate
+
+	LOAD
+		
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Canal],
+		[Canal_Tmp],
+		[Cod. Sucursal],
+		[Cantidad Transacciones] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargenxMes_Tra.qvd (qvd)
+		Where [Id Canal]<>'3'
+	;
+
+Concatenate
+ 
+	LOAD
+		'3'&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&floor(MonthStart(%Pk_Fecha)) as %Pk_LlaveTickets,
+		floor(MonthStart(%Pk_Fecha)) as [FECHA_CALENDARIO_TRX],
+		'3' as [Id Canal],
+		[Id Canal Sin Convenio],
+		'811' as TIPO_COMPROBANTE,
+		'Venta' as TIPO_DOCUMENTO,
+		Canal,
+		Canal_Tmp,
+		[Cod. Sucursal],	
+		sum([Cantidad Transacciones Venta Público]) as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd)
+		Group By floor(MonthStart(%Pk_Fecha)),
+				 [Id Canal Sin Convenio],
+				Canal,
+				Canal_Tmp,
+				[Cod. Sucursal]	
+	;
+	
+STORE D_TicketsConteo into $(vR_Qvd)D_08_Qvd_VentasTicketsxMes_Tra.qvd (qvd);
+DROP Table D_TicketsConteo;
+
+/*********************************************************************************************************************************
+							Se realiza ciclo for de conteo de tickets
+*********************************************************************************************************************************/
+
+M_Campos:
+LOAD * Inline
+	[
+	Campo,					Campo Contado,			Campo Margen,			Campo Cencosud,			Qvd
+	Categoría Producto,		Categoría Producto,		Categoría Producto,		Categoría Producto,		CatProd
+	Mundo Producto,			Mundo Producto,			Mundo Producto,			Mundo Producto,			MundoProducto
+	Grupo Producto,			Grupo Producto,			Grupo Producto,			Grupo Producto,			GrupoProducto
+	Tipo Dinámica,			Tipo Dinámica,			-1,						Tipo Dinámica,			Dinamica		
+	Descuento Aplicado,		Descuento Aplicado,		-1,						Descuento Aplicado,		DescuentoAplicado
+	Cliente Retail,			Cliente Retail,			-1,						Cliente Retail,			ClienteRetail
+	Actividad,				Actividad,				Actividad,				Actividad,				Actividad
+	Tipo Dinámica,			Tipo Dinámica,			-1,						Tipo Dinámica,			TipoDinamica
+	Agrupacion Campaña,		Agrupacion Campaña,		-1,						Agrupacion Campaña,		AgrupacionCampaña
+	nit,					nit,					nit,					nit,					nit
+	]
+	;
+
+
+
+
+let vS_Registros = NoOfRows('M_Campos')-1;
+for i=0 to $(vS_Registros) 
+let vS_Campo = Peek('Campo',$(i),'M_Campos');
+let vS_CampoContado= if(Peek('Campo Contado',$(i),'M_Campos')='-1',chr(39)&'Sin Asignar' &chr(39)&' as ['&Peek('Campo',$(i),'M_Campos')&']', '['&Peek('Campo Contado',$(i),'M_Campos')&']');
+let vS_CampoContadoGroup= if(Peek('Campo Contado',$(i),'M_Campos')='-1','', '['&Peek('Campo Contado',$(i),'M_Campos')&'],');
+let vS_CampoMargen=  if(Peek('Campo Margen',$(i),'M_Campos')='-1',chr(39)&'Sin Asignar' &chr(39)&' as ['&Peek('Campo',$(i),'M_Campos')&']', '['&Peek('Campo Margen',$(i),'M_Campos')&']');
+let vS_CampoMargenGroup=  if(Peek('Campo Margen',$(i),'M_Campos')='-1','','['&Peek('Campo Margen',$(i),'M_Campos')&'],');
+let vS_CampoCencosud= if(Peek('Campo Cencosud',$(i),'M_Campos')='-1',chr(39)&'Sin Asignar' &chr(39)&' as ['&Peek('Campo Cencosud',$(i),'M_Campos')&']', '['&Peek('Campo Cencosud',$(i),'M_Campos')&']');
+let vS_Qvd= Peek('Qvd',$(i),'M_Campos');
+
+let vR_VentasContado10= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDia_Tra.qvd'))='0','D_08_Qvd_VentasContadoDetalle_Tra.qvd','D_08_Qvd_VentasContadoDetalleDelta_Tra.qvd') ;
+let vR_VentasMargen10= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDia_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ;
+let vR_VentasContado11= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xMes_Tra.qvd'))='0','D_08_Qvd_VentasContadoDetalle_Tra.qvd','D_08_Qvd_VentasContadoDetalleDelta_Tra.qvd') ;
+let vR_VentasMargen11= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMes_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ; 
+
+
+
+/**********************************************************************************************************************
+	11.3 Se realiza el calculo de la cantidad de tickets agrupados por día Teniendo en cuenta la categoría del producto.
+**********************************************************************************************************************/			
+D_Tickets_Ventas_Contado:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]) as [Id Canal Sin Convenio],
+	[Id Canal],
+	$(vS_CampoContado),
+	[Linea de Negocio],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+From $(vR_Qvd)$(vR_VentasContado10) (qvd)
+	Where [Numero Ticket Conteo]>'0' and TIPO_COMPROBANTE='811' and upper([Linea de Negocio]) like '*RETA*' and Upper(COD_UNIDAD_OP) <>'INT' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+	Group By 	[Canal],
+				[Canal_Tmp],
+				[Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX],
+				if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]),
+				[Id Canal],
+				$(vS_CampoContadoGroup)
+				[Id Centro Costo],
+				[Linea de Negocio],
+				[TIPO_COMPROBANTE],
+				[TIPO_DOCUMENTO]
+;
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDiaDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDia_Tra.qvd'))>'0') then 
+
+Concatenate(D_Tickets_Ventas_Contado)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDia_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDia_Tra.qvd (qvd);
+DROP Table D_Tickets_Ventas_Contado;
+
+
+/*********************************************************************
+							Conteo Tickets Margen
+*********************************************************************/							
+
+
+ 
+D_Margen_Tmp:
+LOAD
+	Canal,
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	$(vS_CampoMargen),
+	[TIPO_DOCUMENTO],
+	[Numero Ticket Conteo]
+
+From $(vR_Qvd)$(vR_VentasMargen10) (qvd)
+	where TIPO_COMPROBANTE='811' and Flag_Costo_Promedio_Rev = '0' and [Id Canal]<>'3' and UPPER([UOM_Media])<>'INT' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+;
+
+NoConcatenate	
+D_Margen_Tmp2:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	$(vS_CampoMargen),
+	Count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+Resident D_Margen_Tmp
+		Group By 	[Canal],
+					[Canal_Tmp],
+					[Cod. Sucursal],
+					[FECHA_CALENDARIO_TRX],
+					[Id Canal],
+					$(vS_CampoMargenGroup)
+					[Id Canal Sin Convenio],
+					[NOMBRE_SUCURSAL],
+					[TIPO_COMPROBANTE],
+					[TIPO_DOCUMENTO]
+;
+
+DROP Table D_Margen_Tmp;
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDiaDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDia_Tra.qvd'))>'0') then 
+
+	Concatenate(D_Margen_Tmp2)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDia_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDia_Tra.qvd (qvd);
+DROP Table D_Margen_Tmp2;
+
+
+
+D_TicketsConteo:
+//Tickets_Contado:
+	LOAD
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[Canal],
+		[Canal_Tmp],
+		[Cantidad Transacciones] as [Cantidad Tickets],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		$(vS_CampoContado),
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO]
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xDia_Tra.qvd (qvd);
+
+Concatenate
+
+	LOAD
+		
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Canal],
+		[Canal_Tmp],
+		$(vS_CampoMargen),
+		[Cod. Sucursal],
+		[Cantidad Transacciones] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xDia_Tra.qvd (qvd)
+		Where [Id Canal]<>'3'
+	;
+
+Concatenate
+ 
+ 
+	LOAD
+		'3'&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&floor(%Pk_Fecha) as %Pk_LlaveTickets,
+		floor(%Pk_Fecha) as [FECHA_CALENDARIO_TRX],
+		'3' as [Id Canal],
+		[Id Canal Sin Convenio],
+		'811' as TIPO_COMPROBANTE,
+		'Venta' as TIPO_DOCUMENTO,
+		Canal,
+		Canal_Tmp,
+		[Cod. Sucursal],	
+		'Sin Asignar' as $(vS_CampoCencosud),
+		[Cantidad Transacciones Venta Público] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd);
+	
+STORE D_TicketsConteo into $(vR_Qvd)D_08_Qvd_VentasTickets$(vS_Qvd)xDia_Tra.qvd (qvd);
+DROP Table D_TicketsConteo;
+
+/**********************************************************************************************************************
+	11.4 Se realiza el calculo de la cantidad de tickets agrupados por Mes. Teniendo en cuenta la categoría del producto.
+**********************************************************************************************************************/			
+  
+D_Tickets_Ventas_Contado:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	Floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+	if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]) as [Id Canal Sin Convenio],
+	[Id Canal],
+	$(vS_CampoContado),
+	[Linea de Negocio],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+From $(vR_Qvd)$(vR_VentasContado11) (qvd)
+	Where [Numero Ticket Conteo]>'0' and TIPO_COMPROBANTE='811' and upper([Linea de Negocio]) like '*RETA*' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+	Group By 	[Canal],
+				[Canal_Tmp],
+				[Cod. Sucursal],
+				Floor(MonthStart([FECHA_CALENDARIO_TRX])),
+				if([Id Canal]<>'1' or [Id Canal]<>'2' or [Id Canal]<>'5',[Id Canal],[Id Canal Sin Convenio]),
+				[Id Canal],
+				$(vS_CampoContadoGroup)
+				[Id Centro Costo],
+				[Linea de Negocio],
+				[TIPO_COMPROBANTE],
+				[TIPO_DOCUMENTO]
+;
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)MesDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xMes_Tra.qvd'))>'0') then
+
+	Concatenate(D_Tickets_Ventas_Contado)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xMes_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Tickets_Ventas_Contado into $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xMes_Tra.qvd (qvd);
+DROP Table D_Tickets_Ventas_Contado;
+
+
+/*********************************************************************
+							Conteo Tickets Margen
+*********************************************************************/							
+ 
+D_Margen_Tmp:
+LOAD
+	Canal,
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	Floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	$(vS_CampoMargen),
+	[Numero Ticket Conteo]
+
+From $(vR_Qvd)$(vR_VentasMargen11) (qvd)
+	where TIPO_COMPROBANTE='811' and Flag_Costo_Promedio_Rev = '0' and [Id Canal]<>'3' and UPPER([UOM_Media])<>'INT' and Floor([FECHA_CALENDARIO_TRX])<Floor(Today())
+;
+
+NoConcatenate	
+D_Margen_Tmp2:
+LOAD
+	[Canal],
+	[Canal_Tmp],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[NOMBRE_SUCURSAL],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	$(vS_CampoMargen),
+	Count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+Resident D_Margen_Tmp
+		Group By 	[Canal],
+					[Canal_Tmp],
+					[Cod. Sucursal],
+					[FECHA_CALENDARIO_TRX],
+					[Id Canal],
+					$(vS_CampoMargenGroup)
+					[Id Canal Sin Convenio],
+					[NOMBRE_SUCURSAL],
+					[TIPO_COMPROBANTE],
+					[TIPO_DOCUMENTO]
+;
+
+DROP Table D_Margen_Tmp;
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMesDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMes_Tra.qvd'))>'0') then 
+
+
+	Concatenate(D_Margen_Tmp2)
+	D_TicketsCatProdDia_Historico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMes_Tra.qvd (qvd)
+		Where Floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMes_Tra.qvd (qvd);
+DROP Table D_Margen_Tmp2;
+
+
+
+D_TicketsConteo:
+//Tickets_Contado:
+	LOAD
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[Canal],
+		[Canal_Tmp],
+		[Cantidad Transacciones] as [Cantidad Tickets],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		$(vS_CampoContado),
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO]
+	From $(vR_Qvd)D_08_Qvd_TicketsVentasContado$(vS_Qvd)xMes_Tra.qvd (qvd);
+
+Concatenate
+
+	LOAD
+		
+		[Id Canal]&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&FECHA_CALENDARIO_TRX as %Pk_LlaveTickets,
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Canal],
+		$(vS_CampoMargen),
+		[Canal_Tmp],
+		[Cod. Sucursal],
+		[Cantidad Transacciones] as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsMargen$(vS_Qvd)xMes_Tra.qvd (qvd)
+		Where [Id Canal]<>'3'
+	;
+
+Concatenate
+ 
+	LOAD
+		'3'&'_'&[Canal]&'_'&[Canal_Tmp]&'_'&[Cod. Sucursal]&'_'&[Id Canal Sin Convenio]&'_'&floor(MonthStart(%Pk_Fecha)) as %Pk_LlaveTickets,
+		floor(MonthStart(%Pk_Fecha)) as [FECHA_CALENDARIO_TRX],
+		'3' as [Id Canal],
+		[Id Canal Sin Convenio],
+		'811' as TIPO_COMPROBANTE,
+		'Venta' as TIPO_DOCUMENTO,
+		Canal,
+		Canal_Tmp,
+		'Sin Asignar' as $(vS_CampoCencosud),
+		[Cod. Sucursal],	
+		sum([Cantidad Transacciones Venta Público]) as [Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd)
+		Group By floor(MonthStart(%Pk_Fecha)),
+				 [Id Canal Sin Convenio],
+				Canal,
+				Canal_Tmp,
+				[Cod. Sucursal]	
+	;
+	
+STORE D_TicketsConteo into $(vR_Qvd)D_08_Qvd_VentasTickets$(vS_Qvd)xMes_Tra.qvd (qvd);
+DROP Table D_TicketsConteo;
+
+NEXT i
+
+DROP Table M_Campos;
+
+
+/**********************************************************************************
+			Se Concatenan las Tablas Creadas Anteriormente
+**********************************************************************************/
+D_Conteo_Tickets_Tmp:
+
+////	D_ConteoTicketsTotalxDia:
+	LOAD
+		'Total x Dia' as [Clasificacion Conteo Tickets], 
+		[Canal],
+		[Canal_Tmp],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsxDia_Tra.qvd (qvd);
+
+Concatenate(D_Conteo_Tickets_Tmp)
+
+	D_ConteoTicketsTotalxDia:
+	LOAD
+		'Total x Mes' as [Clasificacion Conteo Tickets], 
+		[Canal],
+		[Canal_Tmp],
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Cantidad Tickets]
+	From $(vR_Qvd)D_08_Qvd_VentasTicketsxMes_Tra.qvd (qvd);
+
+
+
+FOR Each vS_Union in FileList('$(vR_Qvd)D_08_Qvd_VentasTickets*xDia_Tra.qvd')
+
+Concatenate(D_Conteo_Tickets_Tmp)
+	D_ConteoTicketsTotalxDia:
+	LOAD
+		*,
+		replace(SubField(SubField(FileBaseName(),'x',1),'Tickets',2),'Margen','') &' x '& SubField(SubField(FileBaseName(),'x',2),'_',1) as [Clasificacion Conteo Tickets]
+	From $(vS_Union) (qvd);
+
+NEXT vS_Union
+
+FOR Each vS_Union in FileList('$(vR_Qvd)D_08_Qvd_VentasTickets*xMes_Tra.qvd')
+
+Concatenate(D_Conteo_Tickets_Tmp)
+	D_ConteoTicketsTotalxDia:
+	LOAD
+		*,
+		replace(SubField(SubField(FileBaseName(),'x',1),'Tickets',2),'Margen','') &' x '& SubField(SubField(FileBaseName(),'x',2),'_',1) as [Clasificacion Conteo Tickets]
+	From $(vS_Union) (qvd);
+
+next vS_Union
+
+DROP Field %Pk_LlaveTickets From D_Conteo_Tickets_Tmp;
+
+NoConcatenate
+D_Conteo_Tickets:
+LOAD
+	*,
+	[Mundo Producto]&'_'&[Grupo Producto]&'_'&[Id Canal] & '_' & [Canal] & '_' & [Canal_Tmp] & '_' & [Cod. Sucursal] & '_' & [Id Canal Sin Convenio] & '_' & [FECHA_CALENDARIO_TRX] & '_' & [Categoría Producto] & '_' & [Tipo Dinámica] & '_' & [Descuento Aplicado] & '_' & [Cliente Retail] & '_' & [Actividad] & '_' & [Agrupacion Campaña] & '_' & [nit] as %Pk_LlaveTickets
+Resident D_Conteo_Tickets_Tmp
+	Where [Clasificacion Conteo Tickets]<>' x Mes' and [Clasificacion Conteo Tickets]<>' x Dia';
+
+DROP Table D_Conteo_Tickets_Tmp;
+
+STORE D_Conteo_Tickets into $(vR_Qvd)D_08_Qvd_VentasTickets_Tra.qvd (qvd);
+DROP Table D_Conteo_Tickets;

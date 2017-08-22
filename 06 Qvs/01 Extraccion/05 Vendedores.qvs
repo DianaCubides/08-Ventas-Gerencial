@@ -1,0 +1,28 @@
+Trace ==============================================================================================================================
+5.1.
+	Fecha: 12/12/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: 
+	Version: 1.0
+	Nombre Tablas/Archivos Origen: Vendedores
+	Fuente de datos: Insumo_Vendedores.xlsx
+	Nombre Archivos QVD Resultante: M_09_Excel_VendedoresNoContado_Ext.qvd
+	Descripcion QVD Resultante:	Se extrae Archivo de Excel llamado Insumo_Vendedores, el cual contiene la informacion de cada uno de los vendedores aplicable sa los canales diferentes  als ventas de Contado.
+	Regla de negocio: ninguna ne particular, se realiza extracción Full de la tabla.
+===================================================================================================================================;
+M_VendedoresNoContado:
+LOAD 
+	 [Id Canal], 
+     Canal, 
+     [Id Ciudad], 
+     Ciudad, 
+     NIT, 
+     CLIENTE, 
+     Numero_VENDEDOR, 
+     NOMBRE_VENDEDOR
+FROM $(vR_Fuentes_Externas)Insumo_Vendedores.xlsx
+(ooxml, embedded labels, table is Vendedores)
+	Where Numero_VENDEDOR>'0'
+;
+STORE M_VendedoresNoContado into $(vR_Qvd)M_08_Excel_VendedoresNoContado_Ext.qvd (qvd);
+DROP Table M_VendedoresNoContado;

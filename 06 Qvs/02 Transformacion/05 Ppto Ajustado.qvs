@@ -1,0 +1,169 @@
+﻿Trace =======================================================================================================================================================
+5.1.
+	Fecha: 05/12/2013
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen:  
+
+	Fuente de datos: Qvd
+	Nombre Archivos QVD Resultante: D_02_Presupuesto_Tra.qvd
+	Descripcion QVD Resultante:	Presupuesto Diario para cada uno de los canales existentes en la organización. 
+								
+	Regla de negocio: 	9.1.1. Se carga el presupuesto que genera mensualmente COntrol de Gestión y que correpsonde al presupuesto ajustado FInanciero y Veta a Público. 
+							   Se agregan los valores de Margen generados en el presupuesto Financiro del año. Posteriormente se calcula presupuesto Contribución y Costos.
+
+=============================================================================================================================================================;
+
+/*************************************************************************************************
+	9.1.1. Se crea la lista de meses y su número correspondiente para mapear los nombres 
+	   de los archivos y así crear las fechas
+*************************************************************************************************/
+D_Presupuesto_Ajustado:
+LOAD
+	rangesum([Ppto Ingresos Venta Público])-(rangesum([Ppto Ingresos Venta Público])*[Ppto Margen]) as [Ppto Costos Venta Público],  
+	rangesum([Ppto Ingresos Financiero])-(rangesum([Ppto Ingresos Financiero])*[Ppto Margen]) as [Ppto Costos Financiero],
+	rangesum([Ppto Ingresos Venta Público])*[Ppto Margen] as [Ppto Contribución Venta Público],  
+	rangesum([Ppto Ingresos Financiero])*[Ppto Margen] as [Ppto Contribución Financiero],
+	*	
+	;	
+LOAD
+	ApplyMap('D_Margen_PptoCanal_Map',Floor(MonthStart(Fecha))&'_'&[Id Canal],
+		ApplyMap('D_Margen_Ppto_Map',Floor(MonthStart(Fecha))&'_'&[ID Sucursal]&'_'&ACTIVIDAD&'_'&NIT&'_'&[ID CONVENIO]&'_'&[ID. UEN]&'_'&[Id Canal]&'_'&[ID Centro de Costo],'0')) as [Ppto Margen],
+	*
+	;
+LOAD 
+	[Id Canal],
+	UEN as [ID. UEN],
+	[ID CONVENIO],
+	ApplyMap('Homologacion_Sucursales_Nuevos_Map',[COD SUCURSAL],
+		ApplyMap('Homologacion_Sucursales_CeCo_Map',[COD SUCURSAL],[N° CENTRO DE COSTO])) as [ID Centro de Costo], 
+	[COD SUCURSAL] as [ID Sucursal], 
+	Fecha,   	 
+	CLIENTE,
+	ACTIVIDAD,
+	NIT,
+	[PRESUPUESTO DIARIO META]*1000 as [Ppto Ingresos Venta Público],  
+	[PRESUPUESTO DIARIO FINANCIERO]*1000 as [Ppto Ingresos Financiero]		
+FROM $(vR_QvdVentas)D_02_EXCEL_PresupuestosAjustados_Ext.qvd (qvd);
+
+STORE D_Presupuesto_Ajustado into $(vR_Qvd)D_08_Qvd_PresupuestoAjustado_Tra.qvd (qvd);
+DROP Table D_Presupuesto_Ajustado;
+
+
+/*******************************************************************
+
+
+
+
+********************************************************************/
+
+D_Ppto_Financiero_Tmp:
+//Ppto Ingresos:
+	LOAD
+		if(len(ACTIVIDAD)='0','#',ACTIVIDAD) as ACTIVIDAD,
+		FLOOR([Fecha]) as Fecha,
+		if(len([Id Canal])='0','#',[Id Canal]) as [Id Canal],
+		if(len([ID Centro de Costo])='0','#',[ID Centro de Costo]) as [ID Centro de Costo],
+		if(len([ID CONVENIO])='0','#', [ID CONVENIO]) as [ID CONVENIO],
+		if(len([ID Sucursal])='0','#',[ID Sucursal]) as [ID Sucursal],
+		if(len([ID. UEN])='0','#',[ID. UEN]) as [ID. UEN],
+		if(len([NIT])='0','#',[NIT]) as [NIT],
+		[Ppto Definitivo] as [Ppto Ingresos Meta],
+		[Ppto Definitivo] as [Ppto Ingresos Financiero]
+	From $(vR_QvdVentas)D_02_EXCEL_BQV1PptoIngCosGastInv_Ppto_Operacional_Ext.qvd (qvd)
+		Where upper([Clase Cuenta]) like '*ING*'
+	;
+
+Join
+	D_Ppto_Costos_Financiero:
+	LOAD
+		if(len(ACTIVIDAD)='0','#',ACTIVIDAD) as ACTIVIDAD,
+		FLOOR([Fecha]) as Fecha,
+		if(len([Id Canal])='0','#',[Id Canal]) as [Id Canal],
+		if(len([ID Centro de Costo])='0','#',[ID Centro de Costo]) as [ID Centro de Costo],
+		if(len([ID CONVENIO])='0','#', [ID CONVENIO]) as [ID CONVENIO],
+		if(len([ID Sucursal])='0','#',[ID Sucursal]) as [ID Sucursal],
+		if(len([ID. UEN])='0','#',[ID. UEN]) as [ID. UEN],
+		if(len([NIT])='0','#',[NIT]) as [NIT],
+		[Ppto Definitivo] as [Ppto Costos Meta],
+		[Ppto Definitivo] as [Ppto Costos Financiero]
+	From $(vR_QvdVentas)D_02_EXCEL_BQV1PptoIngCosGastInv_Ppto_Operacional_Ext.qvd (qvd)
+		Where upper([Clase Cuenta]) like '*COST*'
+	;
+
+D_Ppto_Financiero_Tmp2:
+LOAD
+	if(ACTIVIDAD='#',Null(),ACTIVIDAD) as ACTIVIDAD,
+	floor([Fecha]) as Fecha,
+	if([Id Canal]='#',null(),[Id Canal]) as [Id Canal],
+	if([ID Centro de Costo]='#',null(),[ID Centro de Costo]) as [ID Centro de Costo],
+	if([ID CONVENIO]='#',null(),[ID CONVENIO]) as [ID CONVENIO],
+	if([ID Sucursal]='#',Null(), [ID Sucursal]) as [ID Sucursal],
+	if([ID. UEN]='#',null(),[ID. UEN]) as [ID. UEN],
+	if(NIT='#',null(),NIT) as NIT,
+	(rangesum([Ppto Ingresos Financiero])-rangesum([Ppto Costos Financiero]))/rangesum([Ppto Ingresos Financiero]) as [Ppto Margen],
+	rangesum([Ppto Ingresos Financiero])-rangesum([Ppto Costos Financiero]) as [Ppto Contribución Financiero],
+	rangesum([Ppto Ingresos Meta])-rangesum([Ppto Costos Meta]) as [Ppto Contribución Venta Público],
+	rangesum([Ppto Costos Financiero]) as [Ppto Costos Financiero],
+	rangesum([Ppto Costos Meta]) as [Ppto Costos Venta Público],  
+	rangesum([Ppto Ingresos Financiero]) as [Ppto Ingresos Financiero],
+	rangesum([Ppto Ingresos Meta]) as [Ppto Ingresos Venta Público]
+Resident D_Ppto_Financiero_Tmp;
+DROP Table D_Ppto_Financiero_Tmp;
+STORE D_Ppto_Financiero_Tmp2 into $(vR_Qvd)D_08_Qvd_PresupuestoFinanciero_Tra.qvd (qvd);
+DROP Table D_Ppto_Financiero_Tmp2;
+
+
+D_Presupeuesto_Definitivo_Tmp:
+//Ajustado:
+	LOAD
+		*,
+		'Mensual_Ajustado' as Origen_Ppto
+	From $(vR_Qvd)D_08_Qvd_PresupuestoAjustado_Tra.qvd (qvd);
+
+Concatenate
+
+	D_Financiero:
+	LOAD
+		*,
+		'Financiero_Anual' as Origen_Ppto,		
+		'' as CLIENTE
+	From $(vR_Qvd)D_08_Qvd_PresupuestoFinanciero_Tra.qvd (qvd)
+		Where not Exists(Fecha)
+	;
+
+NoConcatenate
+D_Presupeuesto_Definitivo:
+LOAD
+	ACTIVIDAD&'_'&Fecha&'_'&[Id Canal]&'_'&[ID Centro de Costo]&'_'&[ID CONVENIO]&'_'&[ID Sucursal]&'_'&[ID. UEN]&'_'&NIT
+	&'_'&ApplyMap('Desc_Canal_Map',[Id Canal],[Id Canal])&'_'&ApplyMap('Canales_Map',[Id Canal],'Error')&'_'&ApplyMap('Canales_Map',[Id Canal],'Error') 
+	&'_'&ApplyMap('M_IdVendedoresPpto_Map',[Id Canal]&'_'&NIT,'No Aplica')&'_'&ApplyMap('M_NombreVendedoresPpto_Map',[Id Canal]&'_'&NIT,'No Aplica') as %Pk_PptoLink,
+	ApplyMap('Desc_Canal_Map',[Id Canal],[Id Canal]) as [Canal Gestion],
+	ApplyMap('Canales_Map',[Id Canal],'Error') as Canal,
+	ApplyMap('Canales_Map',[Id Canal],'Error') as Canal_Tmp,
+	[ACTIVIDAD],
+	[CLIENTE],
+	[Fecha],
+	[Id Canal],
+	[ID Centro de Costo],
+	[ID CONVENIO],
+	[ID Sucursal],
+	[ID. UEN],
+	[NIT],
+	ApplyMap('M_IdVendedoresPpto_Map',[Id Canal]&'_'&NIT,'No Aplica') as [Id Vendedor],
+	ApplyMap('M_NombreVendedoresPpto_Map',[Id Canal]&'_'&NIT,'No Aplica') as [Nombre Vendedor],	
+	[Origen_Ppto],
+	[Ppto Ingresos Financiero] as [Valor Ppto Venta Comercial],
+	[Ppto Ingresos Venta Público] as [Valor Ppto Venta Público],
+	[Ppto Costos Financiero] as [Valor Ppto Costos Comercial],
+	[Ppto Costos Venta Público] as [Valor Ppto Costos Público],
+	[Ppto Contribución Financiero] as [Valor Ppto Contribución Comercial],
+	[Ppto Contribución Venta Público] as [Valor Ppto Contribución Público],
+	[Ppto Margen] as [Valor Ppto Magen Comercial],	
+	[Ppto Margen] as [Valor Ppto Magen Público]	
+Resident D_Presupeuesto_Definitivo_Tmp;
+DROP Table D_Presupeuesto_Definitivo_Tmp;
+
+STORE D_Presupeuesto_Definitivo into $(vR_Qvd)D_08_Qvd_Presupuesto_Tra.qvd (qvd);
+DROP Table D_Presupeuesto_Definitivo;

@@ -1,0 +1,131 @@
+﻿M_IslaTiempo:
+LOAD * Inline
+	[
+	%Periodo_Tiempo
+	YTD
+	MTD
+	MAT
+	]
+	; 
+
+M_FactorConversionValor:
+add LOAD * Inline
+	[
+	%UnidadesValor, %M_FactorConversionValor
+	Pesos,	1
+	Miles,	1000
+	Millones, 1000000
+	]
+	;
+
+M_DashBoardMedidas:
+LOAD * Inline 
+	[
+	Medidas				, Medidas Id 	, Medidas Ord
+	Ventas					, 1				, 1 
+	Contribucion			, 4 			, 2
+	Margen					, 5 			, 3
+	Transacciones			, 2				, 4 
+	Valor Ticket Promedio	, 3				, 5
+	Unidades				, 7				, 6
+	Und Ticket Promedio		, 8				, 7
+	Valor / Und				, 9				, 8
+	Conversion				, 6				, 9 
+	];
+
+M_ReportePersonalizado_Dimension0:
+LOAD * Inline
+	[
+	%Rep_Personalizado0, %OrdenRepPersonalizado0 
+	Año,					1
+	Mes,					2
+	Día,					3
+	Día Semana,				4
+	Tipo Día,				5
+	Semestre,				6
+	Quartil,				7
+	Semana Retail,			8
+	]
+	;
+M_ReportePersonalizado_Dimension1:
+LOAD * Inline
+	[
+	%Rep_Personalizado1, %OrdenRepPersonalizado1 
+	Línea Negocio,			1
+	Canal.,					2
+	Canal Gestión,			3
+	Centro de Costo,		4
+	Director,				5
+	Subdirector,			6
+	Sucursal,				8
+	]
+	;
+
+M_ReportePersonalizado_Dimension2:
+LOAD * Inline
+	[
+	%Rep_Personalizado2, %OrdenRepPersonalizado2 
+	Grupo,						1
+	Categoría,					2
+	Mundo,						3
+	]
+	;
+
+M_ReportePersonalizado_Dimension3:
+LOAD * Inline
+	[
+	%Rep_Personalizado3, %OrdenRepPersonalizado3 
+	Departamento,					1
+	Ciudad,							2
+	Regional,						3
+	Cluster,						4
+	]
+	;
+
+M_ReportePersonalizado_Dimension3:
+LOAD * Inline
+	[
+	%Rep_Personalizado4, %OrdenRepPersonalizado4
+	Ventas/Ventas,						1
+	Costo/Costo,						2
+	Contribución/Contribución,			3
+	Margen/Margen,						4
+	Ventas/Ppto Ventas,					5
+	Costo/Ppto Costo,					6
+	Contribución/Ppto Contribución,		7
+	Margen/Ppto Margen,					8
+	Ventas/Cump. Ventas,				9
+	Costo/Cump. Costo,					10
+	Contribución/Cump. Contribución,	11
+	Margen/Cump. Margen,				12
+	Cantidad Productos/UMD Mínima,		13
+	Cantidad Productos/UMD Media,		14
+	Cantidad Productos/UMD Máxima,		15		
+	Dinámicas/Dinámicas,				16
+	Dinámicas/Ppto PAD,					17
+	Dinámicas/Cump. PAD,				18
+	Conversión/Visitas Dispensación, 19
+	Conversión/Visitas Retail,		20
+	Conversión/%Conversión,			21
+	]
+	;	
+
+//	Cantidad Tickets/ Total General,	22
+//	Cantidad Tickets/ Categoría Prod,	23	
+//	Cantidad Tickets/ Mundo Prod,		24	
+//	Cantidad Tickets/ Grupo Prod,		25		
+//	Cantidad Tickets/ Dcto Aplicado,	26		
+//	Cantidad Tickets/ Cliente Retail,	27		
+//	Cantidad Tickets/ Nit,				28
+//	Cantidad Tickets/ Tipo Dinamica,	29
+//	Cantidad Tickets/ Nombre Actividad,	30	
+M_Filtros_Navegacion_Isla:	
+LOAD * Inline
+	[
+	%Analisis_Cifras
+	Ventas
+	Costos
+	Contribución
+	Margen
+	]
+	;

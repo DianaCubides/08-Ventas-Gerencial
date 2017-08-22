@@ -1,0 +1,217 @@
+﻿D_Ventas_Tmp:
+//	D_Margen:
+	LOAD
+		'Margen' as %Origen_UnionTablas,
+		[Actividad],
+		if([Id Canal]='999','En Transición',Canal) as Canal,
+		[Canal_Tmp],
+		[CANTIDAD_UDM_MAXIMA],
+		[CANTIDAD_UDM_MEDIA],
+		[CANTIDAD_UDM_MINIMA],
+		[Categoría Producto],
+		ApplyMap('Descripcion_Actividades_Map',Actividad,'No Hay Dato') as [Nombre Actividad],
+		[Cod. Sucursal],
+		floor([FECHA_CALENDARIO_TRX]) as %Pk_Fecha,
+		[Grupo Producto],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[Id Centro Costo],
+		[Id Convenio],
+		[Id Vendedor],
+		[ID. UEN],
+		[Linea de Negocio],
+		[Mundo Producto],
+		nit,
+		[Nombre Vendedor],
+		[NOMBRE_SUCURSAL],
+		[Subcategoría Producto],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Codigo Departamento Cliente Entrega], 
+		[Departamento Cliente Entrega], 
+		[Codigo Ciudad Cliente Entrega], 
+		[Ciudad Cliente Entrega],		
+		[Valor Transacciones] as [Valor Venta],
+		if([Id Canal]='3','0',[Valor Transacciones]) as [Valor Venta Público],
+		[Costo Promedio] as [Costo Promedio Venta],
+		if([Id Canal]='3','0',[Costo Promedio]) as [Costo Promedio Venta Público],
+		[Cantidad Transacciones] as [Cantidad Transacciones Venta],
+		if([Id Canal]='3','0',[Cantidad Transacciones]) as [Cantidad Transacciones Venta Público]
+	From $(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd (qvd)
+		Where [Id Canal]<>'998' and [Id Canal]<>'3' and floor(FECHA_CALENDARIO_TRX)<Floor(Today())  //and [Id Canal]>'2'
+	;
+
+Concatenate
+	D_Contado:
+	LOAD
+		'Contado' as %Origen_UnionTablas,
+		[Actividad],
+		[Agrupacion Campaña],
+		if([Id Canal]='999','En Transición',Canal) as Canal,
+		[Canal_Tmp],
+		[CANTIDAD_UDM_MAXIMA],
+		[CANTIDAD_UDM_MEDIA],
+		[CANTIDAD_UDM_MINIMA],
+		[Categoría Producto],
+		[Cliente Retail],
+		[Cod. Sucursal],
+		[Descuento Aplicado],
+		floor([FECHA_CALENDARIO_TRX]) as %Pk_Fecha,
+		[Grupo Producto],
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[Id Centro Costo],
+		[Id Convenio],
+		[Id Vendedor],
+		[ID. UEN],
+		[Linea de Negocio],
+		[Mundo Producto],
+		[Nombre Actividad], 
+		[Nombre Vendedor],
+		[NOMBRE_SUCURSAL],
+		nit,
+		[Subcategoría Producto],
+		[Tipo Dinámica],
+		[TIPO_COMPROBANTE],
+		[TIPO_DOCUMENTO],
+		[Valor Transacciones] as [Valor Venta],
+		[Valor Transacciones] as [Valor Venta Público],
+		[Costo Promedio] as [Costo Promedio Venta],
+//		if([Id Canal]='3','0',if(TIPO_COMPROBANTE='841',fabs([Costo Promedio])*-1,[Costo Promedio])) as [Costo Promedio Venta Público],
+		if(TIPO_COMPROBANTE='841',fabs([Costo Promedio])*-1,[Costo Promedio]) as [Costo Promedio Venta Público],
+		if(TIPO_COMPROBANTE='811',[Cantidad Transacciones],'0') as [Cantidad Transacciones Venta],
+		if([Id Canal]='3','0',[Cantidad Transacciones]) as [Cantidad Transacciones Venta Público]
+	From $(vR_Qvd)D_08_Qvd_VentasContado_Tra.qvd (qvd)
+		Where [Id Canal]<>'998'	and floor(FECHA_CALENDARIO_TRX)<Floor(Today())
+	;
+
+
+Concatenate
+	D_Cencosud:
+	LOAD
+		%Origen_UnionTablas,
+		TIPO_COMPROBANTE,
+		[Id Centro Costo],
+		[Id Canal Sin Convenio],
+		TIPO_DOCUMENTO,
+		NOMBRE_SUCURSAL,
+		Canal,
+		Canal_Tmp,
+		[Linea de Negocio],
+	    [Id Canal],
+		[CANTIDAD_UDM_MAXIMA],
+		[CANTIDAD_UDM_MEDIA],
+		[CANTIDAD_UDM_MINIMA],
+	    [ID. UEN], 
+	    [Categoría Producto],
+	    [Subcategoría Producto],
+	    [Mundo Producto],
+	    [Grupo Producto],
+	    nit,
+	    [Cod. Sucursal],
+	     floor(%Pk_Fecha) as %Pk_Fecha, 
+	     [Valor Venta Público], 
+	     [Costo Promedio Venta Público],
+	     [Costo Promedio Venta],
+	     [Valor Venta],
+	     [Cantidad Transacciones Venta Público],
+	     [Cantidad Transacciones Venta]
+	FROM $(vR_Qvd)D_08_Qvd_VentasCarrefourAgrupado_Tra.qvd (qvd)
+		Where floor(%Pk_Fecha)<Floor(Today())
+	;
+
+
+Concatenate
+Ajustes_Contables:
+	LOAD Distinct
+		'Ajustes Contables' as %Origen_UnionTablas,
+		'Ajuste Contable' as [Categoría Producto],
+		'Ajuste Contable' as [Subcategoría Producto],
+		'Ajuste Contable' as [Mundo Producto],
+		'Ajuste Contable' as [Grupo Producto],
+		 '0' as [CANTIDAD_UDM_MAXIMA],
+		 '0' as [CANTIDAD_UDM_MEDIA],
+		 '0' as [CANTIDAD_UDM_MINIMA],
+		COD_ORG_INV as [Cod. Sucursal],
+		'Ajustes Contables' as NOMBRE_SUCURSAL,
+		floor(FECHA_CALENDARIO_TRX) as %Pk_Fecha, 
+		if([Id Canal]='999','En Transición', ApplyMap('Canales_Map',[Id Canal],'Error')) as Canal,
+		 ApplyMap('Canales_Map',[Id Canal],'Error') as Canal_Tmp,
+		 ApplyMap('Linea_Negocio_Map',[Id Canal],'Error') as [Linea de Negocio],
+		[Id Canal],
+		[Id Canal Sin Convenio], 
+		[ID. UEN],
+		nit,
+		TIPO_COMPROBANTE,
+		TIPO_DOCUMENTO,
+		[Valor Transacciones] as [Valor Venta Público],
+		[Valor Transacciones] as [Valor Venta],
+		[Costo Unitario Promedio UOM Minima] as [Costo Promedio Venta Público],
+		[Costo Unitario Promedio UOM Minima] as [Costo Promedio Venta]
+	FROM $(vR_QvdVentas)D_02_EBS_AjustesContables_Tra.qvd (qvd)
+			where floor(FECHA_CALENDARIO_TRX)<Floor(Today())
+	;
+
+
+noConcatenate
+
+D_Ventas:
+LOAD
+	%Origen_UnionTablas,
+	if(%Origen_UnionTablas='Ajustes Contables','Filtrar','Excluir') as [Filtro Ajuste Contable],
+	Actividad&'_'&Canal&'_'&Canal_Tmp&'_'&%Pk_Fecha&'_'&[Id Canal]&'_'&	[Id Canal Sin Convenio]&'_'&[Id Centro Costo]&'_'&[Id Convenio]&'_'&[Cod. Sucursal]&'_'&[ID. UEN]&'_'&nit
+		&'_'&ApplyMap('Actividad_Cliente_Map1',year(%Pk_Fecha)&'_'&if(len(Actividad)='0','No Hay Dato',Actividad),null())&'_'&ApplyMap('Desc_Canal_Map',[Id Canal Sin Convenio],[Id Canal Sin Convenio])&'_'&
+	ApplyMap('Actividad_Cliente_1_Map',Year(%Pk_Fecha)&'_'&ApplyMap('Actividad_Cliente_Map1',year(%Pk_Fecha)&'_'&if(len(Actividad)='0','No Hay Dato',Actividad),null()),'Sin Convenio')&'_'&[Tipo Dinámica]&'_'&[Categoría Producto]&'_'&[Id Vendedor]&'_'&[Nombre Vendedor] 
+	&'_'&[Descuento Aplicado] & '_' & [Cliente Retail] & '_' & [Actividad] & '_' & [Tipo Dinámica] & '_' & [Agrupacion Campaña] & '_' & [nit] &'_'&[Mundo Producto]&'_'&[Grupo Producto] as %Pk_VentasAgrupadasLink,
+	ApplyMap('Actividad_Cliente_Map1',year(%Pk_Fecha)&'_'&if(len(Actividad)='0','No Hay Dato',Actividad),null()) as [Cod. Agrupacion Cliente],	
+	ApplyMap('Desc_Canal_Map',[Id Canal Sin Convenio],[Id Canal Sin Convenio]) as [Canal Gestion],
+
+	ApplyMap('Actividad_Cliente_1_Map',Year(%Pk_Fecha)&'_'&ApplyMap('Actividad_Cliente_Map1',year(%Pk_Fecha)&'_'&if(len(Actividad)='0','No Hay Dato',Actividad),null()),'Sin Convenio') as [Desc. Cliente Convenio],
+
+	[Actividad],
+	[Agrupacion Campaña],
+	Canal,
+	[Canal_Tmp],
+	%Pk_Fecha,
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[Id Centro Costo],
+	[Id Convenio],
+	[Cod. Sucursal],
+	[ID. UEN] as [Id. UEN],
+	nit as Nit,
+	if(TIPO_DOCUMENTO='841','0', rangesum([Cantidad Transacciones Venta])) as [Cantidad Transacciones Venta Comercial],
+	if(TIPO_DOCUMENTO='841','0', rangesum([Cantidad Transacciones Venta Público])) as [Cantidad Transacciones Venta Público],
+	[CANTIDAD_UDM_MAXIMA] as [Cantidad Productos UDM Maxima],
+	[CANTIDAD_UDM_MEDIA] as [Cantidad Productos UDM Media],
+	[CANTIDAD_UDM_MINIMA] as [Cantidad Productos UDM Minima],
+	[Categoría Producto],
+	[Cliente Retail],
+	[Descuento Aplicado],
+	[Grupo Producto],
+	[Id Vendedor],
+	[Linea de Negocio],
+	[Mundo Producto],
+	[Nombre Actividad],
+	[Nombre Vendedor],
+	[NOMBRE_SUCURSAL] as [Nombre Sucursal],
+	[Subcategoría Producto],
+	if(Upper([Linea de Negocio]) like '*RETAI*', [Tipo Dinámica], Null()) as [Tipo Dinámica],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO] as [Tipo Documento],
+	[Codigo Departamento Cliente Entrega], 
+	[Departamento Cliente Entrega], 
+	[Codigo Ciudad Cliente Entrega], 
+	[Ciudad Cliente Entrega],
+	[Valor Venta] as [Valor Real Venta Comercial],
+	[Valor Venta Público] as [Valor Real Venta Público],
+	[Costo Promedio Venta] as 	[Valor Real Costos Comercial],
+	[Costo Promedio Venta Público] as [Valor Real Costos Público],
+	[Valor Venta]-[Costo Promedio Venta] as [Valor Real Contribución Comercial],
+	[Valor Venta Público]-[Costo Promedio Venta Público] as [Valor Real Contribución Público]
+	
+Resident D_Ventas_Tmp;
+DROP Table D_Ventas_Tmp;
+
+STORE D_Ventas into $(vR_Qvd)D_08_Qvd_VentasAgrupadas_Tra.qvd (qvd);
+DROP Table D_Ventas;

@@ -1,0 +1,201 @@
+﻿D_Link_Table_Tmp:
+	//D_Conversion
+	LOAD Distinct
+		'Conversion' as %Pk_Origen,
+		%Pk_Link_Conversion,
+		floor([FECHA_CALENDARIO_TRX]) as %Pk_Fecha,
+	    ApplyMap('M_NombreSucursal_Map',[Cod. Sucursal],[Cod. Sucursal]) as Sucursal,
+		[Cod. Sucursal] as [Id Sucursal]
+	From $(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd (qvd);
+
+Concatenate
+	D_Ventas_Agrupadas:
+	LOAD Distinct
+		'Ventas' as %Pk_Origen,
+		%Pk_VentasAgrupadasLink,
+		[Descuento Aplicado],
+		[Cliente Retail],  
+		[Agrupacion Campaña],
+		[%Pk_Fecha]&'_'&[Id Canal] as %Pk_DashLink,
+		Actividad,
+		[Mundo Producto],
+		[Grupo Producto],
+		Canal,
+		Canal_Tmp,
+		%Pk_Fecha,
+		[Id Canal],
+		[Id Canal Sin Convenio],
+		[Cod. Agrupacion Cliente] as [Id Agrupacion Cliente],
+		[Canal Gestion],
+		[Categoría Producto],
+		[Desc. Cliente Convenio],
+		[Id Centro Costo],
+		[Id Convenio],
+		[Id Vendedor],
+		[Nombre Vendedor],
+	    ApplyMap('M_NombreSucursal_Map',[Cod. Sucursal],[Cod. Sucursal]) as Sucursal,
+		[Cod. Sucursal] as [Id Sucursal],
+		[Id. UEN] as [Id UEN],
+		Nit as nit,
+		Capitalize([Tipo Dinámica]) as [Tipo Dinámica]
+	From $(vR_Qvd)D_08_Qvd_VentasAgrupadas_Tra.qvd (qvd)
+		Where floor(%Pk_Fecha) < floor(Today())
+	;
+
+Concatenate
+	D_Ppto:
+	LOAD Distinct
+		'Ppto' as %Pk_Origen,
+		%Pk_PptoLink,
+		[Id Vendedor],
+		[Nombre Vendedor],
+		ACTIVIDAD as Actividad,
+		floor(Fecha)&'_'&[Id Canal] as %Pk_DashLink,
+		floor(Fecha) as %Pk_Fecha,
+		num([ID CONVENIO]) as [Cod. Agrupacion Cliente],
+		capitalize(CLIENTE) AS [Desc. Cliente Convenio],
+		[Id Canal],
+		[Id Canal] as [Id Canal Sin Convenio],
+		[Canal Gestion],
+		Canal,
+		Canal_Tmp,
+		[ID Centro de Costo] as [Id Centro Costo],
+		[ID CONVENIO] as [Id Convenio],
+		[ID Sucursal] as [Id Sucursal],
+	    ApplyMap('M_NombreSucursal_Map',[ID Sucursal],[ID Sucursal]) as Sucursal,		
+		[ID. UEN] as [Id UEN],
+		NIT as nit
+	From $(vR_Qvd)D_08_Qvd_Presupuesto_Tra.qvd (qvd);
+	
+Concatenate
+	D_PptoPAD:
+	LOAD Distinct
+		'Ppto PAD' as %Pk_Origen,
+		%Pk_PptoPADLink,
+		Capitalize([Tipo Dinámica]) as [Tipo Dinámica],
+		[Id Canal],
+		[%Pk_Fecha]&'_'&[Id Canal] as %Pk_DashLink,
+		Canal,
+		%Pk_Fecha,
+	    ApplyMap('M_NombreSucursal_Map',[Cod. Sucursal],[Cod. Sucursal]) as Sucursal,
+		[Cod. Sucursal] as [Id Sucursal]
+	From $(vR_Qvd)D_08_Qvd_PresupuestoPAD_Tra.qvd (qvd); 	 
+
+Concatenate
+	D_Transacciones:
+	LOAD
+		'Conteo Tickets' as %Pk_Origen,
+		%Pk_LlaveTickets,
+		[Descuento Aplicado],
+		[Cliente Retail],
+		[Actividad],
+		Capitalize([Tipo Dinámica]) as [Tipo Dinámica],
+		[Agrupacion Campaña],
+		[nit],
+		[Categoría Producto],
+		[Mundo Producto],
+		[Grupo Producto],
+		[Id Canal],
+		ApplyMap('Actividad_Cliente_1_Map',Year(FECHA_CALENDARIO_TRX)&'_'&ApplyMap('Actividad_Cliente_Map1',year(FECHA_CALENDARIO_TRX)&'_'&if(len(Actividad)='0','No Hay Dato',Actividad),null()),'Sin Convenio') as [Desc. Cliente Convenio],		
+		floor(FECHA_CALENDARIO_TRX)&'_'&[Id Canal] as %Pk_DashLink,		
+		[Canal],
+		ApplyMap('Desc_Canal_Map',[Id Canal Sin Convenio],[Id Canal Sin Convenio]) as [Canal Gestion],
+	 	ApplyMap('M_NombreSucursal_Map',[Cod. Sucursal],[Cod. Sucursal]) as Sucursal,
+		[Canal_Tmp],
+		[Cod. Sucursal] as [Id Sucursal],
+		[Id Canal Sin Convenio],
+		floor(FECHA_CALENDARIO_TRX) as %Pk_Fecha
+From $(vR_Qvd)D_08_Qvd_VentasTickets_Tra.qvd (qvd);
+
+
+Left Join
+	Canales:
+	LOAD
+		[Id Canal],
+		Grupo,
+		[Linea de Negocio]
+	FROM $(vR_QvdVentas)M_02_Jerarquia_Tra.qvd (qvd);
+
+Left Join
+Cluster_Geografia:
+	LOAD Distinct
+		[Id Sucursal],
+		Capitalize(Cluster) as Cluster,
+		Capitalize(Subdirector) as Subdirector,
+		Capitalize(Director) as Director
+	From $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd);	
+
+
+Left Join
+	Organizacion:
+	LOAD Distinct
+		 [Id Sucursal],
+	     FirstValue([Centro de Costo]) as [Centro de Costo], 
+	     FirstValue(Ciudad) as Ciudad, 
+	     FirstValue(Departamento) as Departamento, 
+	     FirstValue([Regional EBS]) as Regional
+	FROM $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd)
+		Group By [Id Sucursal]
+	;
+
+
+
+
+
+NoConcatenate
+
+D_Link_Table:
+LOAD
+	[%Pk_DashLink],
+	[%Pk_Fecha],
+	[%Pk_Link_Conversion],
+	[%Pk_Origen],
+	[%Pk_PptoLink],
+	[%Pk_PptoPADLink],
+	[%Pk_VentasAgrupadasLink],
+	%Pk_LlaveTickets,
+
+	[Descuento Aplicado],
+	[Cliente Retail],
+	[Agrupacion Campaña],
+
+	[Mundo Producto],
+	[Grupo Producto],
+					
+	[Actividad],
+	ApplyMap('Descripcion_Actividades_Map',Actividad,'No Hay Dato') as [Nombre Actividad],
+	[Canal],
+	[Canal Gestion],
+	[Canal_Tmp],
+	[Centro de Costo],
+	[Categoría Producto],
+	Ciudad,
+	[Id Vendedor],
+	if([Id Canal]<>'8' and [Id Canal]<>'11' and [Id Canal]<>'1' and [Id Canal]<>'2' and [Id Canal]<>'3' and [Id Canal]<>'999','No Aplica',
+		if(len([Nombre Vendedor])='0','Sin Asignar',Capitalize([Nombre Vendedor]))) as [Nombre Vendedor],	
+	
+	if(len(Cluster)='0' or Cluster='Sin Asignar','No Aplica',Cluster) as [Cluster],
+	[Cod. Agrupacion Cliente],
+	[Departamento],
+	[Desc. Cliente Convenio],
+	[Grupo],
+	[Id Agrupacion Cliente],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[Id Centro Costo],
+	[Id Convenio],
+	[Id Sucursal],
+	[Id UEN],
+	[Linea de Negocio],
+	[nit],
+	[Regional],
+	if(len(Subdirector)='0' or Subdirector='Sin Asignar','No Aplica',Subdirector) as Subdirector,
+	if(len(Director)='0' or Director='Sin Asignar','No Aplica',Director) as [Director],
+	[Sucursal],
+	[Tipo Dinámica]
+Resident D_Link_Table_Tmp;
+DROP Table D_Link_Table_Tmp;
+
+
+STORE D_Link_Table into $(vR_Qvd)D_08_Qvd_LinkTable_Tra.qvd (qvd);
+DROP Table D_Link_Table;

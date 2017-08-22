@@ -1,0 +1,59 @@
+﻿D_Link_Table:
+LOAD
+	[%Pk_DashLink],
+	[%Pk_Fecha],
+	[%Pk_Link_Conversion],
+	[%Pk_Origen],
+	[%Pk_PptoLink],
+	[%Pk_PptoPADLink],
+	[%Pk_VentasAgrupadasLink],
+	%Pk_LlaveTickets,
+	[Actividad],
+	[Categoría Producto],
+	[Grupo Producto],
+	[Mundo Producto],
+	[Agrupacion Campaña],
+	[Nombre Actividad],		
+//	[Canal],
+	[Canal Gestion],
+	[Canal_Tmp],
+	[Centro de Costo],
+	[Ciudad],
+	[Cluster],
+	[Cod. Agrupacion Cliente],
+	[Departamento],
+	[Desc. Cliente Convenio],
+	[Cliente Retail],
+	[Descuento Aplicado],
+	[Director],
+//	[Grupo],
+	[Id Agrupacion Cliente],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[Id Centro Costo],
+	[Id Convenio],
+	[Id Sucursal],
+	[Id UEN],
+//	[Linea de Negocio],
+	[nit],
+	[Regional],
+	[Subdirector],
+	[Sucursal],
+	[Tipo Dinámica],
+	[Id Vendedor],
+	[Nombre Vendedor]
+
+From $(vR_Qvd)D_08_Qvd_LinkTable_Tra.qvd (qvd)
+	Where %Pk_Fecha>= floor(AddMonths(Today(),-36)) and floor(%Pk_Fecha)>='41640' and floor(%Pk_Fecha)<=Floor(MonthEnd(Today()));
+;
+
+Descripcion_Nit_Cliente_Map:
+LOAD Distinct
+//		%Pk_Clientes,
+		[Nit de Cliente] as nit, 
+	    FirstValue([Desc. Cliente Factura]) as [Desc. Cliente Factura],
+	    FirstValue([Nit de Cliente])&'_'&FirstValue([Desc. Cliente Factura]) as [Cliente Factura]
+From $(vR_QvdVentas)M_02_CLIENTE_D_Tra.qvd (qvd)
+	Where Exists(nit, [Nit de Cliente]) 
+		Group By [Nit de Cliente]
+		;

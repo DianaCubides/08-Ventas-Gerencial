@@ -1,0 +1,286 @@
+﻿Trace ========================================================================================================================================================================
+9.
+	Fecha: 16/11/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Gilberto Jimenez
+	Version: 1.0
+	Nombre Tablas/Archivos Origen:  
+	Fuente de datos: Qvd
+	Nombre Archivos QVD Resultante: 
+	Descripcion QVD Resultante:	Presupuesto de Margen calculado para cada línea.
+								
+	Regla de negocio: 	9.1 Se toma la cantidad de cedulas que hicieron transacciones en dispensacion y en retail y se realiza el conteo de la cantidad de transacciones 
+							por dia y sucursal (Ejemplo diego tiene 5 tickets a su nombre el 01 de enero de 2015, 1 de retail y 3 de dispensacion, en este item se sacan 
+							los totales).
+						9.2 Se carga solo dispensacion y se terminan de agrupar las cifras, posteriormente se realiza un join, se crea una columna adicional que contiene 
+							los valores de las transacciones retail unicamente para las cedulas que fueron dispensadas (valor y cantidad tickets), Lo anterior se sigue 
+							teniendo a nivel de detalle de cedula.
+						9.3 Se realiza un conteo de totales excluyendo las cedulas para obtener la totalidad de visitas y/o transacciones para la tabla anterior. en el qvw 
+							de presentacion se calculan porcentajes y participaciones.  
+
+============================================================================================================================================================================;
+
+let vR_VentasContado3= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd'))='0','D_08_Qvd_VentasContadoDetalle_Tra.qvd','D_08_Qvd_VentasContadoDetalleDelta_Tra.qvd') ;
+let vR_VentasMargen3=  if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ;
+
+
+/*****************************************************************************************************************
+						9.1 CARGUE CIFRAS RETAIL Y DISPENSACION
+*****************************************************************************************************************/
+D_Ventas_Conversion_Tmp:
+	//D_Ventas_Contado_Conversion:
+	LOAD
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		[Linea de Negocio],
+		[NOMBRE_SUCURSAL],
+		Count(DISTINCT [Numero Ticket]) as [Cantidad Tickets],
+		sum([Valor Transacciones]) as [Valor Transacciones]
+		
+	From $(vR_Qvd)$(vR_VentasContado3) (qvd)
+		Where (Upper([Linea de Negocio]) like '*DISPEN*' OR Upper([Linea de Negocio]) like '*RETA*') AND [Identificación del Usuario]<>'0'
+			Group By 	[Cod. Sucursal],
+						[FECHA_CALENDARIO_TRX],
+						[Identificación del Usuario],
+						[Linea de Negocio],
+						[NOMBRE_SUCURSAL];
+
+Concatenate
+
+	D_Ventas_Margen_Conversion:
+	LOAD
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		[Linea de Negocio], 
+		[NOMBRE_SUCURSAL], 
+		Count(DISTINCT [Numero Ticket]) as [Cantidad Tickets],
+		sum([Valor Transacciones]) as [Valor Transacciones] 
+		
+	From $(vR_Qvd)$(vR_VentasMargen3) (qvd)
+		Where (Upper([Linea de Negocio]) like '*DISPEN*' OR Upper([Linea de Negocio]) like '*RETA*' and [Id Canal]<>'3') and UPPER([UOM_Media])<>'INT' and upper([Origen Pedido]) like '*MOLLIER*' AND [Identificación del Usuario]<>'0'
+			Group By 	[Cod. Sucursal],
+						[FECHA_CALENDARIO_TRX],
+						[Identificación del Usuario],
+						[Linea de Negocio],
+						cliente_factura,
+						[NOMBRE_SUCURSAL];
+
+
+STORE D_Ventas_Conversion_Tmp into $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd);
+DROP Table D_Ventas_Conversion_Tmp;
+
+
+
+D_Conversion_Tmp:
+	LOAD
+		[Cod. Sucursal]&'_'&[FECHA_CALENDARIO_TRX]&'_'&[Identificación del Usuario] as %Pk_UnionConversion,
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		RangeSum([Cantidad Tickets]) as [Cantidad Tickets Dispensacion],
+		RangeSum([Valor Transacciones]) as [Valor Transacciones DIspensacion]	
+	From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+		Where Upper([Linea de Negocio]) like '*DISPEN*'
+	;
+
+
+	D_Retail_Tmp:
+	LOAD
+		[Cod. Sucursal]&'_'&[FECHA_CALENDARIO_TRX]&'_'&[Identificación del Usuario] as %Pk_UnionConversion,
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		rangesum([Cantidad Tickets]) as [Cantidad Tickets Retail],
+		RangeSum([Valor Transacciones]) as [Valor Transacciones Retail]
+	From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+		Where Upper([Linea de Negocio]) like '*RETA*' and Exists(%Pk_UnionConversion, [Cod. Sucursal]&'_'&[FECHA_CALENDARIO_TRX]&'_'&[Identificación del Usuario])
+	;
+	
+	
+	DROP Table D_Conversion_Tmp;
+
+D_Conversion_xDia:
+	//D_Retail:
+	LOAD
+		floor([FECHA_CALENDARIO_TRX])&'_'&[Cod. Sucursal] as %Pk_Link_Conversion,		
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		count(DISTINCT [Identificación del Usuario]) as [Cantidad Visitas Retail Día],
+		sum([Cantidad Tickets Retail]) as [Cantidad Tickets Retail Día],
+		sum([Valor Transacciones Retail]) as [Valor Transacciones Venta Retail Día]
+	Resident D_Retail_Tmp
+		Group By [Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX]
+		;
+	DROP Table D_Retail_Tmp;
+Join (D_Conversion_xDia)
+
+	D_Dispensacion_Tmp:
+		LOAD
+			floor([FECHA_CALENDARIO_TRX])&'_'&[Cod. Sucursal] as %Pk_Link_Conversion,
+			[Cod. Sucursal],
+			[FECHA_CALENDARIO_TRX],
+			Count(DISTINCT [Identificación del Usuario]) as [Cantidad Visitas Dispensacion Día],
+			Sum([Cantidad Tickets]) as [Cantidad Tickets Dispensacion Día],
+			Sum([Valor Transacciones]) as [Valor Transacciones Venta Dispensacion Día]	
+		From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+			Where Upper([Linea de Negocio]) like '*DISPEN*'
+				Group By [Cod. Sucursal],
+				 		 [FECHA_CALENDARIO_TRX]
+						;
+
+
+STORE D_Conversion_xDia into $(vR_Qvd)D_08_Qvd_ConversionDiaDelta_Tra.qvd (qvd);
+
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_ConversionDia_Tra.qvd'))>'0') then 
+
+	D_MinFecha:
+	LOAD
+		floor(min([FECHA_CALENDARIO_TRX])) as Min_Fecha
+	Resident D_Conversion_xDia;
+
+	let vR_FechaMinima = Peek('Min_Fecha',0,'D_MinFecha');
+	DROP Table D_MinFecha; 
+
+	Concatenate(D_Conversion_xDia)
+	D_ConversionDiaHistorico:
+		LOAD
+			*
+		From $(vR_Qvd)D_08_Qvd_ConversionDia_Tra.qvd (qvd)
+			Where floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+		;
+
+ENDIF	
+
+STORE D_Conversion_xDia into $(vR_Qvd)D_08_Qvd_ConversionDia_Tra.qvd (qvd);
+DROP Table D_Conversion_xDia;
+
+
+
+D_Conversion_Tmp0:
+	LOAD
+		floor(MonthStart([FECHA_CALENDARIO_TRX]))&'_'&[Identificación del Usuario] as %Pk_UnionConversion,
+		floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		rangesum([Cantidad Tickets]) as [Cantidad Tickets Dispensacion],
+		rangeSum([Valor Transacciones]) as [Valor Transacciones DIspensacion]	
+	From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+		Where Upper([Linea de Negocio]) like '*DISPEN*' AND [Identificación del Usuario]<>'0'
+		;
+
+
+	D_Retail_Tmp:
+	LOAD
+		floor(MonthStart([FECHA_CALENDARIO_TRX]))&'_'&[Identificación del Usuario] as %Pk_UnionConversion,
+		[Cod. Sucursal],
+		floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+		Floor([FECHA_CALENDARIO_TRX]) as FECHA,
+		[Identificación del Usuario],
+		rangesum([Cantidad Tickets]) as [Cantidad Tickets Retail],
+		RangeSum([Valor Transacciones]) as [Valor Transacciones Retail]
+	From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+		Where Upper([Linea de Negocio]) like '*RETA*' and Exists(%Pk_UnionConversion, floor(MonthStart([FECHA_CALENDARIO_TRX]))&'_'&[Identificación del Usuario]) AND [Identificación del Usuario]<>'0'
+	;
+	
+DROP Table D_Conversion_Tmp0;
+
+
+
+	D_Retail_Tmp2:
+	LOAD
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		sum([Cantidad Tickets Retail]) as [Cantidad Tickets Retail Mes],
+		sum([Valor Transacciones Retail]) as [Valor Transacciones Venta Retail Mes]
+	Resident D_Retail_Tmp
+		Group By [Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX],
+				[Identificación del Usuario]
+		;
+	DROP Table D_Retail_Tmp;
+
+D_Conversion_Mes:
+////D_Retail_Tmp3:
+	LOAD
+		floor([FECHA_CALENDARIO_TRX])&'_'&[Cod. Sucursal] as %Pk_Link_Conversion,	
+		[Cod. Sucursal],
+		[FECHA_CALENDARIO_TRX],
+		Count([Identificación del Usuario]) as [Cantidad Visitas Retail Mes],
+		sum([Cantidad Tickets Retail Mes]) as [Cantidad Tickets Retail Mes],
+		sum([Valor Transacciones Venta Retail Mes]) as [Valor Transacciones Venta Retail Mes]
+	Resident D_Retail_Tmp2
+		Group By [Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX]
+		;
+	DROP Table D_Retail_Tmp2;
+
+
+D_Dispensacion_Tmp:
+	LOAD
+		floor(MonthStart([FECHA_CALENDARIO_TRX])) as [FECHA_CALENDARIO_TRX],
+		[Identificación del Usuario],
+		[Cod. Sucursal],
+		sum([Cantidad Tickets]) as [Cantidad Tickets Dispensacion],
+		sum([Valor Transacciones]) as [Valor Transacciones DIspensacion]	
+	From $(vR_Qvd)D_08_Qvd_VentasConversionTmp_Tra.qvd (qvd)
+		Where Upper([Linea de Negocio]) like '*DISPEN*'
+			Group By 	floor(MonthStart([FECHA_CALENDARIO_TRX])),
+						[Identificación del Usuario],
+						[Cod. Sucursal]
+		;
+
+
+Join(D_Conversion_Mes)
+	D_Dispensacion_Tmp2:
+	LOAD
+			floor([FECHA_CALENDARIO_TRX])&'_'&[Cod. Sucursal] as %Pk_Link_Conversion,	
+			[FECHA_CALENDARIO_TRX],
+			[Cod. Sucursal],
+			count([Identificación del Usuario]) as [Cantidad Visitas Dispensacion Mes],
+			sum([Cantidad Tickets Dispensacion]) as [Cantidad Tickets Dispensacion Mes],
+			sum([Valor Transacciones DIspensacion]) as [Valor Transacciones Dispensacion Mes]
+	Resident D_Dispensacion_Tmp
+		Group By [FECHA_CALENDARIO_TRX],
+				 [Cod. Sucursal]
+	;
+DROP Table D_Dispensacion_Tmp;	
+STORE D_Conversion_Mes into $(vR_Qvd)D_08_Qvd_ConversionMesDelta_Tra.qvd (qvd);
+
+
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_ConversionMes_Tra.qvd'))>'0') then 
+
+
+	Concatenate(D_Conversion_Mes)
+	D_ConversionMesHistorico:
+		LOAD
+			*
+		From $(vR_Qvd)D_08_Qvd_ConversionMes_Tra.qvd (qvd)
+			Where floor([FECHA_CALENDARIO_TRX])<'$(vR_FechaMinima)'
+		;
+
+ENDIF	
+
+STORE D_Conversion_Mes into $(vR_Qvd)D_08_Qvd_ConversionMes_Tra.qvd (qvd);
+DROP Table D_Conversion_Mes;
+
+D_Conversion:
+////D_Conversion_Dia:
+	LOAD
+		*,
+		RowNo() as Posicion_Registro
+	From $(vR_Qvd)D_08_Qvd_ConversionMes_Tra.qvd (qvd);
+
+Concatenate
+	D_Conversion_Dia:
+	LOAD
+		*,
+		RowNo() as Posicion_Registro
+	From $(vR_Qvd)D_08_Qvd_ConversionDia_Tra.qvd (qvd);
+
+STORE D_Conversion into $(vR_Qvd)D_08_Qvd_Conversion_Tra.qvd (qvd);
+DROP Table D_Conversion;

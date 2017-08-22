@@ -1,0 +1,34 @@
+﻿Trace ==============================================================================================================================
+3.1.
+	Fecha: 05/12/2013
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Diego Fernando Rueda
+	Version: 1.0
+	Nombre Tablas/Archivos Origen: actividades3
+	Fuente de datos: actividades3.xls
+	Nombre Archivos QVD Resultante: M_02_EXCEL_Actividades3_Ext.qvd
+	Descripcion QVD Resultante:	Se extrae Archivo de Excel llamado Actividades 3, el cual permite diferenciar el tipo de ingreso en la tabla de margen.
+	Regla de negocio: ninguna ne particular, se realiza extracción Full de la tabla.
+===================================================================================================================================;
+D_Ppto_PAD:
+LOAD 
+	 CANAL, 
+     [ID CANAL], 
+     [CANAL GESTIÓN], 
+     Llave, 
+     Id, 
+     Sucursal, 
+     [Tipo Dinámica], 
+     Dia, 
+     [% Par. Dia], 
+     
+     [Meta  MES Cop$] as [Meta MES Cop$], 
+     [Meta Diaria Cop$], 
+     [Meta MES Unid.], 
+     [Meta Diaria Unid.], 
+     FileName() as [Nombre Archivo]
+FROM $(vR_Fuentes_Externas)PAD\Metas_PAD_*.xlsx
+(ooxml, embedded labels, table is Meta_PAD);
+
+STORE D_Ppto_PAD into $(vR_Qvd)D_08_Excel_PresupuestoPAD_Ext.qvd (qvd);
+DROP Table D_Ppto_PAD;

@@ -1,0 +1,3 @@
+﻿let vInicio= now();
+set vR_Qvd=..\04 Qvd\;
+set vR_QvdVentas=..\..\02 Ventas\04 Qvd\;

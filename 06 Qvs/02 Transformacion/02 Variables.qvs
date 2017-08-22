@@ -1,0 +1,23 @@
+﻿/*****************************************************************************************************************
+				Carga Variables existentes en el archivo set variables ubicado en la ruta de las maestras
+*****************************************************************************************************************/
+
+let vInicio= now();
+
+
+/*******************************************************************************************************
+					Se crean variables adicionales para rutas de Maestras
+*******************************************************************************************************/
+set vR_QvdVentas= ..\..\02 Ventas\04 Qvd\; //..\..\02 Ventas\04 Qvd\;
+set vR_Canastas= '..\02 Fuentes Externas\Canastas\';
+set vR_QvdMaestros= '..\..\00 Maestros\04 Qvd\';
+set vR_QvdFinanzas= '..\..\06 Finanzas\04 Qvd\';
+set vR_QvdCompras= '..\..\01 Compras\04 Qvd\';
+set vR_QvdRRHH= '..\..\07 Recursos Humanos\04 Qvd\';
+
+let v_Historicos= if(day(today())>'15',floor(MonthStart(num(today()))), floor(MonthStart(num(today())-15)));
+let v_Fechas_Geopos= if(day(today())>'15',floor(MonthStart(num(today()))), floor(MonthStart(num(today())-15)));
+
+//let v_Historicos= if(day(today())>'10',floor(MonthStart(num(today()))), floor(MonthStart(num(today())-15)));
+//let v_Fechas_Geopos= if(day(today())>'10',floor(MonthStart(num(today()))), floor(MonthStart(num(today())-15)));
+set NullValue='Sin Asignar';

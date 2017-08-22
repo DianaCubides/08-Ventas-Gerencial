@@ -1,0 +1,15 @@
+﻿D_Ppto_PAD:
+LOAD
+	[ID CANAL]&'_'&FLOOR(makedate(year(date#(left(SubField([Nombre Archivo],'_',3),6),'YYYYMM')),month(date#(left(SubField([Nombre Archivo],'_',3),6),'YYYYMM')),Dia))&'_'&Id&'_'&ApplyMap('Canales_Map',[ID CANAL],'Error') as %Pk_PptoPADLink,
+	[Tipo Dinámica],
+	ApplyMap('Canales_Map',[ID CANAL],'Error') as Canal,
+	[ID CANAL] AS [Id Canal],
+	Id as [Cod. Sucursal],
+	[Meta Diaria Cop$] as [Valor Ppto Dinámicas],
+	[Meta Diaria Unid.] as [Cantidad Ppto Dinámicas UDM Media],
+	FLOOR(makedate(year(date#(left(SubField([Nombre Archivo],'_',3),6),'YYYYMM')),month(date#(left(SubField([Nombre Archivo],'_',3),6),'YYYYMM')),Dia)) as %Pk_Fecha
+From $(vR_Qvd)D_08_Excel_PresupuestoPAD_Ext.qvd (qvd)
+	Where len(Id)>'0' ;
+
+STORE D_Ppto_PAD into $(vR_Qvd)D_08_Qvd_PresupuestoPAD_Tra.qvd (qvd); 	 
+DROP Table D_Ppto_PAD;

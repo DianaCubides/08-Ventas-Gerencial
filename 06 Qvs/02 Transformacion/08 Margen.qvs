@@ -1,0 +1,382 @@
+﻿let vR_VentasMargen1= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd'))='0','D_02_Margen_Full_Tra.qvd','D_02_Margen_Delta_Full_Tra.qvd') ;
+let vR_VentasMargen2= if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd'))='0','D_08_Qvd_VentasMargenFull_Tra.qvd','D_08_Qvd_VentasMargenFullDelta_Tra.qvd') ;
+
+D_Margen_Tmp:
+LOAD
+	ApplyMap('Id_Convenio_Map',act_estructura&'_'&year(FECHA_CALENDARIO_TRX),act_estructura) as [Id Convenio],
+	if(COD_ORG_INV like '*FIN*' or COD_ORG_INV like '*PN*','Expansión', ApplyMap('Canales_Map',[Id Canal],'En Transición')) as Canal_Tmp,
+	ApplyMap('Linea_Negocio_Map',[Id Canal],'En Transición') as [Linea Negocio Tmp],	
+	IF(RANGESUM(CANTIDAD)='0' AND RANGESUM([Costo Unitario Promedio UOM Minima])='0',COSTO_TRANSACCION_PROMEDIO,[Costo Unitario Promedio UOM Minima]) as [Costo Unitario Promedio UOM Minima],
+	IF(RANGESUM(CANTIDAD)='0' AND RANGESUM([Costo Unitario Compra UOM Minima])='0',COSTO_TRANSACCION_COMPRA,[Costo Unitario Compra UOM Minima]) as [Costo Unitario Compra UOM Minima],
+	IF(RANGESUM(CANTIDAD)='0' AND RANGESUM(VALOR_UNITARIO_UDM_MINIMA)='0',VALOR_INGRESO,VALOR_UNITARIO_UDM_MINIMA*CANTIDAD_UDM_MINIMA) as [Valor Transacciones],
+	if(len([Id Canal])='0','999',[Id Canal]) as [Id Canal Sin Convenio],	     
+	[%Pk_Conversiones],
+	[act_estructura],
+	[Origen Pedido],
+	[CANTIDAD] as CANTIDAD_UNIDAD_OP,
+	[CANTIDAD_DOCUMENTO_AR],
+	[CANTIDAD_PEDIDA_PEDIDO],
+	[CANTIDAD_TRANSACCION],
+	[CANTIDAD_UDM_MINIMA],
+	[centro_costo],
+	[cliente_entrega],
+	[cliente_factura],
+	[Cod. Articulo],
+	COD_ORG_INV as [Id Sucursal Anterior],
+	ApplyMap('Equivalencia_Sucursal_Map',COD_ORG_INV,COD_ORG_INV) as [COD_ORG_INV],
+	[COD_TIPO_ORIGEN],
+	[COD_UNIDAD_OP],
+	[COD_UOM_ACUERDO_COMER],
+	[COD_UOM_ACUERDO_INST],
+	[COD_UOM_AR],
+	[COD_UOM_PO],
+	[COD_UOM_VENTA_PEDIDO],
+	[Costo Unitario Compra Unidad Op],
+	[Costo Unitario Promedio],
+	[COSTO_PROMEDIO_PRODUCTO_TRX],
+	[COSTO_TRANSACCION_COMPRA],
+	[COSTO_TRANSACCION_COMPRA_Tmp],
+	[COSTO_TRANSACCION_PROMEDIO],
+	[Factor Conversion],
+	[FACTOR_UOM_AR],
+	[FACTOR_UOM_PO_ACU_COMER],
+	[FACTOR_UOM_PO_ACU_INST],
+	[FACTOR_UOM_PO_OC],
+	[FACTOR_UOM_VENTA_PEDIDO],
+	[FECHA_CALENDARIO_TRX],
+	[Flag_Costo_Promedio_Rev],
+	[Numero Pedido] as [Numero Ticket],
+	IF([Flag_Costo_Promedio_Rev]<>'0' OR UPPER(COD_UNIDAD_OP)='INT' OR [TIPO_COMPROBANTE] LIKE '*841*','0',[Numero Pedido]) as [Numero Ticket Conteo],
+	[Flag_Pedidos_Ingreso_Rev],
+	[grupo_cliente],
+	if(len([Id Canal])='0','999',[Id Canal]) as [Id Canal],
+	[Identificación del Usuario],
+	[nit],
+	[Nombre del Usuario],
+	[Numero Factura],
+	
+	[PORCENTAJE_AR],
+	[PRECIO_TOTAL_PEDIDO],
+	[SRC_CUSTOMER_TRX_LINE_ID],
+	[SRC_LINE_CATEGORY_CODE],
+	[SRC_OE_ORDEN_LINES_LINE_ID],
+	[SRC_RA_CUST_TRX_TYPES_ALL_TYPE],
+	[SRC_TRANSACTION_ID] as [Linea Transaccion],
+	[Tipo Identificación del Usuario],
+	[tipo_cliente],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	[uen] as [ID. UEN],
+	[UOM Minima] as [UOM Minima OP],
+	[VALOR_DOCUMENTO_AR],
+	[VALOR_INGRESO],
+	[VALOR_PRODUCTO_COMPRA_INST],
+	[VALOR_TOTAL_COMPRA_COMER],
+	[VALOR_TOTAL_COMPRA_INST],
+	[VALOR_TRANSACCION],
+	[VALOR_UNITARIO],
+	[VALOR_UNITARIO_UDM_MINIMA],
+	[WID_CLIENTES_ENTREGA],
+	[WID_COMBINACIONES_GL_COSTO],
+	[WID_COMBINACIONES_GL_INGRESO],
+	[WID_ESTADOS_LINEA_OM],
+	[WID_ORDENES_COMPRA],
+	[WID_ORGANIZACIONES],
+	[WID_PEDIDOS],
+	[WID_PROVEEDORES_PO_COMER],
+	[WID_PROVEEDORES_PO_INST],
+	[WID_PROVEEDORES_PRIMARIO],
+	[WID_SUBINVENTARIOS],
+	[WID_SUCURSAL_FACTURACION],
+	[WID_TIEMPO],
+	[WID_TIEMPO_CONTABLE],
+	[WID_TIEMPO_PEDIDO],
+	[WID_TIEMPO_TRX_INV],
+	[WID_TIPOS_TRX_INV],
+	[WID_TRANSACCIONES_AR]
+From $(vR_QvdVentas)$(vR_VentasMargen1) (qvd)
+	Where (([Id Canal]>'2' and [Id Canal]<>'5' and [Id Canal]<>'998') or len([Id Canal])='0') and %Flag_Exclusiones='0' and %Flag_Retirar='0'
+;
+
+Left Join (D_Margen_Tmp)
+	M_Cliente_Entrega:
+		LOAD 
+			 WID_CLIENTE_ENTREGA as WID_CLIENTES_ENTREGA, 
+		     COD_DEPTO as [Codigo Departamento Cliente Entrega], 
+		     DEPTO as [Departamento Cliente Entrega], 
+		     num(COD_CIUDAD) as [Id Ciudad],
+		     COD_CIUDAD as [Codigo Ciudad Cliente Entrega], 
+		     CIUDAD as [Ciudad Cliente Entrega]
+		FROM $(vR_QvdVentas)M_00_BI_XXOSI_W_CLIENTES_ENTREGA_D_Ext.qvd (qvd);
+
+Left Join (D_Margen_Tmp)
+	M_Categoría_Productos:
+	LOAD Distinct
+		[Cod. Articulo],
+		[Mundo Producto],
+		[Grupo Producto],
+		[Categoría Producto],
+		[Subcategoría Producto],
+		[Linea Producto],
+		[Segmento Producto]
+	From $(vR_QvdMaestros)M_00_Articulos_Tra.qvd (qvd);
+
+Left Join(D_Margen_Tmp)
+	Conversiones_Uom_Media_Map:
+	LOAD Distinct
+		[Cod. Articulo],
+		FirstValue(UOM_CODE) as UOM_Maxima,
+		FirstValue(primary_uom_code) as primary_uom_code,
+		FirstValue(CONVERSION_RATE) as Conversion_Rate_Maxima
+	FROM $(vR_Qvd)M_08_Qvd_Conversiones.qvd (qvd)
+	Where UDM_Prod='Máxima'
+		Group By [Cod. Articulo]
+	;
+	
+Left Join (D_Margen_Tmp)
+
+	LOAD Distinct
+		[Cod. Articulo],
+		FirstValue(UOM_CODE) as UOM_Media,
+		FirstValue(primary_uom_code) as primary_uom_code,
+		FirstValue(CONVERSION_RATE) as Conversion_Rate_Media
+	FROM $(vR_Qvd)M_08_Qvd_Conversiones.qvd (qvd)
+	Where UDM_Prod='Media'
+		Group By [Cod. Articulo]
+	;
+
+
+
+
+D_Margen_Tmp2:	
+LOAD
+	ApplyMap('M_NombreSucursal_Map',COD_ORG_INV,'No Hay Dato') as [NOMBRE_SUCURSAL],
+	ApplyMap('M_IdVendedores_Map',[Id Canal]&'_'&[Id Ciudad]&'_'&nit,'Error') as [Id Vendedor],
+	ApplyMap('M_NombreVendedores_Map',[Id Canal]&'_'&[Id Ciudad]&'_'&nit,null()) as [Nombre Vendedor],
+	if(COD_UNIDAD_OP='INT' OR UOM_Media='INT','0',[CANTIDAD_UDM_MINIMA])/[Conversion_Rate_Media] as CANTIDAD_UDM_MEDIA,
+	if(COD_UNIDAD_OP='INT' OR UOM_Media='INT','0',[CANTIDAD_UDM_MINIMA])/[Conversion_Rate_Maxima] as CANTIDAD_UDM_MAXIMA,
+	 if([Numero Ticket]='-1' and rangesum(CANTIDAD_UDM_MINIMA)='0',RangeSum([Costo Unitario Promedio UOM Minima]),
+		if([Numero Ticket]='-1',CANTIDAD_UDM_MINIMA* RangeSum([Costo Unitario Promedio UOM Minima]),
+			IF(TIPO_COMPROBANTE='841' AND RANGESUM(CANTIDAD_UNIDAD_OP)='0',FABS([Costo Unitario Promedio UOM Minima])*-1,
+				IF(RANGESUM(CANTIDAD_UNIDAD_OP)='0',FABS([Costo Unitario Promedio UOM Minima]),
+					if(SRC_LINE_CATEGORY_CODE='SINF',CANTIDAD_UDM_MINIMA* RangeSum([Costo Unitario Promedio UOM Minima]),
+						IF(TIPO_COMPROBANTE='841', FABS(CANTIDAD_UDM_MINIMA* RangeSum([Costo Unitario Promedio UOM Minima]))*-1,FABS(CANTIDAD_UDM_MINIMA* RangeSum([Costo Unitario Promedio UOM Minima])))))))) as [Costos Transacciones Promedio],
+	
+	
+	[Origen Pedido],
+	[Id Ciudad],
+	[%Pk_Conversiones],
+	[act_estructura] as Actividad,
+	[Canal_Tmp],
+	Canal_Tmp as Canal,
+	[CANTIDAD_DOCUMENTO_AR],
+	[CANTIDAD_PEDIDA_PEDIDO],
+	[CANTIDAD_TRANSACCION],
+	if(COD_UNIDAD_OP='INT' OR UOM_Media='INT','0',[CANTIDAD_UDM_MINIMA]) as [CANTIDAD_UDM_MINIMA],
+	[CANTIDAD_UNIDAD_OP],
+	[Categoría Producto],
+	[centro_costo] as [Id Centro Costo],
+	[cliente_entrega],
+	[cliente_factura],
+	[Cod. Articulo],
+	[COD_ORG_INV] as [Cod. Sucursal],
+	[Id Sucursal Anterior],
+	[COD_TIPO_ORIGEN],
+	[COD_UNIDAD_OP],
+	[COD_UOM_ACUERDO_COMER],
+	[COD_UOM_ACUERDO_INST],
+	[COD_UOM_AR],
+	[COD_UOM_PO],
+	[COD_UOM_VENTA_PEDIDO],
+	[Conversion_Rate_Maxima],
+	[Conversion_Rate_Media],
+	[Costo Unitario Compra Unidad Op],
+	[Costo Unitario Compra UOM Minima],
+	[Costo Unitario Promedio],
+	[Costo Unitario Promedio UOM Minima],
+	[COSTO_PROMEDIO_PRODUCTO_TRX],
+	[COSTO_TRANSACCION_COMPRA],
+	[COSTO_TRANSACCION_COMPRA_Tmp],
+	[COSTO_TRANSACCION_PROMEDIO],
+	[Factor Conversion],
+	[FACTOR_UOM_AR],
+	[FACTOR_UOM_PO_ACU_COMER],
+	[FACTOR_UOM_PO_ACU_INST],
+	[FACTOR_UOM_PO_OC],
+	[FACTOR_UOM_VENTA_PEDIDO],
+	[FECHA_CALENDARIO_TRX],
+	[Flag_Costo_Promedio_Rev],
+	[Flag_Pedidos_Ingreso_Rev],
+	[Grupo Producto],
+	[grupo_cliente],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[Id Convenio],
+	[ID. UEN],
+	[Identificación del Usuario],
+	if(len([Linea Negocio Tmp])='0','En Transición',[Linea Negocio Tmp]) as [Linea de Negocio],
+	[Numero Ticket Conteo],
+	[Linea Producto],
+	[Linea Transaccion],
+	[Mundo Producto],
+	[nit],
+	[Nombre del Usuario],
+	[Numero Factura],
+	[Numero Ticket],
+	[PORCENTAJE_AR],
+	[PRECIO_TOTAL_PEDIDO],
+	[primary_uom_code],
+	[Segmento Producto],
+	[SRC_CUSTOMER_TRX_LINE_ID],
+	[SRC_LINE_CATEGORY_CODE],
+	[SRC_OE_ORDEN_LINES_LINE_ID],
+	[SRC_RA_CUST_TRX_TYPES_ALL_TYPE],
+	[Subcategoría Producto],
+	[Tipo Identificación del Usuario],
+	[tipo_cliente],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	[UOM Minima OP],
+	[UOM_Maxima],
+	[UOM_Media],
+	[Valor Transacciones],
+	[VALOR_DOCUMENTO_AR],
+	[VALOR_INGRESO],
+	[VALOR_PRODUCTO_COMPRA_INST],
+	[VALOR_TOTAL_COMPRA_COMER],
+	[VALOR_TOTAL_COMPRA_INST],
+	[VALOR_TRANSACCION],
+	[VALOR_UNITARIO],
+	[VALOR_UNITARIO_UDM_MINIMA],
+	[WID_CLIENTES_ENTREGA],
+	[WID_COMBINACIONES_GL_COSTO],
+	[WID_COMBINACIONES_GL_INGRESO],
+	[WID_ESTADOS_LINEA_OM],
+	[WID_ORDENES_COMPRA],
+	[WID_ORGANIZACIONES],
+	[WID_PEDIDOS],
+	[WID_PROVEEDORES_PO_COMER],
+	[WID_PROVEEDORES_PO_INST],
+	[WID_PROVEEDORES_PRIMARIO],
+	[WID_SUBINVENTARIOS],
+	[WID_SUCURSAL_FACTURACION],
+	[WID_TIEMPO],
+	[WID_TIEMPO_CONTABLE],
+	[WID_TIEMPO_PEDIDO],
+	[WID_TIEMPO_TRX_INV],
+	[WID_TIPOS_TRX_INV],
+	[WID_TRANSACCIONES_AR],	
+	[Codigo Departamento Cliente Entrega], 
+	[Departamento Cliente Entrega], 
+	[Codigo Ciudad Cliente Entrega], 
+	[Ciudad Cliente Entrega]
+Resident D_Margen_Tmp;
+DROP Table D_Margen_Tmp;
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasMargenFullDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd'))>'0') then 
+
+	D_MinFecha:
+	LOAD
+		floor(min(FECHA_CALENDARIO_TRX)) as Min_Fecha
+	Resident D_Margen_Tmp2;
+
+	let vR_FechaMinima = Peek('Min_Fecha',0,'D_MinFecha');
+	DROP Table D_MinFecha; 
+
+	Concatenate(D_Margen_Tmp2)
+	D_MargenHistorico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasMargenFull_Tra.qvd (qvd)
+		Where floor(FECHA_CALENDARIO_TRX)<'$(vR_FechaMinima)'
+	;
+
+ENDIF
+
+STORE D_Margen_Tmp2 into $(vR_Qvd)D_08_Qvd_VentasMargenFull_Tra.qvd (qvd);
+DROP Table D_Margen_Tmp2;
+
+
+
+NoConcatenate
+D_Margen:
+LOAD
+	[Actividad],
+	[Canal],
+	[Canal_Tmp],
+	[Categoría Producto],
+	[Cod. Sucursal],
+	[FECHA_CALENDARIO_TRX],
+	[Grupo Producto],
+	[Id Canal],
+	[Id Canal Sin Convenio],
+	[Id Centro Costo],
+	[Id Convenio],
+	[Id Vendedor],
+	[ID. UEN],
+	[Linea de Negocio],
+	[Mundo Producto],
+	[Nombre Vendedor],
+	[NOMBRE_SUCURSAL],
+	[Subcategoría Producto],
+	[TIPO_COMPROBANTE],
+	[TIPO_DOCUMENTO],
+	nit,
+	[Codigo Departamento Cliente Entrega], 
+	[Departamento Cliente Entrega], 
+	[Codigo Ciudad Cliente Entrega], 
+	[Ciudad Cliente Entrega],
+	
+	sum([Valor Transacciones]) as [Valor Transacciones],
+	sum(CANTIDAD_UDM_MAXIMA) as [CANTIDAD_UDM_MAXIMA],
+	sum(CANTIDAD_UDM_MEDIA) as [CANTIDAD_UDM_MEDIA],
+	sum(CANTIDAD_UDM_MINIMA) as [CANTIDAD_UDM_MINIMA],
+	sum([Costos Transacciones Promedio]) as [Costo Promedio],
+	Count(DISTINCT [Numero Ticket Conteo]) as [Cantidad Transacciones]
+From $(vR_Qvd)$(vR_VentasMargen2) (qvd)
+	Group By 	Actividad,
+				[Canal],
+				[Canal_Tmp],
+				[Categoría Producto],
+				[Cod. Sucursal],
+				[FECHA_CALENDARIO_TRX],
+				[Grupo Producto],
+				[Id Canal],
+				[Id Canal Sin Convenio],
+				[Id Centro Costo],
+				[Id Convenio],
+				[Id Vendedor],
+				[ID. UEN],
+				[Linea de Negocio],
+				[Mundo Producto],
+				nit,
+				[Codigo Departamento Cliente Entrega], 
+				[Departamento Cliente Entrega], 
+				[Codigo Ciudad Cliente Entrega], 
+				[Ciudad Cliente Entrega],
+				[Nombre Vendedor],
+				[NOMBRE_SUCURSAL],
+				[Subcategoría Producto],
+				[TIPO_COMPROBANTE],
+				[TIPO_DOCUMENTO]
+;
+
+
+STORE D_Margen into $(vR_Qvd)D_08_Qvd_VentasMargenDelta_Tra.qvd (qvd);
+
+if(len(QvdTableName('$(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd'))>'0') then 
+
+	Concatenate(D_Margen)
+	D_MargenHistorico:
+	LOAD
+		*
+	From $(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd (qvd)
+		Where Floor(FECHA_CALENDARIO_TRX)<'$(vR_FechaMinima)'
+	;
+	
+ENDIF
+
+STORE D_Margen into $(vR_Qvd)D_08_Qvd_VentasMargen_Tra.qvd (qvd);
+DROP Table D_Margen;

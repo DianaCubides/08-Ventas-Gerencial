@@ -1,0 +1,127 @@
+﻿Trace =======================================================================================================================================================
+3.1.
+	Fecha: 16/11/2015
+	Nombre Consultor: Diego Fernando Rueda 
+	Revision/Aprobacion: Gilberto Jimenez
+	Version: 1.0
+	Nombre Tablas/Archivos Origen:  
+	Fuente de datos: Qvd
+	Nombre Archivos QVD Resultante: 
+	Descripcion QVD Resultante:	Presupuesto de Margen calculado para cada línea.
+								
+	Regla de negocio: 	3.1.1. Se carga el presupuesto Ingresos (Cuentas 4135) excluyendo el ppto de Averiados y se une mediante un Join con el ppto de Costos (cuentas 6135). 
+							   Se almacena resultante en un qvd para poder realizar un mapping al ppto Mensual.
+=============================================================================================================================================================;
+
+/*************************************************************************************************
+	3.1.1. Se carga el presupuesto Ingresos (Cuentas 4135) excluyendo el ppto de Averiados y se 
+		   une mediante un Join con el ppto de Costos (cuentas 6135)
+*************************************************************************************************/
+
+Ppto_Financiero_Tmp1:
+	LOAD 
+		Fecha as [Inicio_Mes], 
+		SUC as [ID Sucursal],
+		if(len(ACTIVIDAD)='0','#',ACTIVIDAD) as ACTIVIDAD,
+		if(len(NIT)='0','#',NIT) as NIT,
+		if(len([Id Convenio])='0','#',[Id Convenio]) as [ID CONVENIO],
+		if(len([Id UEN]) <'2','#',[Id UEN]) as [Id UEN], 
+		if(len([ID CANAL])='0','#',[ID CANAL]) as [ID CANAL],
+		if(len([Id Centro Costo])='0','#',[Id Centro Costo]) as [ID Centro de Costo], 
+		[Vlr Ppto] as [Presupuesto Ingresos Mes]
+
+	FROM $(vR_QvdFinanzas)D_06_EXCEL_BQV1PptoIngCosGastInv_Ppto_Consolidado_Tra_Tmp1.QVD (qvd)
+		Where ([Id Auxiliar] like '4135*') and not([Id Detalle Cuenta Auxiliar] like '*Averiados*') //and SUC='149'
+	;
+join
+
+	Ppto_Financiero_Tmp2:
+	LOAD 
+		Fecha as [Inicio_Mes], 
+		SUC as [ID Sucursal],
+		if(len(ACTIVIDAD)='0','#',ACTIVIDAD) as ACTIVIDAD,
+		if(len(NIT)='0','#',NIT) as NIT,
+		if(len([Id Convenio])='0','#',[Id Convenio]) as [ID CONVENIO],
+		if(len([Id UEN]) <'2','#',[Id UEN]) as [Id UEN], 
+		if(len([ID CANAL])='0','#',[ID CANAL]) as [ID CANAL],
+		if(len([Id Centro Costo])='0','#',[Id Centro Costo]) as [ID Centro de Costo],
+		[Vlr Ppto]*-1 as [Presupuesto Costos Mes]
+
+	FROM $(vR_QvdFinanzas)D_06_EXCEL_BQV1PptoIngCosGastInv_Ppto_Consolidado_Tra_Tmp1.QVD (qvd)
+		Where ([Id Auxiliar] like '6135*') and not([Id Detalle Cuenta Auxiliar] like '*Averiados*') //and SUC='149'
+	;
+
+
+
+Linea_Negocio_Map:
+Mapping LOAD Distinct
+     [Id Canal], 
+     [Linea de Negocio]
+FROM $(vR_QvdVentas)M_02_Jerarquia_Ext.qvd (qvd);
+
+
+D_Ppto_Margen_Financiero:
+LOAD
+	Floor([Inicio_Mes])&'_'&[ID Sucursal]&'_'&ACTIVIDAD&'_'&NIT&'_'&[ID CONVENIO]&'_'&[Id UEN]&'_'&[ID CANAL]&'_'&[ID Centro de Costo] as %Pk_Llave_Ppto_Margen,
+	*
+	;
+LOAD
+	ApplyMap('Linea_Negocio_Map',if([ID CANAL]='#',null(),[ID CANAL]),'Error') as [Linea de Negocio],
+	[Inicio_Mes], 
+	[ID Sucursal],
+	if(ACTIVIDAD='#',null(),ACTIVIDAD) as ACTIVIDAD,
+	if(NIT='#',null(),NIT) as NIT,
+	if([ID CONVENIO]='#',null(),[ID CONVENIO]) as [ID CONVENIO],
+	if([Id UEN]='#',null(),[Id UEN]) as [Id UEN], 
+	if([ID CANAL]='#',null(),[ID CANAL]) as [ID CANAL],
+	if([ID Centro de Costo]='#',null(),[ID Centro de Costo]) as [ID Centro de Costo],
+	rangesum([Presupuesto Ingresos Mes]) as [Presupuesto Ingresos Mes],
+	rangesum([Presupuesto Costos Mes]) as [Presupuesto Costos Mes],
+	rangesum([Presupuesto Ingresos Mes])-rangesum([Presupuesto Costos Mes]) as [Presupuesto Contribución Mes],
+	rangesum((rangesum([Presupuesto Ingresos Mes])-rangesum([Presupuesto Costos Mes]))/rangesum([Presupuesto Ingresos Mes])) as [Presupuesto Margen Mes]
+Resident Ppto_Financiero_Tmp1;		
+DROP Table Ppto_Financiero_Tmp1;
+STORE D_Ppto_Margen_Financiero into $(vR_Qvd)D_08_Qvd_PresupuestoMargenDetalle_Tra.qvd (qvd);
+DROP Table D_Ppto_Margen_Financiero;
+
+D_Agrupacion_Valores_Tmp:
+LOAD
+	[Linea de Negocio],
+	[Inicio_Mes], 
+	[ID CANAL],
+	sum([Presupuesto Ingresos Mes]) as [Presupuesto Ingresos Mes],
+	sum([Presupuesto Costos Mes]) as [Presupuesto Costos Mes]
+from $(vR_Qvd)D_08_Qvd_PresupuestoMargenDetalle_Tra.qvd (qvd)
+	Where not([Linea de Negocio] like '*Intrahospitalarias*')
+		Group By 	[Linea de Negocio],
+					[Inicio_Mes], 
+					[ID CANAL]
+;
+
+D_Agrupacion_Valores:
+LOAD
+	[Linea de Negocio],
+	[Inicio_Mes], 
+	[ID CANAL],
+	([Presupuesto Ingresos Mes]-[Presupuesto Costos Mes])/[Presupuesto Ingresos Mes] as [Presupuesto Margen Mes],
+	[Presupuesto Ingresos Mes],
+	[Presupuesto Costos Mes]
+Resident D_Agrupacion_Valores_Tmp;
+DROP Table D_Agrupacion_Valores_Tmp;
+
+// Se crea tabla mapping con los valores de presupuesto de margen a Asignar sobre cada una de las líneas del presupuesto generado por COntrol de Gestión. 
+D_Margen_PptoCanal_Map:
+Mapping LOAD Distinct
+	floor(Inicio_Mes)&'_'&[ID CANAL],
+	[Presupuesto Margen Mes] as [Presupuesto Margen Mes Canal]
+Resident D_Agrupacion_Valores;
+DROP Table D_Agrupacion_Valores;
+
+
+D_Margen_Ppto_Map:
+Mapping LOAD Distinct
+	%Pk_Llave_Ppto_Margen,
+	[Presupuesto Margen Mes]
+From $(vR_Qvd)D_08_Qvd_PresupuestoMargenDetalle_Tra.qvd (qvd)
+	Where [Linea de Negocio] like '*Intrahospita*'
+;

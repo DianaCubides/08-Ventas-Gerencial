@@ -1,0 +1,44 @@
+﻿/*****************************************************************************************************************
+				Carga Variables existentes en el archivo set variables ubicado en la ruta de las maestras
+*****************************************************************************************************************/
+
+let vInicio= now();
+
+	Temp_Variables:
+	LOAD 
+		Nombre,
+		[Expresion Español] as Expresion,
+		Comentario
+	FROM [..\..\00 Maestros\02 Fuentes Externas\Set Variables.xlsx]
+		 (ooxml, embedded labels, table is Variables)
+		 	Where Clasificacion='Rutas' or Clasificacion='Color'
+		 ;
+
+
+	FOR i = 0 to NoOfRows('Temp_Variables') - 1
+	
+	  let vName = peek('Nombre', i, 'Temp_Variables'); /* Nombre de la Variable */
+	  let vComment = peek('Comentario', i, 'Temp_Variables'); /* Comentario o Descripción de la variable*/
+	  let $(vName) = If(len('$(vComment)')>0,peek('Expresion', i, 'Temp_Variables') & chr(10) & '/* $(vComment) */', peek('Expresion', i, 'Temp_Variables')); /* Expresión */
+	
+	NEXT i
+	
+	LET i = null();
+	LET vName = null();
+	LET vComment = null();
+	
+	DROP Table Temp_Variables;
+
+
+/*******************************************************************************************************
+					Se crean variables adicionales para rutas de Maestras
+*******************************************************************************************************/
+set vCanastas= '..\02 Fuentes Externas\Canastas\';
+set vFuncionarios= '..\02 Fuentes Externas\Funcionarios\';
+set vActividad_Comercial= '..\02 Fuentes Externas\Actividad Comercial\'; 
+set vR_Presupuesto=	'..\02 Fuentes Externas\Ppto\';
+set vR_Presupuesto_Convenios= '..\02 Fuentes Externas\Ppto\Convenios\';
+set vR_Carrefour= '..\02 Fuentes Externas\Carrefour\';
+set vR_Carrefour_ODBC= '..\02 FUENTES EXTERNAS\CARREFOUR\';
+set vR_Nielsen = '..\02 Fuentes Externas\Nielsen\';
+set vR_Ims = '..\02 Fuentes Externas\Ims\';

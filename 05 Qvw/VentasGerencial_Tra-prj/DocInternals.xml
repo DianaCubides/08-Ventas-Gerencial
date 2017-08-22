@@ -1,0 +1,1596 @@
+﻿<DocInternals>
+  <AlwaysLoose></AlwaysLoose>
+  <FieldSrcTables></FieldSrcTables>
+  <TableViewData>
+    <Pos></Pos>
+    <CtlInfo>
+      <InternalView>
+        <Tables>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>832</Left>
+              <Top>178</Top>
+              <Width>308</Width>
+              <Height>244</Height>
+            </Pos>
+            <Caption>D_Presupuesto_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>438</Left>
+              <Top>192</Top>
+              <Width>358</Width>
+              <Height>347</Height>
+            </Pos>
+            <Caption>D_02_EXCEL_BQV1PptoIngCosGastInv_Ppto_Operacional_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>833</Left>
+              <Top>282</Top>
+              <Width>100</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>Id_Convenio_Map</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>432</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Link_Table</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>1154</Left>
+              <Top>111</Top>
+              <Width>100</Width>
+              <Height>82</Height>
+            </Pos>
+            <Caption>$Syn 1 Table</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>331</Left>
+              <Top>237</Top>
+              <Width>207</Width>
+              <Height>154</Height>
+            </Pos>
+            <Caption>Margen_Full_Tmp1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>733</Left>
+              <Top>273</Top>
+              <Width>301</Width>
+              <Height>82</Height>
+            </Pos>
+            <Caption>Costos_Promedio_Sin_Dia_Tmp2</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Planta_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>440</Left>
+              <Top>147</Top>
+              <Width>206</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Ppto_Financiero_Tmp1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>195</Left>
+              <Top>279</Top>
+              <Width>168</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Ppto_Financiero_Tmp1-1</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>298</Left>
+              <Top>171</Top>
+              <Width>244</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Ventas_Contado_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>521</Left>
+              <Top>207</Top>
+              <Width>199</Width>
+              <Height>136</Height>
+            </Pos>
+            <Caption>M_02_EXCEL_Agrupacion_Campana_Ext</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>120</Left>
+              <Top>171</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Ventas_Contado_Tmp2</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>268</Left>
+              <Top>171</Top>
+              <Width>304</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Ventas_Contado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>896</Left>
+              <Top>250</Top>
+              <Width>100</Width>
+              <Height>118</Height>
+            </Pos>
+            <Caption>D_Conversion</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>147</Left>
+              <Top>291</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_VentasConversionTmp_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>446</Left>
+              <Top>280</Top>
+              <Width>201</Width>
+              <Height>190</Height>
+            </Pos>
+            <Caption>D_Conversion_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>186</Left>
+              <Top>298</Top>
+              <Width>202</Width>
+              <Height>190</Height>
+            </Pos>
+            <Caption>D_Conversion_Mes_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>401</Left>
+              <Top>210</Top>
+              <Width>243</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Margen</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>129</Left>
+              <Top>292</Top>
+              <Width>208</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Contado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>457</Left>
+              <Top>292</Top>
+              <Width>228</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Cencosud</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>310</Left>
+              <Top>102</Top>
+              <Width>177</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Conversion</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>292</Left>
+              <Top>171</Top>
+              <Width>257</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Ventas</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>798</Left>
+              <Top>107</Top>
+              <Width>256</Width>
+              <Height>352</Height>
+            </Pos>
+            <Caption>Ppto</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>634</Left>
+              <Top>198</Top>
+              <Width>100</Width>
+              <Height>190</Height>
+            </Pos>
+            <Caption>$Syn 3 Table</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>242</Left>
+              <Top>141</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Ventas_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>90</Left>
+              <Top>83</Top>
+              <Width>294</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Link_Table_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>83</Left>
+              <Top>301</Top>
+              <Width>270</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_VentasAgrupadas_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>369</Left>
+              <Top>181</Top>
+              <Width>331</Width>
+              <Height>334</Height>
+            </Pos>
+            <Caption>D_Indicadores_DashBoard_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>116</Left>
+              <Top>170</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Contado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>462</Left>
+              <Top>110</Top>
+              <Width>262</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>Cliente_Retail</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>441</Left>
+              <Top>375</Top>
+              <Width>283</Width>
+              <Height>64</Height>
+            </Pos>
+            <Caption>Campañas</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>357</Left>
+              <Top>206</Top>
+              <Width>100</Width>
+              <Height>136</Height>
+            </Pos>
+            <Caption>Agup.Camp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Margen_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>590</Left>
+              <Top>177</Top>
+              <Width>278</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>Tickets_Contado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>265</Left>
+              <Top>341</Top>
+              <Width>248</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_VentasTicketsMargen_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>225</Left>
+              <Top>62</Top>
+              <Width>315</Width>
+              <Height>262</Height>
+            </Pos>
+            <Caption>D_Conteo_Tickets</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>260</Left>
+              <Top>340</Top>
+              <Width>266</Width>
+              <Height>226</Height>
+            </Pos>
+            <Caption>Original</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>149</Left>
+              <Top>282</Top>
+              <Width>199</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Conteo_Tickets_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>77</Left>
+              <Top>154</Top>
+              <Width>250</Width>
+              <Height>136</Height>
+            </Pos>
+            <Caption>D_Retail_Tmp</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>144</Left>
+              <Top>315</Top>
+              <Width>238</Width>
+              <Height>190</Height>
+            </Pos>
+            <Caption>D_Conversion_xDia</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>529</Left>
+              <Top>210</Top>
+              <Width>307</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_Conversion_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>632</Left>
+              <Top>210</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_VentasMargenFull_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>585</Left>
+              <Top>237</Top>
+              <Width>194</Width>
+              <Height>154</Height>
+            </Pos>
+            <Caption>D_Retail_Tmp4</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>717</Left>
+              <Top>227</Top>
+              <Width>246</Width>
+              <Height>118</Height>
+            </Pos>
+            <Caption>M_Cliente_Entrega</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>251</Left>
+              <Top>136</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_08_Qvd_VentasContado_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>74</Left>
+              <Top>300</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_02_Ventas_Contado_Tra</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>213</Left>
+              <Top>130</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>contado</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>36</Left>
+              <Top>294</Top>
+              <Width>100</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>margen</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>833</Left>
+              <Top>255</Top>
+              <Width>100</Width>
+              <Height>118</Height>
+            </Pos>
+            <Caption>M_Campos</Caption>
+          </TableViewTableWinSaveInfo>
+          <TableViewTableWinSaveInfo>
+            <Pos>
+              <Left>431</Left>
+              <Top>210</Top>
+              <Width>283</Width>
+              <Height>208</Height>
+            </Pos>
+            <Caption>D_Tickets_Ventas_Contado</Caption>
+          </TableViewTableWinSaveInfo>
+        </Tables>
+        <BroomPoints></BroomPoints>
+        <ConnectionPoints></ConnectionPoints>
+        <ZoomFactor>3FF0000000000000</ZoomFactor>
+      </InternalView>
+      <SourceView></SourceView>
+    </CtlInfo>
+    <Mode>0</Mode>
+  </TableViewData>
+  <Bookmarks>
+    <Bookmark>
+      <Id>BM01</Id>
+      <Name>23/02/2016 - 1</Name>
+      <ApplyAdditive>false</ApplyAdditive>
+      <FieldItems>
+        <BookmarkFieldItem>
+          <Def>
+            <Name>Flag_Costo_Promedio_Rev</Name>
+            <Type>NOT_PRESENT</Type>
+          </Def>
+          <Locked>false</Locked>
+          <SelectInfo></SelectInfo>
+          <Values>
+            <FieldValue>
+              <Text></Text>
+              <IsNumeric>true</IsNumeric>
+              <Number>0000000000000000</Number>
+            </FieldValue>
+          </Values>
+          <ExcludedValues></ExcludedValues>
+          <AndMode>false</AndMode>
+          <OneAndOnlyOne>false</OneAndOnlyOne>
+        </BookmarkFieldItem>
+        <BookmarkFieldItem>
+          <Def>
+            <Name>Id Canal</Name>
+            <Type>NOT_PRESENT</Type>
+          </Def>
+          <Locked>false</Locked>
+          <SelectInfo>
+            <TextSearch>&gt;5</TextSearch>
+            <RangeLo>FE37E43C8800759C</RangeLo>
+            <RangeHi>FE37E43C8800759C</RangeHi>
+            <NumberFormat></NumberFormat>
+          </SelectInfo>
+          <Values></Values>
+          <ExcludedValues></ExcludedValues>
+          <AndMode>false</AndMode>
+          <OneAndOnlyOne>false</OneAndOnlyOne>
+        </BookmarkFieldItem>
+        <BookmarkFieldItem>
+          <Def>
+            <Name>TIPO_COMPROBANTE</Name>
+            <Type>NOT_PRESENT</Type>
+          </Def>
+          <Locked>false</Locked>
+          <SelectInfo></SelectInfo>
+          <Values>
+            <FieldValue>
+              <Text></Text>
+              <IsNumeric>true</IsNumeric>
+              <Number>4089580000000000</Number>
+            </FieldValue>
+          </Values>
+          <ExcludedValues></ExcludedValues>
+          <AndMode>false</AndMode>
+          <OneAndOnlyOne>false</OneAndOnlyOne>
+        </BookmarkFieldItem>
+        <BookmarkFieldItem>
+          <Def>
+            <Name>UOM Minima OP</Name>
+            <Type>NOT_PRESENT</Type>
+          </Def>
+          <Locked>false</Locked>
+          <SelectInfo></SelectInfo>
+          <Values>
+            <FieldValue>
+              <Text>TAB</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CAP</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>GRA</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>FCO</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>AMP</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>SOB</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>OVU</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CIN</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>TUB</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CAJ</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>POT</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>VAL</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>SUP</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CAR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>COM</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CPL</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>SIN</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>PAR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>APC</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>BOL</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>PZA</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>JER</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>BIN</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>ROL</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>JRP</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CCH</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>TAR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>UNI</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>GAR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>CMT</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>MTS</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>PAQ</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>GTE</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>PFL</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>LAT</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>ITM</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>BAR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>SPR</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>BLI</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>PER</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>VSO</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+            <FieldValue>
+              <Text>-</Text>
+              <IsNumeric>false</IsNumeric>
+              <Number>7E37E43C8800759C</Number>
+            </FieldValue>
+          </Values>
+          <ExcludedValues></ExcludedValues>
+          <AndMode>false</AndMode>
+          <OneAndOnlyOne>false</OneAndOnlyOne>
+        </BookmarkFieldItem>
+      </FieldItems>
+      <VariableItems></VariableItems>
+      <SheetId></SheetId>
+      <Objects></Objects>
+      <ApplyLayoutState>false</ApplyLayoutState>
+      <ShowPopupInfo>false</ShowPopupInfo>
+      <InfoText></InfoText>
+      <Owner></Owner>
+      <Groups></Groups>
+      <Show>
+        <Always>true</Always>
+        <Expression>
+          <v>=0</v>
+        </Expression>
+      </Show>
+      <ApplyInputFieldValues>false</ApplyInputFieldValues>
+      <InputFieldItems></InputFieldItems>
+      <ObjectsLayout></ObjectsLayout>
+      <IncludeSelectionState>true</IncludeSelectionState>
+      <IncludeScrollPosition>false</IncludeScrollPosition>
+      <AlternateStateData></AlternateStateData>
+      <ForAnnotations>false</ForAnnotations>
+    </Bookmark>
+  </Bookmarks>
+  <SavedByVersion>11.20.12742.0409</SavedByVersion>
+  <ForceBackEndMacroExecution>false</ForceBackEndMacroExecution>
+  <FieldTags>
+    <ScriptBased>
+      <FieldTagData>
+        <Tag>$hidden</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$system</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$ascii</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$text</Tag>
+        <FieldNames>
+          <String>$Field</String>
+          <String>$Table</String>
+          <String>$Rows</String>
+          <String>$Fields</String>
+          <String>$FieldNo</String>
+          <String>$Info</String>
+        </FieldNames>
+      </FieldTagData>
+    </ScriptBased>
+    <Interactive>
+      <FieldTagData>
+        <Tag>$text</Tag>
+        <FieldNames>
+          <String>%Pk_Categoria_Empleado</String>
+          <String>Nombre Gerencia</String>
+          <String>Nombre Cargo</String>
+          <String>Categoría de Cargo</String>
+          <String>Nombre Centro de Costo</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$ascii</Tag>
+        <FieldNames>
+          <String>%Pk_Categoria_Empleado</String>
+          <String>Categoría de Cargo</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$numeric</Tag>
+        <FieldNames>
+          <String>Ppto Costos Meta Definitivo</String>
+          <String>Ppto Contribucion Meta Definitivo</String>
+          <String>Ppto Margen Meta Definitivo</String>
+          <String>Ppto Margen Definitivo</String>
+          <String>Ppto Margen Financiero</String>
+          <String>Ppto Margen Viabilidad</String>
+          <String>Ppto Contribucion Definitivo</String>
+          <String>Ppto Contribucion Financiero</String>
+          <String>Ppto Contribucion Viabilidad</String>
+          <String>ID Centro de Costo Ingresos</String>
+          <String>Fecha_TRX</String>
+          <String>Id Canal</String>
+          <String>ID. UEN</String>
+          <String>ID Sucursal</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>ID CONVENIO</String>
+          <String>Ppto Ingresos Financiero</String>
+          <String>Ppto Ingresos Viabilidad</String>
+          <String>Ppto Ingresos Definitivo</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Viabilidad</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Definitivo</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Financiero</String>
+          <String>Ppto Base Ingresos Viabilidad</String>
+          <String>Ppto Base Ingresos Definitivo</String>
+          <String>Ppto Base Ingresos Financiero</String>
+          <String>Ppto Costos Financiero</String>
+          <String>Ppto Costos Viabilidad</String>
+          <String>Ppto Costos Definitivo</String>
+          <String>Ppto Ingresos Meta Definitivo</String>
+          <String>%Flag_Viabilidad</String>
+          <String>%Flag_Definitivo</String>
+          <String>%Flag_Financiero</String>
+          <String>ID Centro de Costo Costos</String>
+          <String>Fecha_Archivo</String>
+          <String>CODIGO</String>
+          <String>BARRAS 2</String>
+          <String>PVP FULL CADENA</String>
+          <String>PVP FULL SAN ANDRES</String>
+          <String>IVA</String>
+          <String>PVP DCTO CADENA</String>
+          <String>PVP DCTO GEOPOS</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Mes</String>
+          <String>Año</String>
+          <String>BARRAS</String>
+          <String>DCTO</String>
+          <String>Px DCTO GEOPOS</String>
+          <String>PVP DCTO SAN ANDRES</String>
+          <String>DCTO1</String>
+          <String>PVP DCTO CADENA1</String>
+          <String>Px DCTO LISTA CADENA1</String>
+          <String>PVP DCTO GEOPOS1</String>
+          <String>Px DCTO GEOPOS1</String>
+          <String>PVP DCTO SAN ANDRES1</String>
+          <String>PVP DCTO CADENA2</String>
+          <String>Px DCTO LISTA CADENA2</String>
+          <String>PVP DCTO GEOPOS2</String>
+          <String>Px DCTO GEOPOS2</String>
+          <String>PVP DCTO SAN ANDRES2</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>DCTO3</String>
+          <String>PVP DCTO CADENA3</String>
+          <String>Px DCTO LISTA CADENA3</String>
+          <String>PVP DCTO GEOPOS3</String>
+          <String>Px DCTO GEOPOS3</String>
+          <String>PVP DCTO SAN ANDRES3</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>DCTO4</String>
+          <String>PVP DCTO CADENA4</String>
+          <String>Px DCTO LISTA CADENA4</String>
+          <String>PVP DCTO GEOPOS4</String>
+          <String>Px DCTO GEOPOS4</String>
+          <String>PVP DCTO SAN ANDRES4</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>DCTO5</String>
+          <String>PVP DCTO CADENA5</String>
+          <String>Px DCTO LISTA CADENA5</String>
+          <String>PVP DCTO GEOPOS5</String>
+          <String>Px DCTO GEOPOS5</String>
+          <String>PVP DCTO SAN ANDRES5</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>PVP DCTO CADENA6</String>
+          <String>Px DCTO LISTA CADENA6</String>
+          <String>PVP DCTO GEOPOS6</String>
+          <String>Px DCTO GEOPOS6</String>
+          <String>PVP DCTO SAN ANDRES6</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>DCTO7</String>
+          <String>PVP DCTO CADENA7</String>
+          <String>Px DCTO LISTA CADENA7</String>
+          <String>PVP DCTO GEOPOS7</String>
+          <String>Px DCTO GEOPOS7</String>
+          <String>PVP DCTO SAN ANDRES7</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>DCTO8</String>
+          <String>PVP DCTO CADENA8</String>
+          <String>Px DCTO LISTA CADENA8</String>
+          <String>PVP DCTO GEOPOS8</String>
+          <String>Px DCTO GEOPOS8</String>
+          <String>PVP DCTO SAN ANDRES8</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>DCTO9</String>
+          <String>PVP DCTO CADENA9</String>
+          <String>Px DCTO LISTA CADENA9</String>
+          <String>PVP DCTO GEOPOS9</String>
+          <String>Px DCTO GEOPOS9</String>
+          <String>PVP DCTO SAN ANDRES9</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>DCTO10</String>
+          <String>PVP DCTO CADENA10</String>
+          <String>Px DCTO LISTA CADENA10</String>
+          <String>PVP DCTO GEOPOS10</String>
+          <String>Px DCTO GEOPOS10</String>
+          <String>PVP DCTO SAN ANDRES10</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>DCTO11</String>
+          <String>PVP DCTO CADENA11</String>
+          <String>Px DCTO LISTA CADENA11</String>
+          <String>PVP DCTO GEOPOS11</String>
+          <String>Px DCTO GEOPOS11</String>
+          <String>PVP DCTO SAN ANDRES11</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>Flag_Conversion</String>
+          <String>Margen Transacciones Promedio</String>
+          <String>Margen Transacciones Compra</String>
+          <String>Margen Unitario Compra</String>
+          <String>Margen Unitario Promedio</String>
+          <String>Contribucion Transacciones Compra</String>
+          <String>Contribucion Transacciones Promedio</String>
+          <String>Id Convenio</String>
+          <String>Valor Transacciones Compra</String>
+          <String>Valor Transacciones Promedio</String>
+          <String>Contribucion Unitario Compra</String>
+          <String>Contribucion Unitario Promedio</String>
+          <String>Costos Transacciones Compra</String>
+          <String>Costos Transacciones Promedio</String>
+          <String>Valor Unitario</String>
+          <String>Actividad</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Costo Unitario Compra UOM Minima</String>
+          <String>Costo Unitario Promedio UOM Minima</String>
+          <String>Cedula Vendedor</String>
+          <String>%Pk_Cod_Articulo</String>
+          <String>Cod. Articulo</String>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>Id Sucursal Anterior</String>
+          <String>Id Sucursal</String>
+          <String>Cantidad</String>
+          <String>Cantidad Transaccion</String>
+          <String>%Pk_WID_PROVEEDOR</String>
+          <String>Numero Ticket</String>
+          <String>Id Sucursal Cencosud</String>
+          <String>Total Transacciones</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>Ppto_Convenio_Dia</String>
+          <String>Linea Transaccion</String>
+          <String>CODIGO_ACTIVIDAD</String>
+          <String>CODIGO_OFICINA</String>
+          <String>CAJA</String>
+          <String>CODIGO_CAJERO</String>
+          <String>CODIGO_INTERNO_VENDEDOR</String>
+          <String>CODIGO_VENDEDOR</String>
+          <String>SECUENCIA_INTERNA</String>
+          <String>NUMERO_LINEA</String>
+          <String>ARTICULO</String>
+          <String>UDM</String>
+          <String>CANTIDAD</String>
+          <String>FECHA_GRABACION</String>
+          <String>VALOR_TRANSACCION</String>
+          <String>VALOR_IVA</String>
+          <String>PORCENTAJE_IVA</String>
+          <String>FECHA_GRABACION2</String>
+          <String>AÑO</String>
+          <String>MES</String>
+          <String>DIA</String>
+          <String>HORA</String>
+          <String>CONTEO</String>
+          <String>FECHA_SERVIDOR</String>
+          <String>FECHA_CONTABLE</String>
+          <String>LAST_UPDATE_DATE</String>
+          <String>CREATION_DATE</String>
+          <String>ITEM_ID</String>
+          <String>END_DATE</String>
+          <String>UNIT_PRICE</String>
+          <String>PO_HEADER_ID</String>
+          <String>VENDOR_ID</String>
+          <String>RATE</String>
+          <String>START_DATE</String>
+          <String>LINE_NUM</String>
+          <String>EXPIRATION_DATE</String>
+          <String>SEGMENT1</String>
+          <String>Costo Unitario Tmp2</String>
+          <String>Num. Orden Compra</String>
+          <String>Num. Acuerdo Compra</String>
+          <String>Costo Unitario Tmp</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+          <String>COD_ORG_INV</String>
+          <String>VALOR_UNITARIO_UDM_MINIMA</String>
+          <String>CANTIDAD_UDM_MINIMA</String>
+          <String>Id Canal Tmp1</String>
+          <String>Cedula Cajero</String>
+          <String>Conversion_Rate_Compra</String>
+          <String>Conversion_Rate_Compra_Tmp</String>
+          <String>Factor Conversion</String>
+          <String>Cod. Actividad</String>
+          <String>Numero Caja</String>
+          <String>VALOR_UNITARIO</String>
+          <String>Iva</String>
+          <String>Cantidad Campaña</String>
+          <String>Id Uen</String>
+          <String>Valor Transacciones</String>
+          <String>Agrupacion</String>
+          <String>Flag Existencia Nielsen</String>
+          <String>Cod. Articulo Nielsen</String>
+          <String>Numero Periodo Nielsen</String>
+          <String>Codigo de Barras Nielsen</String>
+          <String>Valor Ventas Droguerias</String>
+          <String>Ranking Mercado Ventas</String>
+          <String>Participacion del total Ventas Mercado</String>
+          <String>Precio Mercado Nielsen</String>
+          <String>Cantidad Articulos Mercado</String>
+          <String>Ranking Mercado Unidades</String>
+          <String>Participacion del total Unicades Mercado</String>
+          <String>Valor Ventas Farmasanitas</String>
+          <String>Ranking Farmasanitas Ventas</String>
+          <String>Participacion del total Ventas Farmasanitas</String>
+          <String>Precio Unitario Farmasanitas</String>
+          <String>Cantidades Vendidas Farmasanitas</String>
+          <String>Ranking Farmasanitas Unidades</String>
+          <String>Participacion del total Unidades Farmasanitas</String>
+          <String>Valido Desde Nielsen</String>
+          <String>Valido Hasta Nielsen</String>
+          <String>Flag Existencia Ims</String>
+          <String>Cod. Articulo Ims</String>
+          <String>Cod. Barras</String>
+          <String>Venta Droguerias Mes Ims</String>
+          <String>Posicion Ventas Mercado Ims</String>
+          <String>Participacion Ventas del total Mercado Ims</String>
+          <String>Precio Mercado Ims</String>
+          <String>Cantidad Articulos Mercado Mes Ims</String>
+          <String>Posicion Cantidad Mercado Ims</String>
+          <String>Participacion de Cantidad Total Mercado Ims</String>
+          <String>Valido Desde1</String>
+          <String>Valido Hasta1</String>
+          <String>Ppto Costos Venta Público</String>
+          <String>Ppto Contribución Venta Público</String>
+          <String>Ppto Contribución Financiero</String>
+          <String>ID Centro de Costo</String>
+          <String>Ppto Ingresos Venta Público</String>
+          <String>Id Centro Costo</String>
+          <String>%Flag_Retirar</String>
+          <String>Cedula Cliente</String>
+          <String>nit</String>
+          <String>Conversion_Rate_Maxima</String>
+          <String>Conversion_Rate_Media</String>
+          <String>CANTIDAD_UDM_MEDIA</String>
+          <String>CANTIDAD_UDM_MAXIMA</String>
+          <String>Costo Unitario Compra UOM Media</String>
+          <String>Costo Unitario Compra UOM Maxima</String>
+          <String>Costo Unitario Promedio UOM Media</String>
+          <String>Costo Unitario Promedio UOM Maxima</String>
+          <String>Costo Compra</String>
+          <String>Costo Promedio</String>
+          <String>centro_costo</String>
+          <String>Cod. Sucursal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Id Vendedor</String>
+          <String>Cantidad Transacciones</String>
+          <String>Cantidad Transacciones Venta</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>Costo Promedio Venta</String>
+          <String>Costo Promedio Venta Público</String>
+          <String>Valor Venta</String>
+          <String>Valor Venta Público</String>
+          <String>Id. UEN</String>
+          <String>Nit</String>
+          <String>Cantidad Productos UDM Maxima</String>
+          <String>Cantidad Productos UDM Media</String>
+          <String>Cantidad Productos UDM Minima</String>
+          <String>Valor Real Venta Comercial</String>
+          <String>Valor Real Venta Público</String>
+          <String>Valor Real Costos Comercial</String>
+          <String>Valor Real Costos Público</String>
+          <String>Valor Real Contribución Comercial</String>
+          <String>Valor Real Contribución Público</String>
+          <String>INVENTORY_ITEM_ID</String>
+          <String>Código Barras</String>
+          <String>Id Ciudad</String>
+          <String>Id Departamento</String>
+          <String>Id Linea de Negocio</String>
+          <String>Id Regional</String>
+          <String>Id Unidad de Administración de Inventario</String>
+          <String>Fecha Cierre</String>
+          <String>%Flag_Exclusiones</String>
+          <String>WID_CLIENTES_ENTREGA</String>
+          <String>WID_PEDIDOS</String>
+          <String>Costo Unitario Promedio</String>
+          <String>COSTO_TRANSACCION_PROMEDIO</String>
+          <String>COSTO_TRANSACCION_COMPRA</String>
+          <String>Flag_Costo_Promedio_Rev</String>
+          <String>COSTO_TRANSACCION_COMPRA_Tmp</String>
+          <String>Numero Factura</String>
+          <String>Numero Pedido</String>
+          <String>WID_ORGANIZACIONES</String>
+          <String>Costo Unitario Compra Unidad Op</String>
+          <String>Flag_Pedidos_Ingreso_Rev</String>
+          <String>uen</String>
+          <String>WID_TRANSACCIONES_AR</String>
+          <String>WID_TIPOS_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_INV</String>
+          <String>WID_TIEMPO_PEDIDO</String>
+          <String>WID_TIEMPO_CONTABLE</String>
+          <String>WID_SUCURSAL_FACTURACION</String>
+          <String>WID_SUBINVENTARIOS</String>
+          <String>WID_PROVEEDORES_PRIMARIO</String>
+          <String>WID_PROVEEDORES_PO_INST</String>
+          <String>WID_PROVEEDORES_PO_COMER</String>
+          <String>WID_ORDENES_COMPRA</String>
+          <String>WID_ESTADOS_LINEA_OM</String>
+          <String>WID_COMBINACIONES_GL_INGRESO</String>
+          <String>WID_COMBINACIONES_GL_COSTO</String>
+          <String>SRC_TRANSACTION_ID</String>
+          <String>SRC_OE_ORDEN_LINES_LINE_ID</String>
+          <String>SRC_CUSTOMER_TRX_LINE_ID</String>
+          <String>NUM_ACUERDO_COMPRA_INST</String>
+          <String>NUM_ACUERDO_COMPRA_COMER</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>VALOR_PRODUCTO_COMPRA_INST</String>
+          <String>VALOR_DOCUMENTO_AR</String>
+          <String>PRECIO_TOTAL_PEDIDO</String>
+          <String>COSTO_PROMEDIO_PRODUCTO_TRX</String>
+          <String>CANTIDAD_PEDIDA_PEDIDO</String>
+          <String>CANTIDAD_DOCUMENTO_AR</String>
+          <String>FACTOR_UOM_VENTA_PEDIDO</String>
+          <String>FACTOR_UOM_PO_ACU_COMER</String>
+          <String>FACTOR_UOM_PO_ACU_INST</String>
+          <String>FACTOR_UOM_PO_OC</String>
+          <String>FACTOR_UOM_AR</String>
+          <String>PORCENTAJE_AR</String>
+          <String>VALOR_INGRESO</String>
+          <String>VALOR_TOTAL_COMPRA_INST</String>
+          <String>VALOR_TOTAL_COMPRA_COMER</String>
+          <String>Identificación del Usuario</String>
+          <String>act_estructura</String>
+          <String>Ppto Margen</String>
+          <String>Cantidad Tickets</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>Cantidad Tickets Retail Mes</String>
+          <String>Valor Transacciones Venta Retail Mes</String>
+          <String>CANTIDAD_TRANSACCION</String>
+          <String>WID_TIEMPO</String>
+          <String>CREATED_BY_WID</String>
+          <String>CREATED_ON_DT</String>
+          <String>CHANGED_BY_WID</String>
+          <String>CHANGED_ON_DT</String>
+          <String>W_INSERT_DT</String>
+          <String>W_UPDATE_DT</String>
+          <String>W_EFFECTIVE_FROM_DT</String>
+          <String>W_EFFECTIVE_TO_DT</String>
+          <String>Prioridad</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$integer</Tag>
+        <FieldNames>
+          <String>Ppto Costos Meta Definitivo</String>
+          <String>Ppto Margen Meta Definitivo</String>
+          <String>Ppto Margen Definitivo</String>
+          <String>Ppto Margen Financiero</String>
+          <String>Ppto Margen Viabilidad</String>
+          <String>ID Centro de Costo Ingresos</String>
+          <String>Fecha_TRX</String>
+          <String>Id Canal</String>
+          <String>ID. UEN</String>
+          <String>ID Sucursal</String>
+          <String>ACTIVIDAD</String>
+          <String>NIT</String>
+          <String>ID CONVENIO</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Financiero</String>
+          <String>Ppto Costos Financiero</String>
+          <String>Ppto Costos Viabilidad</String>
+          <String>Ppto Costos Definitivo</String>
+          <String>%Flag_Viabilidad</String>
+          <String>%Flag_Definitivo</String>
+          <String>%Flag_Financiero</String>
+          <String>ID Centro de Costo Costos</String>
+          <String>Fecha_Archivo</String>
+          <String>CODIGO</String>
+          <String>BARRAS 2</String>
+          <String>PVP FULL SAN ANDRES</String>
+          <String>PVP DCTO CADENA</String>
+          <String>PVP DCTO GEOPOS</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Mes</String>
+          <String>Año</String>
+          <String>BARRAS</String>
+          <String>PVP DCTO SAN ANDRES</String>
+          <String>PVP DCTO CADENA1</String>
+          <String>PVP DCTO GEOPOS1</String>
+          <String>PVP DCTO SAN ANDRES1</String>
+          <String>PVP DCTO CADENA2</String>
+          <String>PVP DCTO GEOPOS2</String>
+          <String>PVP DCTO SAN ANDRES2</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>PVP DCTO CADENA3</String>
+          <String>PVP DCTO GEOPOS3</String>
+          <String>PVP DCTO SAN ANDRES3</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>PVP DCTO CADENA4</String>
+          <String>PVP DCTO GEOPOS4</String>
+          <String>PVP DCTO SAN ANDRES4</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>PVP DCTO CADENA5</String>
+          <String>PVP DCTO GEOPOS5</String>
+          <String>PVP DCTO SAN ANDRES5</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>PVP DCTO CADENA6</String>
+          <String>PVP DCTO GEOPOS6</String>
+          <String>PVP DCTO SAN ANDRES6</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>PVP DCTO CADENA7</String>
+          <String>PVP DCTO GEOPOS7</String>
+          <String>PVP DCTO SAN ANDRES7</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>PVP DCTO CADENA8</String>
+          <String>PVP DCTO GEOPOS8</String>
+          <String>PVP DCTO SAN ANDRES8</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>PVP DCTO CADENA9</String>
+          <String>PVP DCTO GEOPOS9</String>
+          <String>PVP DCTO SAN ANDRES9</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>PVP DCTO CADENA10</String>
+          <String>PVP DCTO GEOPOS10</String>
+          <String>PVP DCTO SAN ANDRES10</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>PVP DCTO CADENA11</String>
+          <String>PVP DCTO GEOPOS11</String>
+          <String>PVP DCTO SAN ANDRES11</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>Flag_Conversion</String>
+          <String>Id Convenio</String>
+          <String>Actividad</String>
+          <String>Cod. Agrupacion Cliente</String>
+          <String>Cedula Vendedor</String>
+          <String>%Pk_Cod_Articulo</String>
+          <String>Cod. Articulo</String>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>Id Sucursal Anterior</String>
+          <String>Id Sucursal</String>
+          <String>%Pk_WID_PROVEEDOR</String>
+          <String>Numero Ticket</String>
+          <String>Id Sucursal Cencosud</String>
+          <String>Total Transacciones</String>
+          <String>TIPO_COMPROBANTE</String>
+          <String>Linea Transaccion</String>
+          <String>CODIGO_ACTIVIDAD</String>
+          <String>CODIGO_OFICINA</String>
+          <String>CAJA</String>
+          <String>CODIGO_CAJERO</String>
+          <String>CODIGO_INTERNO_VENDEDOR</String>
+          <String>CODIGO_VENDEDOR</String>
+          <String>SECUENCIA_INTERNA</String>
+          <String>NUMERO_LINEA</String>
+          <String>ARTICULO</String>
+          <String>UDM</String>
+          <String>CANTIDAD</String>
+          <String>VALOR_TRANSACCION</String>
+          <String>VALOR_IVA</String>
+          <String>FECHA_GRABACION2</String>
+          <String>AÑO</String>
+          <String>MES</String>
+          <String>DIA</String>
+          <String>HORA</String>
+          <String>CONTEO</String>
+          <String>ITEM_ID</String>
+          <String>END_DATE</String>
+          <String>PO_HEADER_ID</String>
+          <String>VENDOR_ID</String>
+          <String>START_DATE</String>
+          <String>LINE_NUM</String>
+          <String>EXPIRATION_DATE</String>
+          <String>SEGMENT1</String>
+          <String>Num. Orden Compra</String>
+          <String>Num. Acuerdo Compra</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+          <String>COD_ORG_INV</String>
+          <String>CANTIDAD_UDM_MINIMA</String>
+          <String>Id Canal Tmp1</String>
+          <String>Cedula Cajero</String>
+          <String>Conversion_Rate_Compra</String>
+          <String>Conversion_Rate_Compra_Tmp</String>
+          <String>Factor Conversion</String>
+          <String>Cod. Actividad</String>
+          <String>Numero Caja</String>
+          <String>Iva</String>
+          <String>Cantidad Campaña</String>
+          <String>Ppto Contribucion Viabilidad</String>
+          <String>Ppto Ingresos Viabilidad</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Viabilidad</String>
+          <String>Ppto Impacto Reub + Act Comer Ingresos Definitivo</String>
+          <String>Ppto Base Ingresos Viabilidad</String>
+          <String>Ppto Base Ingresos Definitivo</String>
+          <String>Ppto Base Ingresos Financiero</String>
+          <String>Id Uen</String>
+          <String>Agrupacion</String>
+          <String>Flag Existencia Nielsen</String>
+          <String>Cod. Articulo Nielsen</String>
+          <String>Numero Periodo Nielsen</String>
+          <String>Codigo de Barras Nielsen</String>
+          <String>Valor Ventas Droguerias</String>
+          <String>Ranking Mercado Ventas</String>
+          <String>Precio Mercado Nielsen</String>
+          <String>Cantidad Articulos Mercado</String>
+          <String>Ranking Mercado Unidades</String>
+          <String>Valor Ventas Farmasanitas</String>
+          <String>Ranking Farmasanitas Ventas</String>
+          <String>Precio Unitario Farmasanitas</String>
+          <String>Cantidades Vendidas Farmasanitas</String>
+          <String>Ranking Farmasanitas Unidades</String>
+          <String>Valido Desde Nielsen</String>
+          <String>Valido Hasta Nielsen</String>
+          <String>Flag Existencia Ims</String>
+          <String>Cod. Articulo Ims</String>
+          <String>Cod. Barras</String>
+          <String>Venta Droguerias Mes Ims</String>
+          <String>Posicion Ventas Mercado Ims</String>
+          <String>Cantidad Articulos Mercado Mes Ims</String>
+          <String>Posicion Cantidad Mercado Ims</String>
+          <String>Valido Desde1</String>
+          <String>Valido Hasta1</String>
+          <String>ID Centro de Costo</String>
+          <String>Id Centro Costo</String>
+          <String>%Flag_Retirar</String>
+          <String>Cedula Cliente</String>
+          <String>nit</String>
+          <String>Conversion_Rate_Maxima</String>
+          <String>Conversion_Rate_Media</String>
+          <String>centro_costo</String>
+          <String>Cod. Sucursal</String>
+          <String>Id Canal Sin Convenio</String>
+          <String>Id Vendedor</String>
+          <String>Cantidad Transacciones</String>
+          <String>Cantidad Transacciones Venta</String>
+          <String>Cantidad Transacciones Venta Público</String>
+          <String>Id. UEN</String>
+          <String>Nit</String>
+          <String>INVENTORY_ITEM_ID</String>
+          <String>Código Barras</String>
+          <String>Id Ciudad</String>
+          <String>Id Departamento</String>
+          <String>Id Linea de Negocio</String>
+          <String>Id Regional</String>
+          <String>Id Unidad de Administración de Inventario</String>
+          <String>Fecha Cierre</String>
+          <String>%Flag_Exclusiones</String>
+          <String>WID_CLIENTES_ENTREGA</String>
+          <String>WID_PEDIDOS</String>
+          <String>Costo Unitario Compra UOM Minima</String>
+          <String>COSTO_TRANSACCION_PROMEDIO</String>
+          <String>Flag_Costo_Promedio_Rev</String>
+          <String>Numero Factura</String>
+          <String>Numero Pedido</String>
+          <String>WID_ORGANIZACIONES</String>
+          <String>Flag_Pedidos_Ingreso_Rev</String>
+          <String>uen</String>
+          <String>WID_TRANSACCIONES_AR</String>
+          <String>WID_TIPOS_TRX_INV</String>
+          <String>WID_TIEMPO_TRX_INV</String>
+          <String>WID_TIEMPO_PEDIDO</String>
+          <String>WID_TIEMPO_CONTABLE</String>
+          <String>WID_SUCURSAL_FACTURACION</String>
+          <String>WID_SUBINVENTARIOS</String>
+          <String>WID_PROVEEDORES_PRIMARIO</String>
+          <String>WID_PROVEEDORES_PO_INST</String>
+          <String>WID_PROVEEDORES_PO_COMER</String>
+          <String>WID_ORDENES_COMPRA</String>
+          <String>WID_ESTADOS_LINEA_OM</String>
+          <String>WID_COMBINACIONES_GL_INGRESO</String>
+          <String>WID_COMBINACIONES_GL_COSTO</String>
+          <String>SRC_TRANSACTION_ID</String>
+          <String>SRC_OE_ORDEN_LINES_LINE_ID</String>
+          <String>SRC_CUSTOMER_TRX_LINE_ID</String>
+          <String>NUM_ACUERDO_COMPRA_INST</String>
+          <String>NUM_ACUERDO_COMPRA_COMER</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>COSTO_PROMEDIO_PRODUCTO_TRX</String>
+          <String>FACTOR_UOM_VENTA_PEDIDO</String>
+          <String>FACTOR_UOM_AR</String>
+          <String>PORCENTAJE_AR</String>
+          <String>Identificación del Usuario</String>
+          <String>act_estructura</String>
+          <String>Cantidad Tickets</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>Cantidad Tickets Retail Mes</String>
+          <String>WID_TIEMPO</String>
+          <String>CREATED_BY_WID</String>
+          <String>CHANGED_BY_WID</String>
+          <String>Prioridad</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$timestamp</Tag>
+        <FieldNames>
+          <String>Fecha_TRX</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>FECHA_GRABACION</String>
+          <String>FECHA_GRABACION2</String>
+          <String>FECHA_SERVIDOR</String>
+          <String>FECHA_CONTABLE</String>
+          <String>CREATED_ON_DT</String>
+          <String>CHANGED_ON_DT</String>
+          <String>W_INSERT_DT</String>
+          <String>W_UPDATE_DT</String>
+          <String>LAST_UPDATE_DATE</String>
+          <String>CREATION_DATE</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+          <String>END_DATE</String>
+          <String>START_DATE</String>
+          <String>EXPIRATION_DATE</String>
+          <String>Valido Desde Nielsen</String>
+          <String>Valido Hasta Nielsen</String>
+          <String>Fecha Cierre</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>%Pk_Link_Conversion</String>
+          <String>W_EFFECTIVE_FROM_DT</String>
+          <String>W_EFFECTIVE_TO_DT</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$date</Tag>
+        <FieldNames>
+          <String>Fecha_TRX</String>
+          <String>Fecha_Archivo</String>
+          <String>Valido Desde</String>
+          <String>Valido Hasta</String>
+          <String>Valido Desde2</String>
+          <String>Valido Hasta2</String>
+          <String>Valido Desde3</String>
+          <String>Valido Hasta3</String>
+          <String>Valido Desde4</String>
+          <String>Valido Hasta4</String>
+          <String>Valido Desde5</String>
+          <String>Valido Hasta5</String>
+          <String>Valido Desde6</String>
+          <String>Valido Hasta6</String>
+          <String>Valido Desde7</String>
+          <String>Valido Hasta7</String>
+          <String>Valido Desde8</String>
+          <String>Valido Hasta8</String>
+          <String>Valido Desde9</String>
+          <String>Valido Hasta9</String>
+          <String>Valido Desde10</String>
+          <String>Valido Hasta10</String>
+          <String>Valido Desde11</String>
+          <String>Valido Hasta11</String>
+          <String>%Pk_Fecha</String>
+          <String>Fecha</String>
+          <String>FECHA_GRABACION2</String>
+          <String>FECHA_CALENDARIO_TRX</String>
+          <String>END_DATE</String>
+          <String>START_DATE</String>
+          <String>EXPIRATION_DATE</String>
+          <String>Valido Desde Nielsen</String>
+          <String>Valido Hasta Nielsen</String>
+          <String>Fecha Cierre</String>
+          <String>FECHA_VIG_ACUERDO_INI_INST</String>
+          <String>FECHA_VIG_ACUERDO_INI_COMER</String>
+          <String>FECHA_VIG_ACUERDO_FIN_INST</String>
+          <String>FECHA_VIG_ACUERDO_FIN_COMER</String>
+          <String>%Pk_Link_Conversion</String>
+        </FieldNames>
+      </FieldTagData>
+      <FieldTagData>
+        <Tag>$dimension</Tag>
+        <FieldNames>
+          <String>Inicio_Mes</String>
+        </FieldNames>
+      </FieldTagData>
+    </Interactive>
+  </FieldTags>
+  <FieldComments></FieldComments>
+  <TableComments></TableComments>
+  <CreatePrjFolder>false</CreatePrjFolder>
+  <LinkedTables></LinkedTables>
+</DocInternals>

@@ -1,0 +1,7 @@
+﻿M_Calendario:
+LOAD
+	*,
+	Num(Periodo) as Num_Periodo
+From $(vR_Qvd)M_08_Qvd_CalendarioMAT_Tra.qvd (qvd)
+	Where Exists(%Pk_Fecha) and Año<=Year(Today())
+;

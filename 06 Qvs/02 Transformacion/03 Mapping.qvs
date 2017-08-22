@@ -1,0 +1,353 @@
+﻿Homologacion_Sucursales_Nuevos_Map:
+Mapping LOAD Distinct
+	 [COD SUCURSAL NUEVO] as [COD SUCURSAL],
+	 [COD CENTRO COSTO NUEVO]     
+FROM $(vR_QvdVentas)M_02_Excel_Creacion_Scursales_Ext.qvd (qvd);
+
+Homologacion_Sucursales_CeCo_Map:
+Mapping LOAD Distinct
+     [Id Sucursal],
+     [Id Centro Costo]
+FROM $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd);
+
+/********************************************************************************************************
+		Se cargan valores de Costo Promedio tomado desde la tabla de Margenes
+********************************************************************************************************/
+Unidad_Compra_Map:
+mapping LOAD Distinct 
+	  [Cod. Articulo],
+     PRIMARY_UOM_CODE
+FROM $(vR_QvdMaestros)M_00_EBS_APPS_UDM_Compra_Articulos_Tra.qvd (qvd);
+
+Articulos_Map:
+mapping LOAD Distinct 
+     num#(INVENTORY_ITEM_ID) as INVENTORY_ITEM_ID, 
+	 [Cod. Articulo]
+FROM $(vR_QvdMaestros)M_00_Articulos_Tra.qvd (qvd);
+
+M_Conversiones_Tmp:
+	LOAD 
+		ApplyMap('Articulos_Map',INVENTORY_ITEM_ID, 'Error') as [Cod. Articulo],
+		 UNIT_OF_MEASURE, 
+	     UOM_CODE, 
+	     num#(INVENTORY_ITEM_ID) as INVENTORY_ITEM_ID, 
+	     CONVERSION_RATE 
+	FROM $(vR_QvdMaestros)M_00_EBS_Uom_Conversions_Ext.qvd(qvd);
+Left Join
+	LOAD Distinct
+		[Cod. Articulo],
+		UOM_CODE as primary_uom_code
+	Resident M_Conversiones_Tmp
+		Where CONVERSION_RATE='1'
+	;
+	
+M_Conversiones_Tmp2:
+LOAD
+	AutoNumber(INVENTORY_ITEM_ID&CONVERSION_RATE,[Cod. Articulo]) as Conteo,
+	*
+	;
+LOAD
+	*
+Resident M_Conversiones_Tmp
+	Where [Cod. Articulo]<>'Error'
+	Order by INVENTORY_ITEM_ID,
+		     CONVERSION_RATE asc
+;
+DROP Table M_Conversiones_Tmp;
+
+
+Maximo_UDM_Prod_Map:
+mapping LOAD
+	[Cod. Articulo],
+	max(Conteo) as Maximo_Registro
+	
+Resident M_Conversiones_Tmp2
+	Group By [Cod. Articulo];
+	
+M_Conversiones_Tmp3:
+LOAD
+	*,
+	ApplyMap('Maximo_UDM_Prod_Map',[Cod. Articulo],'0') as Maximas_UDM
+Resident M_Conversiones_Tmp2;
+DROP Table M_Conversiones_Tmp2;
+
+NoConcatenate
+M_Conversiones_Tmp4:
+	LOAD
+		*
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='1';
+Concatenate	
+	LOAD
+		[Cod. Articulo],
+		'2' as Conteo,
+		CONVERSION_RATE,
+		INVENTORY_ITEM_ID,
+		Maximas_UDM,
+		primary_uom_code,
+		UNIT_OF_MEASURE,
+		UOM_CODE
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='1';
+Concatenate	
+	LOAD
+		[Cod. Articulo],
+		'3' as Conteo,
+		CONVERSION_RATE,
+		INVENTORY_ITEM_ID,
+		Maximas_UDM,
+		primary_uom_code,
+		UNIT_OF_MEASURE,
+		UOM_CODE
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='1';
+
+Concatenate
+	LOAD
+		*
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='2';
+Concatenate	
+	LOAD
+		[Cod. Articulo],
+		'3' as Conteo,
+		CONVERSION_RATE,
+		INVENTORY_ITEM_ID,
+		Maximas_UDM,
+		primary_uom_code,
+		UNIT_OF_MEASURE,
+		UOM_CODE
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='2' and Conteo='2';
+Concatenate
+	LOAD
+		*
+	Resident M_Conversiones_Tmp3
+		Where Maximas_UDM='3';
+		
+DROP Table M_Conversiones_Tmp3;
+
+NoConcatenate
+M_Conversiones:
+LOAD
+	*,
+	if(Conteo='1','Mínima',
+		if(Conteo='2','Media', 'Máxima')) as UDM_Prod
+Resident M_Conversiones_Tmp4;
+DROP Table M_Conversiones_Tmp4;
+
+STORE M_Conversiones into $(vR_Qvd)M_08_Qvd_Conversiones.qvd (qvd);
+
+Conversiones_Map:
+Mapping LOAD Distinct
+	[Cod. Articulo]&'_'&UOM_CODE&'_'&primary_uom_code as %Pk_Conversiones,
+	CONVERSION_RATE as Conversion_Rate
+Resident M_Conversiones;
+
+
+Unidad_Minima_Map:
+mapping LOAD Distinct
+	 [Cod. Articulo] as COD_PRODUCTO, 
+     primary_uom_code as Cod_Unidad_Minima
+resident M_Conversiones;
+
+DROP Table M_Conversiones;
+
+
+
+M_CentroCosto_Map:
+mapping LOAD Distinct 
+     [Id Sucursal], 
+     [Id Centro Costo]
+FROM $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd);
+
+M_CiudadPunto_Map:
+mapping LOAD Distinct 
+     [Id Sucursal], 
+	 [Id Ciudad]
+FROM $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd);
+
+M_Actividades3_Map:
+mapping LOAD Distinct 
+	 nit&'_'&act_estructura&'_'&centro_costo, 
+     [Cliente Retail]
+FROM $(vR_QvdVentas)M_02_EXCEL_Actividades3_Ext.qvd (qvd)
+	Where upper([Cliente Retail])<>'NO APLICA'
+;
+
+M_Actividades3_Map2:
+mapping LOAD Distinct 
+	 act_estructura&'_'&centro_costo, 
+     [Cliente Retail]
+FROM $(vR_QvdVentas)M_02_EXCEL_Actividades3_Ext.qvd (qvd)
+	Where upper([Cliente Retail])<>'NO APLICA'
+;
+
+M_Actividades3_Map3:
+mapping LOAD Distinct 
+	 act_estructura, 
+     [Cliente Retail]
+FROM $(vR_QvdVentas)M_02_EXCEL_Actividades3_Ext.qvd (qvd);
+
+
+
+// Marcacion de las campañas con las nuevas reglas de agrupacion definidas.
+M_Agupacion_Campaña_Tmp:
+LOAD
+	upper([Nombre Campaña])&'_'&upper([Cliente Retail]) as %Pk_Llave_Campañas,
+	[Cliente Retail],
+	[Nombre Campaña],
+	[Agrupacion Campaña],
+	[Descuento Aplicado],
+	Prioridad
+From $(vR_QvdVentas)M_02_EXCEL_Agrupacion_Campana_Ext.qvd (qvd);
+
+M_Agrupacion_CampañaDescAplicado_Map:
+Mapping LOAD Distinct
+	%Pk_Llave_Campañas,
+	[Descuento Aplicado]
+Resident M_Agupacion_Campaña_Tmp
+	Order By Prioridad asc;
+
+M_Agrupacion_Campaña_Map:
+Mapping LOAD Distinct
+	%Pk_Llave_Campañas,
+	[Agrupacion Campaña]
+Resident M_Agupacion_Campaña_Tmp
+	Order By Prioridad asc;
+
+
+DROP Table M_Agupacion_Campaña_Tmp;
+
+//Se desagrega la informaicon de las dinamicas comercials existentes en el archivo de excel remitido. Se desagrega la informacion por cada día del mesde la vigencia.
+M_Dinamicas_Tmp:
+	LOAD	
+		[Actividad_Original],
+		Articulo,
+		Articulo_Descripcion,
+		Mes,
+		[Nombre Archivo],
+		Tipo_Dinamica,
+		floor(Vigencia_Fin) as Vigencia_Fin,
+		floor(Vigencia_Inicio) as Vigencia_Inicio
+	from $(vR_Qvd)M_08_Excel_DinamicasComerciales_Ext.qvd (qvd);
+Left Join
+	M_Dias_Desagregados:
+	LOAD Distinct
+	      Num(Vigencia_Inicio)+IterNo() - 1 as FECHA_Vigencia,
+	      Num(Vigencia_Inicio) as Vigencia_Inicio, 
+	      Num(Vigencia_Fin) as Vigencia_Fin
+	Resident M_Dinamicas_Tmp
+	             While Num(Vigencia_Inicio)+IterNo() - 1 <= Num(Vigencia_Fin);
+
+M_marcacion_PAD_Map:
+Mapping LOAD Distinct
+	Floor(FECHA_Vigencia)&'_'&Articulo as %Pk_LlavePAD,
+	Capitalize(Tipo_Dinamica) as Tipo_Dinamica
+Resident M_Dinamicas_Tmp;
+DROP Table M_Dinamicas_Tmp;
+
+
+
+Canales_Map:
+Mapping LOAD Distinct
+     [Id Canal], 
+     Canal
+FROM $(vR_QvdVentas)M_02_Jerarquia_Ext.qvd (qvd);
+
+Id_Convenio_Map:
+mapping LOAD Distinct
+     COD_PLA_ACT&'_'&AÑO as %Pk_Actividad_Año, 
+     ID
+FROM $(vR_QvdVentas)D_02_EXCEL_Agrupacion_Actividad_Cliente_Ext.qvd (qvd);
+
+Linea_Negocio_Map:
+Mapping LOAD Distinct
+     [Id Canal], 
+     [Linea de Negocio]
+FROM $(vR_QvdVentas)M_02_Jerarquia_Ext.qvd (qvd); 
+
+M_IdVendedores_Map:
+mapping LOAD
+	[Id Canal]&'_'&[Id Ciudad]&'_'&NIT as %Pk_LlaveVendedores,
+	Capitalize(Numero_VENDEDOR) as Numero_VENDEDOR
+From $(vR_Qvd)M_08_Excel_VendedoresNoContado_Ext.qvd (qvd);
+
+M_NombreVendedores_Map:
+mapping LOAD	
+	[Id Canal]&'_'&[Id Ciudad]&'_'&NIT as %Pk_LlaveVendedores,
+	Capitalize(NOMBRE_VENDEDOR) as NOMBRE_VENDEDOR
+From $(vR_Qvd)M_08_Excel_VendedoresNoContado_Ext.qvd (qvd);
+
+M_NombreSucursal_Map:
+mapping LOAD
+	[Id Sucursal],
+	capitalize(Sucursal) as Sucursal
+FROM $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd);
+
+Actividad_Cliente_1_Map:
+mapping LOAD
+     AÑO&'_'&ID as %Pk_Convenio, 
+     Capitalize(CLIENTE) as CLIENTE
+FROM $(vR_QvdVentas)D_02_EXCEL_Agrupacion_Actividad_Cliente_Ext.qvd (qvd);
+
+
+Desc_Canal_Map:
+mapping LOAD 
+	[Id Canal], 
+    'Gestion '&Canal as Canal
+FROM $(vR_QvdVentas)M_02_Jerarquia_Tra.qvd (qvd);
+
+Actividad_Cliente_Map1:
+mapping LOAD
+     AÑO&'_'&COD_PLA_ACT as %Pk_Actividad_Año, 
+     ID
+FROM $(vR_QvdVentas)D_02_EXCEL_Agrupacion_Actividad_Cliente_Ext.qvd (qvd);
+
+
+D_Campañas_Map:
+Mapping LOAD Distinct
+	[NUMERO_DOCUMENTO]&'_'&[NUMERO_LINEA] AS [Llave Transaccion],
+	if(Len([Campaña Original])='1','Venta Full',[Campaña Original]) as [Campaña Original]
+From $(vR_QvdVentas)D_02_Ventas_Contado_Tra.qvd (qvd);
+
+Equivalencia_Sucursal_Map:
+mapping LOAD Distinct
+    [Id Sucursal Anterior] as [Id Sucursal], 
+	[Id Sucursal] as [Id Sucursal Definitiva]
+From $(vR_QvdMaestros)M_00_EXCEL_Clasificacion_TipoNegocio_Geografia_Tra.qvd (qvd)
+Where len([Id Sucursal Anterior])>'0' and not([Id Sucursal Anterior] like 'No*')
+;
+
+Subcanal_Map:
+mapping LOAD 
+	[Id Sucursal],
+	[Sub Canal]
+from $(vR_QvdVentas)M_02_EXCEL_SubCanal_Ext.qvd (qvd);
+
+M_IdVendedoresPpto_Map:
+mapping LOAD
+	[Id Canal]&'_'&NIT as %Pk_LlaveVendedores,
+	Capitalize(Numero_VENDEDOR) as Numero_VENDEDOR
+From $(vR_Qvd)M_08_Excel_VendedoresNoContado_Ext.qvd (qvd);
+
+M_NombreVendedoresPpto_Map:
+mapping LOAD	
+	[Id Canal]&'_'&NIT as %Pk_LlaveVendedores,
+	Capitalize(NOMBRE_VENDEDOR) as NOMBRE_VENDEDOR
+From $(vR_Qvd)M_08_Excel_VendedoresNoContado_Ext.qvd (qvd);
+
+//M_ClientesCiudad_Map:
+//mapping load
+//	CLIENTE_FACTURA_NIT,
+//	COD_CIUDAD as [Id Ciudad]
+//From $(vR_QvdVentas)M_00_BI_XXOSI_W_CLIENTES_ENTREGA_D_Ext.qvd (qvd);
+////	Where CURRENT_FLG = 'Y';
+
+Descripcion_Actividades_Map:
+mapping LOAD Distinct
+	COD_ACTIVIDAD,
+	Capitalize(NOM_ACTIVIDAD) as NOM_ACTIVIDAD
+FROM $(vR_QvdVentas)M_00_BI_XXOSI_W_CLIENTES_ENTREGA_D_Ext.qvd (qvd)
+	Where len(NOM_ACTIVIDAD)>'0'
+;

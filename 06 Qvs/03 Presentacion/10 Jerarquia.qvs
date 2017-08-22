@@ -1,0 +1,9 @@
+﻿Jerarquia:
+LOAD 
+     [Id Canal], 
+     Canal, 
+     Grupo, 
+     [Linea de Negocio]
+FROM $(vR_QvdVentas)M_02_Jerarquia_Tra.qvd (qvd)
+	Where Exists([Id Canal])
+;

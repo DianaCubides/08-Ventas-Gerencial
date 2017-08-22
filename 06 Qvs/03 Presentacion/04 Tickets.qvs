@@ -1,0 +1,9 @@
+﻿Tickets:
+LOAD 
+	 %Pk_LlaveTickets, 
+	[Clasificacion Conteo Tickets], 
+	[Cantidad Tickets] as [Cantidad Transacciones Venta Público],
+	[Cantidad Tickets] as [Cantidad Real Transacciones Venta Comercial]
+FROM $(vR_Qvd)D_08_Qvd_VentasTickets_Tra.qvd (qvd)
+	Where Exists(%Pk_LlaveTickets)
+;
